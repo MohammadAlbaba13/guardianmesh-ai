@@ -1,0 +1,623 @@
+{
+  "pdf": "C:\\Users\\LOQ\\Documents\\ChatGPT\\Win\\GuardianMesh_AI_Complete_Project_Report.pdf",
+  "page_count": 54,
+  "unique_screenshots": 20,
+  "screenshot_placements": 33,
+  "screenshots": {
+    "01-idle": [
+      10,
+      44
+    ],
+    "03-camera-sentinel": [
+      14,
+      22
+    ],
+    "06-camera-plan-policy": [
+      14,
+      46
+    ],
+    "04-camera-classification": [
+      15,
+      45
+    ],
+    "08-camera-contained": [
+      18,
+      47
+    ],
+    "09-hospital-protected-qod": [
+      18,
+      47
+    ],
+    "13-energy-approval-before": [
+      19,
+      46
+    ],
+    "19-energy-reject-final": [
+      20
+    ],
+    "02-camera-attack-paused": [
+      22,
+      31
+    ],
+    "05-hospital-risk": [
+      23
+    ],
+    "26-fast-final": [
+      24,
+      48
+    ],
+    "21-identity-contained": [
+      27,
+      49
+    ],
+    "22-identity-context-checks": [
+      28
+    ],
+    "15-energy-approved-final": [
+      30,
+      46,
+      49
+    ],
+    "29-guided-uninterrupted-final": [
+      31
+    ],
+    "24-fast-attack": [
+      32
+    ],
+    "25-fast-middle": [
+      32
+    ],
+    "27-fast-executive": [
+      33,
+      50
+    ],
+    "28-fast-technical": [
+      34
+    ],
+    "12-swagger": [
+      36
+    ]
+  },
+  "pages": [
+    {
+      "page": 1,
+      "section": "Complete project report",
+      "title": "GuardianMesh AI",
+      "key": "cover",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 2,
+      "section": "Reading guide",
+      "title": "Contents",
+      "key": "contents",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 3,
+      "section": "01 / Executive overview",
+      "title": "Defend the service, contain the source",
+      "key": "page-3",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 4,
+      "section": "02 / Current project status",
+      "title": "Implementation matrix 1 of 2",
+      "key": "page-4",
+      "size": [
+        1190.5511811023623,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 5,
+      "section": "02 / Current project status",
+      "title": "Implementation matrix 2 of 2",
+      "key": "page-5",
+      "size": [
+        1190.5511811023623,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 6,
+      "section": "03 / Project architecture",
+      "title": "One incident context, one coherent defense",
+      "key": "page-6",
+      "size": [
+        841.8897637795277,
+        595.2755905511812
+      ]
+    },
+    {
+      "page": 7,
+      "section": "03 / Project architecture",
+      "title": "Repository map and module responsibilities",
+      "key": "page-7",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 8,
+      "section": "04 / Actual data model",
+      "title": "The shared Incident is the integration boundary",
+      "key": "page-8",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 9,
+      "section": "04 / Actual data model",
+      "title": "How information moves between agents",
+      "key": "page-9",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 10,
+      "section": "05 / Digital twin",
+      "title": "A complete city, ready to defend",
+      "key": "page-10",
+      "size": [
+        1190.5511811023623,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 11,
+      "section": "05 / Digital twin",
+      "title": "Every node and every dependency category",
+      "key": "page-11",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 12,
+      "section": "06 / Six-agent system",
+      "title": "Sentinel, Impact and Response",
+      "key": "page-12",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 13,
+      "section": "06 / Six-agent system",
+      "title": "Compliance, Network and Report",
+      "key": "page-13",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 14,
+      "section": "06 / Six-agent system",
+      "title": "Agents visibly process actual incident state",
+      "key": "page-14",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 15,
+      "section": "07 / MITRE ATT&CK",
+      "title": "Three focused, explainable mappings",
+      "key": "page-15",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 16,
+      "section": "08 / Impact analysis",
+      "title": "The hospital risk is calculated from the graph",
+      "key": "page-16",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 17,
+      "section": "09 / Network-as-Code",
+      "title": "SIMULATED / LOCAL PROTOTYPE",
+      "key": "page-17",
+      "size": [
+        841.8897637795277,
+        595.2755905511812
+      ]
+    },
+    {
+      "page": 18,
+      "section": "09 / Network-as-Code",
+      "title": "Route protection and QoD are visible evidence",
+      "key": "page-18",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 19,
+      "section": "10 / Human-in-the-loop",
+      "title": "Approve a guarded shared-segment action",
+      "key": "page-19",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 20,
+      "section": "10 / Human-in-the-loop",
+      "title": "Reject preserves evidence and chooses a safe fallback",
+      "key": "page-20",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 21,
+      "section": "11 / Camera walkthrough",
+      "title": "Flagship: from compromised camera to protected hospital",
+      "key": "page-21",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 22,
+      "section": "11 / Camera walkthrough",
+      "title": "Attack begins; Sentinel examines the observations",
+      "key": "page-22",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 23,
+      "section": "11 / Camera walkthrough",
+      "title": "The graph explains why the hospital is exposed",
+      "key": "page-23",
+      "size": [
+        1190.5511811023623,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 24,
+      "section": "11 / Camera walkthrough",
+      "title": "Containment is the result, not just an alert",
+      "key": "page-24",
+      "size": [
+        1190.5511811023623,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 25,
+      "section": "11 / Camera walkthrough",
+      "title": "Complete measured timeline 1 of 2",
+      "key": "page-25",
+      "size": [
+        1190.5511811023623,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 26,
+      "section": "11 / Camera walkthrough",
+      "title": "Complete measured timeline 2 of 2",
+      "key": "page-26",
+      "size": [
+        1190.5511811023623,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 27,
+      "section": "12 / Identity walkthrough",
+      "title": "Correlate the identity anomaly before containment",
+      "key": "page-27",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 28,
+      "section": "12 / Identity walkthrough",
+      "title": "The location and SIM results are actual incident data",
+      "key": "page-28",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 29,
+      "section": "13 / Energy walkthrough",
+      "title": "A different path through shared edge infrastructure",
+      "key": "page-29",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 30,
+      "section": "13 / Energy walkthrough",
+      "title": "Shared edge isolated; energy connectivity preserved",
+      "key": "page-30",
+      "size": [
+        1190.5511811023623,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 31,
+      "section": "14 / Guided Demo",
+      "title": "Every control was exercised against the backend",
+      "key": "page-31",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 32,
+      "section": "15 / Fast Pitch Mode",
+      "title": "A complete story in 22.24 seconds",
+      "key": "page-32",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 33,
+      "section": "16 / Incident reports",
+      "title": "Executive summary from the actual run",
+      "key": "page-33",
+      "size": [
+        841.8897637795277,
+        1190.5511811023623
+      ]
+    },
+    {
+      "page": 34,
+      "section": "16 / Incident reports",
+      "title": "Technical evidence, history and export",
+      "key": "page-34",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 35,
+      "section": "17 / REST API",
+      "title": "Actual routes and contracts",
+      "key": "page-35",
+      "size": [
+        841.8897637795277,
+        595.2755905511812
+      ]
+    },
+    {
+      "page": 36,
+      "section": "17 / REST API",
+      "title": "Swagger exposes the implemented backend",
+      "key": "page-36",
+      "size": [
+        841.8897637795277,
+        595.2755905511812
+      ]
+    },
+    {
+      "page": 37,
+      "section": "18 / WebSocket event system",
+      "title": "Backend events drive the visualization",
+      "key": "page-37",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 38,
+      "section": "19 / Database",
+      "title": "SQLite retains the decision trail",
+      "key": "page-38",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 39,
+      "section": "20 / Testing",
+      "title": "Fresh tests passed; warnings are retained",
+      "key": "page-39",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 40,
+      "section": "21 / Frontend production build",
+      "title": "TypeScript and Vite production output succeeded",
+      "key": "page-40",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 41,
+      "section": "22 / Docker",
+      "title": "Configuration present; runtime remains PARTIAL",
+      "key": "page-41",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 42,
+      "section": "23 / Exact startup",
+      "title": "Run the existing local application on Windows",
+      "key": "page-42",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 43,
+      "section": "24 / Judge experience",
+      "title": "JUDGE REHEARSAL RESULT: PASS",
+      "key": "page-43",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 44,
+      "section": "25 / Visual gallery",
+      "title": "01  |  Idle Command Center",
+      "key": "page-44",
+      "size": [
+        1190.5511811023623,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 45,
+      "section": "25 / Visual gallery",
+      "title": "02  |  Attack, classification and impact",
+      "key": "page-45",
+      "size": [
+        1190.5511811023623,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 46,
+      "section": "25 / Visual gallery",
+      "title": "03  |  Six agents and operator oversight",
+      "key": "page-46",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 47,
+      "section": "25 / Visual gallery",
+      "title": "04  |  Network actions and protected hospital",
+      "key": "page-47",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 48,
+      "section": "25 / Visual gallery",
+      "title": "05  |  Fast Pitch: the winning moment",
+      "key": "page-48",
+      "size": [
+        1190.5511811023623,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 49,
+      "section": "25 / Visual gallery",
+      "title": "06  |  Two different incident paths",
+      "key": "page-49",
+      "size": [
+        1190.5511811023623,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 50,
+      "section": "25 / Visual gallery",
+      "title": "07  |  The incident record closes the story",
+      "key": "page-50",
+      "size": [
+        841.8897637795277,
+        1190.5511811023623
+      ]
+    },
+    {
+      "page": 51,
+      "section": "26 / Limitations",
+      "title": "What the prototype proves - and what it does not",
+      "key": "page-51",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 52,
+      "section": "27 / Roadmap",
+      "title": "Keep the proven prototype separate from future work",
+      "key": "page-52",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 53,
+      "section": "28 / Final verification matrix",
+      "title": "Definition of Done 1 of 2",
+      "key": "page-53",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    },
+    {
+      "page": 54,
+      "section": "28 / Final verification matrix",
+      "title": "Definition of Done 2 of 2",
+      "key": "page-54",
+      "size": [
+        595.2755905511812,
+        841.8897637795277
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+
+> guardianmesh-command-center@1.0.0 build
+> tsc -b && vite build
+
+vite v6.4.3 building for production...
+transforming...
+✓ 2292 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.78 kB │ gzip:  0.45 kB
+dist/assets/index-CNldKenc.css     52.68 kB │ gzip: 11.37 kB
+dist/assets/topology-CitRzoT2.js  197.84 kB │ gzip: 64.55 kB
+dist/assets/index-CI_OBj68.js     227.99 kB │ gzip: 70.16 kB
+dist/assets/charts-BX467RyK.js    339.60 kB │ gzip: 99.57 kB
+✓ built in 7.26s

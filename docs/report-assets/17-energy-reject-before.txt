@@ -1,0 +1,275 @@
+- banner:
+  - link "GuardianMesh AI command center":
+    - /url: /
+    - text: GuardianMeshAI
+    - generic: AUTONOMOUS CYBER RESILIENCE
+  - generic: Defense command
+  - button "Incident reports":
+    - text: Incident reports
+  - generic: Threat monitoring active
+  - text: LOCAL SIMULATION
+- main:
+  - text: OPERATIONS
+  - text: CITY DEFENSE
+  - heading "Keep the city moving." [level=1]
+  - paragraph: Autonomous threat containment. Uninterrupted critical services.
+  - text: MENA IGNITE 2026
+  - paragraph: Smart Cities & Urban Safety
+  - text: GSMA × Nokia · Hackathon prototype
+  - region "Demo controls":
+    - text: THREAT SCENARIO
+    - combobox "THREAT SCENARIO" [disabled]:
+      - option "01 · Compromised IoT Camera"
+      - option "02 · Telecom Identity / SIM-Swap Risk"
+      - option "03 · Energy & City Control Threat" [selected]
+    - group "Demo mode":
+      - button "Fast pitch ~25 sec" [disabled] [pressed]:
+        - text: Fast pitch
+        - generic: ~25 sec
+      - button "Guided ~1 min" [disabled]:
+        - text: Guided
+        - generic: ~1 min
+    - generic "When enabled, the energy scenario visibly records approval by DEMO_AUTOMATION.":
+      - checkbox "Demo auto-approval" [disabled]
+      - generic: Demo auto-approval
+    - button "Autonomous defense running" [disabled]:
+      - text: Autonomous defense running
+  - region "Service continuity":
+    - strong: 6 / 6
+    - text: CRITICAL SERVICES
+    - text: ONLINE
+    - paragraph: Continuous protection for the services that matter.
+    - 'generic "Hospital: ONLINE; online"': Hospital
+    - 'generic "Emergency Response: ONLINE; online"': Emergency
+    - 'generic "Energy Grid: AT RISK; online"': Energy grid
+    - 'generic "Traffic Management: ONLINE; online"': Traffic
+    - 'generic "Public Safety Service: ONLINE; online"': Public safety
+    - 'generic "Smart-City Control: AT RISK; online"': City control
+    - generic: Service availability
+    - strong: 100%
+    - application
+  - generic "Defense progress":
+    - generic: Attack
+    - generic: Detect
+    - generic: Classify
+    - generic: Predict impact
+    - generic: Plan response
+    - generic: "06"
+    - generic: Policy check
+    - generic: "07"
+    - generic: Network response
+    - generic: "08"
+    - generic: Contained
+    - generic: "09"
+    - generic: Report
+  - region "Live digital twin":
+    - generic: LIVE DIGITAL TWIN
+    - heading "City infrastructure" [level=2]
+    - generic: 14 assets · 6 critical services
+    - generic "Live agent progress":
+      - 'generic "Sentinel: COMPLETE. T1489 · Service Stop · 98% rule confidence"':
+        - text: Sentinel
+      - 'generic "Impact: COMPLETE. Risk 72/100 · 2 critical services exposed"':
+        - text: Impact
+      - 'generic "Response: COMPLETE. 7 ordered actions · protect routes before isolation"':
+        - text: Response
+      - 'generic "Compliance: WAITING. Shared-segment isolation requires approval. Safe fallback is available on rejection."': Compliance
+      - 'generic "Network: IDLE. Ready for incident telemetry."': Network
+      - 'generic "Report: IDLE. Ready for incident telemetry."': Report
+    - generic: CONNECTED ENDPOINTS
+    - generic: TELECOM & EDGE
+    - generic: CRITICAL SERVICES
+    - application "Interactive city network":
+      - strong: IoT Security Camera
+      - generic: ONLINE
+      - strong: Traffic Controller
+      - generic: COMPROMISED
+      - strong: Environmental Sensor
+      - generic: ONLINE
+      - strong: Telecom Edge Gateway
+      - generic: ONLINE
+      - strong: Edge Compute Node
+      - generic: WARNING
+      - strong: 5G Core Network
+      - generic: ONLINE
+      - strong: City Network Gateway
+      - generic: ONLINE
+      - strong: GuardianMesh SOC
+      - generic: ONLINE
+      - generic: CRITICAL
+      - strong: Hospital
+      - text: ONLINE
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Emergency Response
+      - text: ONLINE
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Energy Grid
+      - text: AT RISK
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Traffic Management
+      - text: ONLINE
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Public Safety Service
+      - text: ONLINE
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Smart-City Control
+      - text: AT RISK
+      - generic: ● live
+      - generic "Control Panel":
+        - button "Zoom In":
+        - button "Zoom Out":
+        - button "Fit View":
+      - link "React Flow attribution":
+        - /url: https://reactflow.dev/attribution
+        - text: React Flow
+    - generic: Online
+    - generic: Threat path
+    - generic: Protected route
+    - generic: Isolated
+    - generic: Select an asset to inspect
+  - text: Live event stream
+  - generic: APPROVAL
+  - button "Pause" [disabled]:
+    - text: Pause
+  - button "Skip" [disabled]:
+    - text: Skip
+  - button "Restart":
+    - text: Restart
+  - button "Reset":
+    - text: Reset
+  - region "Incident intelligence":
+    - generic: INCIDENT INTELLIGENCE
+    - heading "Active investigation" [level=2]
+    - generic: APPROVAL
+    - generic: GM-3B9DF73610B7
+    - generic: FAST PITCH
+    - heading "Energy & City Control Threat" [level=3]
+    - text: Traffic Controller
+    - generic: SOURCE
+    - generic: PROJECTED SERVICE RISK
+    - strong: "72"
+    - generic: / 100
+    - generic: HIGH
+    - generic: MITRE ATT&CK · Enterprise
+    - link "T1489 Service Stop":
+      - /url: https://attack.mitre.org/techniques/T1489/
+      - code: T1489
+      - generic: Service Stop
+    - paragraph: Impact · 98% rule confidence
+    - text: PROJECTED PROPAGATION
+    - paragraph: Traffic Controller → Edge Compute Node → Energy Grid
+    - alert:
+      - heading "Operator decision required" [level=4]:
+        - text: Operator decision required
+      - paragraph: Isolate the shared edge segment after protecting service routes. Reject to use endpoint-only containment.
+      - button "Approve"
+      - button "Reject · safe fallback"
+  - region "Six coordinated agents":
+    - generic: COORDINATED INTELLIGENCE
+    - heading "Six agents. One defense." [level=2]
+    - generic: Deterministic reasoning · shared incident context
+    - article:
+      - text: COMPLETE
+      - heading "SentinelAgent" [level=3]
+      - paragraph: Detect & classify
+      - paragraph: T1489 · Service Stop · 98% rule confidence
+    - article:
+      - text: COMPLETE
+      - heading "ImpactAgent" [level=3]
+      - paragraph: Trace service exposure
+      - paragraph: Risk 72/100 · 2 critical services exposed
+    - article:
+      - text: COMPLETE
+      - heading "ResponseAgent" [level=3]
+      - paragraph: Plan safe containment
+      - paragraph: 7 ordered actions · protect routes before isolation
+    - article:
+      - text: WAITING
+      - heading "ComplianceAgent" [level=3]
+      - paragraph: Enforce operational policy
+      - paragraph: Shared-segment isolation requires approval. Safe fallback is available on rejection.
+    - article:
+      - text: IDLE
+      - heading "NetworkAgent" [level=3]
+      - paragraph: Execute simulated capabilities
+      - paragraph: Ready for incident telemetry.
+    - article:
+      - text: IDLE
+      - heading "ReportAgent" [level=3]
+      - paragraph: Explain the outcome
+      - paragraph: Ready for incident telemetry.
+  - generic: TELECOM DEFENSE LAYER
+  - heading "Network-as-Code actions" [level=2]
+  - generic: SIMULATED NETWORK-AS-CODE ACTIONS
+  - generic "Network actions":
+    - paragraph: Network actions will appear here.
+    - generic: Location verification · SIM swap · QoD · isolation · rerouting
+  - generic: 0 actions completed
+  - generic: Local provider · conceptual endpoints
+  - generic: EVIDENCE STREAM
+  - heading "Incident timeline" [level=2]
+  - text: 10 events
+  - generic "Incident timeline":
+    - generic: Compliance
+    - time: 18:26:28
+    - code: "#10"
+    - strong: APPROVAL REQUIRED
+    - paragraph: Approve shared edge-segment isolation, or reject to use endpoint-only containment.
+    - generic: Compliance
+    - time: 18:26:28
+    - code: "#09"
+    - strong: POLICY CHECK COMPLETE
+    - paragraph: Shared edge-segment isolation affects multiple tenants. Explicit approval is required; all critical service routes pass the safety dry-run.
+    - generic: Compliance
+    - time: 18:26:26
+    - code: "#08"
+    - strong: POLICY CHECK STARTED
+    - paragraph: Validating simulation scope, service routes and isolation boundaries.
+    - generic: Response
+    - time: 18:26:26
+    - code: "#07"
+    - strong: RESPONSE PLAN CREATED
+    - paragraph: Preserve critical service availability before changing endpoint or segment access. Context checks, service rerouting and containment are ordered and policy validated.
+    - generic: Response
+    - time: 18:26:25
+    - code: "#06"
+    - strong: RESPONSE PLANNING
+    - paragraph: Selecting a service-preserving containment strategy.
+    - generic: Impact
+    - time: 18:26:25
+    - code: "#05"
+    - strong: IMPACT ANALYSIS COMPLETE
+    - paragraph: 2 critical services are reachable through enabled dependency links. Peak risk 72/100 combines asset criticality, exposure, graph distance, link trust and current protection.
+    - generic: Impact
+    - time: 18:26:23
+    - code: "#04"
+    - strong: IMPACT ANALYSIS STARTED
+    - paragraph: Calculating downstream exposure from the compromised asset.
+    - generic: Sentinel
+    - time: 18:26:23
+    - code: "#03"
+    - strong: THREAT CLASSIFIED
+    - paragraph: Unauthorized service-stop commands attempt to disrupt the edge services supporting energy and city control. This is an Enterprise mapping for the compute layer, not a full ICS assessment.
+    - generic: Sentinel
+    - time: 18:26:21
+    - code: "#02"
+    - strong: ANOMALY DETECTED
+    - paragraph: Traffic controller sent 26 unauthorized service-stop requests to the edge compute plane.
+    - generic: SYSTEM
+    - time: 18:26:19
+    - code: "#01"
+    - strong: INCIDENT STARTED
+    - paragraph: Energy & City Control Threat. Synthetic attack telemetry injected into the city twin.
+  - generic: Backend event stream
+  - generic: Ordered · persisted · replayable
+  - text: GuardianMesh AI
+  - text: Autonomous defense armed
+  - generic: Offline-ready · Rule-based agents · Simulated telecom capabilities
+  - link "API reference":
+    - /url: http://127.0.0.1:8000/docs
+    - text: API reference

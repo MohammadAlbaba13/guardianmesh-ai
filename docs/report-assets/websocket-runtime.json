@@ -1,0 +1,285 @@
+[
+  {
+    "received_at": "2026-09-07T15:23:19.896312+00:00",
+    "type": "SNAPSHOT",
+    "seq": 27,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 27,
+      "timestamp": "2026-09-07T15:22:40.582996+00:00",
+      "type": "DEMO_PAUSE",
+      "agent": null,
+      "message": "Operator selected pause."
+    },
+    "online": 6
+  },
+  {
+    "type": "PONG"
+  },
+  {
+    "received_at": "2026-09-07T15:23:37.266169+00:00",
+    "type": "SNAPSHOT",
+    "seq": 28,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 28,
+      "timestamp": "2026-09-07T15:23:37.185988+00:00",
+      "type": "DEMO_RESUME",
+      "agent": null,
+      "message": "Operator selected resume."
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:38.344728+00:00",
+    "type": "SNAPSHOT",
+    "seq": 29,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 29,
+      "timestamp": "2026-09-07T15:23:38.191529+00:00",
+      "type": "TRAFFIC_REROUTED",
+      "agent": "Network",
+      "message": "Emergency Response moved to protected transport"
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:38.349842+00:00",
+    "type": "SNAPSHOT",
+    "seq": 30,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 30,
+      "timestamp": "2026-09-07T15:23:38.299175+00:00",
+      "type": "ACTION_EXECUTING",
+      "agent": "Network",
+      "message": "POST /routes/reroute \u00b7 Energy Grid"
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:41.232977+00:00",
+    "type": "SNAPSHOT",
+    "seq": 31,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 31,
+      "timestamp": "2026-09-07T15:23:41.080991+00:00",
+      "type": "TRAFFIC_REROUTED",
+      "agent": "Network",
+      "message": "Energy Grid moved to protected transport"
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:41.243694+00:00",
+    "type": "SNAPSHOT",
+    "seq": 32,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 32,
+      "timestamp": "2026-09-07T15:23:41.157442+00:00",
+      "type": "ACTION_EXECUTING",
+      "agent": "Network",
+      "message": "POST /routes/reroute \u00b7 Smart-City Control"
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:44.101694+00:00",
+    "type": "SNAPSHOT",
+    "seq": 33,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 33,
+      "timestamp": "2026-09-07T15:23:43.982815+00:00",
+      "type": "TRAFFIC_REROUTED",
+      "agent": "Network",
+      "message": "Smart-City Control moved to protected transport"
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:44.106827+00:00",
+    "type": "SNAPSHOT",
+    "seq": 34,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 34,
+      "timestamp": "2026-09-07T15:23:44.034794+00:00",
+      "type": "ACTION_EXECUTING",
+      "agent": "Network",
+      "message": "POST /routes/reroute \u00b7 Public Safety Service"
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:47.040531+00:00",
+    "type": "SNAPSHOT",
+    "seq": 35,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 35,
+      "timestamp": "2026-09-07T15:23:46.865814+00:00",
+      "type": "TRAFFIC_REROUTED",
+      "agent": "Network",
+      "message": "Public Safety Service moved to protected transport"
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:47.047265+00:00",
+    "type": "SNAPSHOT",
+    "seq": 36,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 36,
+      "timestamp": "2026-09-07T15:23:46.940354+00:00",
+      "type": "ACTION_EXECUTING",
+      "agent": "Network",
+      "message": "POST /routes/reroute \u00b7 Traffic Management"
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:49.958483+00:00",
+    "type": "SNAPSHOT",
+    "seq": 37,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 37,
+      "timestamp": "2026-09-07T15:23:49.786970+00:00",
+      "type": "TRAFFIC_REROUTED",
+      "agent": "Network",
+      "message": "Traffic Management moved to protected transport"
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:49.969675+00:00",
+    "type": "SNAPSHOT",
+    "seq": 38,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 38,
+      "timestamp": "2026-09-07T15:23:49.869115+00:00",
+      "type": "ACTION_EXECUTING",
+      "agent": "Network",
+      "message": "POST /qod/sessions \u00b7 Hospital"
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:52.864114+00:00",
+    "type": "SNAPSHOT",
+    "seq": 39,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 39,
+      "timestamp": "2026-09-07T15:23:52.691505+00:00",
+      "type": "QOD_ACTIVATED",
+      "agent": "Network",
+      "message": "Hospital priority active \u00b7 45 \u2192 8 ms (simulated)"
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:52.873180+00:00",
+    "type": "SNAPSHOT",
+    "seq": 40,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 40,
+      "timestamp": "2026-09-07T15:23:52.788004+00:00",
+      "type": "ACTION_EXECUTING",
+      "agent": "Network",
+      "message": "POST /qod/sessions \u00b7 Emergency Response"
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:55.804275+00:00",
+    "type": "SNAPSHOT",
+    "seq": 41,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 41,
+      "timestamp": "2026-09-07T15:23:55.610358+00:00",
+      "type": "QOD_ACTIVATED",
+      "agent": "Network",
+      "message": "Emergency Response priority active \u00b7 45 \u2192 8 ms (simulated)"
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:55.809839+00:00",
+    "type": "SNAPSHOT",
+    "seq": 42,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 42,
+      "timestamp": "2026-09-07T15:23:55.709854+00:00",
+      "type": "ACTION_EXECUTING",
+      "agent": "Network",
+      "message": "POST /slice/isolate \u00b7 IoT Security Camera"
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:58.848532+00:00",
+    "type": "SNAPSHOT",
+    "seq": 43,
+    "phase": "NETWORK",
+    "last_event": {
+      "seq": 43,
+      "timestamp": "2026-09-07T15:23:58.553686+00:00",
+      "type": "DEVICE_ISOLATED",
+      "agent": "Network",
+      "message": "IoT Security Camera quarantined"
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:58.853546+00:00",
+    "type": "SNAPSHOT",
+    "seq": 44,
+    "phase": "CONTAINED",
+    "last_event": {
+      "seq": 44,
+      "timestamp": "2026-09-07T15:23:58.676691+00:00",
+      "type": "INCIDENT_CONTAINED",
+      "agent": "Network",
+      "message": "Source isolated; residual propagation risk 0/100; all six critical services remained online."
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:23:58.854808+00:00",
+    "type": "SNAPSHOT",
+    "seq": 45,
+    "phase": "CONTAINED",
+    "last_event": {
+      "seq": 45,
+      "timestamp": "2026-09-07T15:23:58.764714+00:00",
+      "type": "REPORT_GENERATING",
+      "agent": "Report",
+      "message": "Compiling evidence, approval history, actions and continuity measurements."
+    },
+    "online": 6
+  },
+  {
+    "received_at": "2026-09-07T15:24:03.986586+00:00",
+    "type": "SNAPSHOT",
+    "seq": 46,
+    "phase": "COMPLETE",
+    "last_event": {
+      "seq": 46,
+      "timestamp": "2026-09-07T15:24:03.849618+00:00",
+      "type": "REPORT_GENERATED",
+      "agent": "Report",
+      "message": "Incident reports generated from actual state. Ready to review or export JSON."
+    },
+    "online": 6
+  }
+]

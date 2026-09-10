@@ -1,0 +1,440 @@
+- banner:
+  - link "GuardianMesh AI command center":
+    - /url: /
+    - text: GuardianMeshAI
+    - generic: AUTONOMOUS CYBER RESILIENCE
+  - generic: Defense command
+  - button "Incident reports":
+    - text: Incident reports
+  - generic: Threat monitoring active
+  - text: LOCAL SIMULATION
+- main:
+  - text: OPERATIONS
+  - text: CITY DEFENSE
+  - heading "Keep the city moving." [level=1]
+  - paragraph: Autonomous threat containment. Uninterrupted critical services.
+  - text: MENA IGNITE 2026
+  - paragraph: Smart Cities & Urban Safety
+  - text: GSMA × Nokia · Hackathon prototype
+  - region "Demo controls":
+    - text: THREAT SCENARIO
+    - combobox "THREAT SCENARIO":
+      - option "01 · Compromised IoT Camera"
+      - option "02 · Telecom Identity / SIM-Swap Risk" [selected]
+      - option "03 · Energy & City Control Threat"
+    - group "Demo mode":
+      - button "Fast pitch ~25 sec" [pressed]:
+        - text: Fast pitch
+        - generic: ~25 sec
+      - button "Guided ~1 min":
+        - text: Guided
+        - generic: ~1 min
+    - generic "When enabled, the energy scenario visibly records approval by DEMO_AUTOMATION.":
+      - checkbox "Demo auto-approval" [checked]
+      - generic: Demo auto-approval
+    - button "Run Autonomous Defense Demo":
+      - text: Run Autonomous Defense Demo
+  - region "Service continuity":
+    - strong: 6 / 6
+    - text: CRITICAL SERVICES
+    - text: ONLINE
+    - paragraph: Threat contained. Essential services uninterrupted.
+    - 'generic "Hospital: PROTECTED; online"': Hospital
+    - 'generic "Emergency Response: PROTECTED; online"': Emergency
+    - 'generic "Energy Grid: PROTECTED; online"': Energy grid
+    - 'generic "Traffic Management: PROTECTED; online"': Traffic
+    - 'generic "Public Safety Service: PROTECTED; online"': Public safety
+    - 'generic "Smart-City Control: PROTECTED; online"': City control
+    - generic: Service availability
+    - strong: 100%
+    - application
+  - generic "Defense progress":
+    - generic: Attack
+    - generic: Detect
+    - generic: Classify
+    - generic: Predict impact
+    - generic: Plan response
+    - generic: Policy check
+    - generic: Network response
+    - generic: Contained
+    - generic: "09"
+    - generic: Report
+  - region "Live digital twin":
+    - generic: LIVE DIGITAL TWIN
+    - heading "City infrastructure" [level=2]
+    - generic: 14 assets · 6 critical services
+    - generic "Live agent progress":
+      - 'generic "Sentinel: COMPLETE. T1451 · SIM Card Swap · 91% rule confidence"':
+        - text: Sentinel
+      - 'generic "Impact: COMPLETE. Risk 73/100 · 6 critical services exposed"':
+        - text: Impact
+      - 'generic "Response: COMPLETE. 11 ordered actions · protect routes before isolation"':
+        - text: Response
+      - 'generic "Compliance: COMPLETE. APPROVED"':
+        - text: Compliance
+      - 'generic "Network: COMPLETE. 11 simulated actions completed · source isolated"':
+        - text: Network
+      - 'generic "Report: COMPLETE. Executive and technical reports ready · evidence and timeline included"':
+        - text: Report
+    - generic: CONNECTED ENDPOINTS
+    - generic: TELECOM & EDGE
+    - generic: CRITICAL SERVICES
+    - application "Interactive city network":
+      - strong: IoT Security Camera
+      - generic: ONLINE
+      - strong: Traffic Controller
+      - generic: ONLINE
+      - strong: Environmental Sensor
+      - generic: ISOLATED
+      - strong: Telecom Edge Gateway
+      - generic: ONLINE
+      - strong: Edge Compute Node
+      - generic: ONLINE
+      - strong: 5G Core Network
+      - generic: ONLINE
+      - strong: City Network Gateway
+      - generic: ONLINE
+      - strong: GuardianMesh SOC
+      - generic: ONLINE
+      - generic: CRITICAL
+      - strong: Hospital
+      - text: PROTECTED
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Emergency Response
+      - text: PROTECTED
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Energy Grid
+      - text: PROTECTED
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Traffic Management
+      - text: PROTECTED
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Public Safety Service
+      - text: PROTECTED
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Smart-City Control
+      - text: PROTECTED
+      - generic: ● live
+      - generic "Control Panel":
+        - button "Zoom In":
+        - button "Zoom Out":
+        - button "Fit View":
+      - link "React Flow attribution":
+        - /url: https://reactflow.dev/attribution
+        - text: React Flow
+    - generic: Online
+    - generic: Threat path
+    - generic: Protected route
+    - generic: Isolated
+    - generic: Select an asset to inspect
+  - text: Live event stream
+  - generic: COMPLETE
+  - button "Pause" [disabled]:
+    - text: Pause
+  - button "Skip" [disabled]:
+    - text: Skip
+  - button "Restart":
+    - text: Restart
+  - button "Reset":
+    - text: Reset
+  - region "Incident intelligence":
+    - generic: INCIDENT INTELLIGENCE
+    - heading "Containment verified" [level=2]
+    - generic: CONTAINED
+    - generic: GM-B7F27B4C6506
+    - generic: FAST PITCH
+    - heading "Telecom Identity / SIM-Swap Risk" [level=3]
+    - text: Environmental Sensor
+    - generic: ISOLATED
+    - generic: RESIDUAL RISK
+    - strong: "0"
+    - generic: / 100
+    - generic: CONTAINED
+    - generic: MITRE ATT&CK · Mobile
+    - link "T1451 SIM Card Swap":
+      - /url: https://attack.mitre.org/techniques/T1451/
+      - code: T1451
+      - generic: SIM Card Swap
+    - paragraph: Initial Access · 91% rule confidence
+    - text: PROJECTED PROPAGATION
+    - paragraph: Environmental Sensor → Telecom Edge Gateway → 5G Core Network → City Network Gateway → Hospital
+    - text: Source isolated.
+    - strong: 6 / 6 critical services online.
+    - button "Generate Incident Report":
+      - text: Generate Incident Report
+  - region "Six coordinated agents":
+    - generic: COORDINATED INTELLIGENCE
+    - heading "Six agents. One defense." [level=2]
+    - generic: Deterministic reasoning · shared incident context
+    - article:
+      - text: COMPLETE
+      - heading "SentinelAgent" [level=3]
+      - paragraph: Detect & classify
+      - paragraph: T1451 · SIM Card Swap · 91% rule confidence
+    - article:
+      - text: COMPLETE
+      - heading "ImpactAgent" [level=3]
+      - paragraph: Trace service exposure
+      - paragraph: Risk 73/100 · 6 critical services exposed
+    - article:
+      - text: COMPLETE
+      - heading "ResponseAgent" [level=3]
+      - paragraph: Plan safe containment
+      - paragraph: 11 ordered actions · protect routes before isolation
+    - article:
+      - text: COMPLETE
+      - heading "ComplianceAgent" [level=3]
+      - paragraph: Enforce operational policy
+      - paragraph: APPROVED
+    - article:
+      - text: COMPLETE
+      - heading "NetworkAgent" [level=3]
+      - paragraph: Execute simulated capabilities
+      - paragraph: 11 simulated actions completed · source isolated
+    - article:
+      - text: COMPLETE
+      - heading "ReportAgent" [level=3]
+      - paragraph: Explain the outcome
+      - paragraph: Executive and technical reports ready · evidence and timeline included
+  - generic: TELECOM DEFENSE LAYER
+  - heading "Network-as-Code actions" [level=2]
+  - generic: SIMULATED NETWORK-AS-CODE ACTIONS
+  - generic "Network actions":
+    - generic: POST
+    - code: /slice/isolate
+    - generic: sensor
+    - paragraph: Environmental Sensor quarantined
+    - generic: POST
+    - code: /qod/sessions
+    - generic: emergency
+    - paragraph: Emergency Response priority active · 45 → 8 ms (simulated)
+    - generic: POST
+    - code: /qod/sessions
+    - generic: hospital
+    - paragraph: Hospital priority active · 45 → 8 ms (simulated)
+    - generic: POST
+    - code: /routes/reroute
+    - generic: traffic center
+    - paragraph: Traffic Management moved to protected transport
+    - generic: POST
+    - code: /routes/reroute
+    - generic: safety
+    - paragraph: Public Safety Service moved to protected transport
+    - generic: POST
+    - code: /routes/reroute
+    - generic: control
+    - paragraph: Smart-City Control moved to protected transport
+    - generic: POST
+    - code: /routes/reroute
+    - generic: energy
+    - paragraph: Energy Grid moved to protected transport
+    - generic: POST
+    - code: /routes/reroute
+    - generic: emergency
+    - paragraph: Emergency Response moved to protected transport
+    - generic: POST
+    - code: /routes/reroute
+    - generic: hospital
+    - paragraph: Hospital moved to protected transport
+    - generic: POST
+    - code: /sim-swap/check
+    - generic: sensor
+    - paragraph: Recent SIM change · trust reduced
+    - generic: POST
+    - code: /device/location/verify
+    - generic: sensor
+    - paragraph: Location mismatch; endpoint trust reduced
+  - generic: 11 actions completed
+  - generic: Local provider · conceptual endpoints
+  - generic: EVIDENCE STREAM
+  - heading "Incident timeline" [level=2]
+  - text: 35 events
+  - generic "Incident timeline":
+    - generic: Report
+    - time: 23:44:17
+    - code: "#35"
+    - strong: REPORT GENERATED
+    - paragraph: Incident reports generated from actual state. Ready to review or export JSON.
+    - generic: Report
+    - time: 23:44:15
+    - code: "#34"
+    - strong: REPORT GENERATING
+    - paragraph: Compiling evidence, approval history, actions and continuity measurements.
+    - generic: Network
+    - time: 23:44:15
+    - code: "#33"
+    - strong: INCIDENT CONTAINED
+    - paragraph: Source isolated; residual propagation risk 0/100; all six critical services remained online.
+    - generic: Network
+    - time: 23:44:15
+    - code: "#32"
+    - strong: DEVICE ISOLATED
+    - paragraph: Environmental Sensor quarantined
+    - generic: Network
+    - time: 23:44:14
+    - code: "#31"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /slice/isolate · Environmental Sensor
+    - generic: Network
+    - time: 23:44:14
+    - code: "#30"
+    - strong: QOD ACTIVATED
+    - paragraph: Emergency Response priority active · 45 → 8 ms (simulated)
+    - generic: Network
+    - time: 23:44:13
+    - code: "#29"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /qod/sessions · Emergency Response
+    - generic: Network
+    - time: 23:44:13
+    - code: "#28"
+    - strong: QOD ACTIVATED
+    - paragraph: Hospital priority active · 45 → 8 ms (simulated)
+    - generic: Network
+    - time: 23:44:12
+    - code: "#27"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /qod/sessions · Hospital
+    - generic: Network
+    - time: 23:44:12
+    - code: "#26"
+    - strong: TRAFFIC REROUTED
+    - paragraph: Traffic Management moved to protected transport
+    - generic: Network
+    - time: 23:44:11
+    - code: "#25"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /routes/reroute · Traffic Management
+    - generic: Network
+    - time: 23:44:11
+    - code: "#24"
+    - strong: TRAFFIC REROUTED
+    - paragraph: Public Safety Service moved to protected transport
+    - generic: Network
+    - time: 23:44:10
+    - code: "#23"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /routes/reroute · Public Safety Service
+    - generic: Network
+    - time: 23:44:10
+    - code: "#22"
+    - strong: TRAFFIC REROUTED
+    - paragraph: Smart-City Control moved to protected transport
+    - generic: Network
+    - time: 23:44:09
+    - code: "#21"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /routes/reroute · Smart-City Control
+    - generic: Network
+    - time: 23:44:09
+    - code: "#20"
+    - strong: TRAFFIC REROUTED
+    - paragraph: Energy Grid moved to protected transport
+    - generic: Network
+    - time: 23:44:08
+    - code: "#19"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /routes/reroute · Energy Grid
+    - generic: Network
+    - time: 23:44:08
+    - code: "#18"
+    - strong: TRAFFIC REROUTED
+    - paragraph: Emergency Response moved to protected transport
+    - generic: Network
+    - time: 23:44:07
+    - code: "#17"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /routes/reroute · Emergency Response
+    - generic: Network
+    - time: 23:44:07
+    - code: "#16"
+    - strong: TRAFFIC REROUTED
+    - paragraph: Hospital moved to protected transport
+    - generic: Network
+    - time: 23:44:06
+    - code: "#15"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /routes/reroute · Hospital
+    - generic: Network
+    - time: 23:44:06
+    - code: "#14"
+    - strong: CONTEXT VERIFIED
+    - paragraph: Recent SIM change · trust reduced
+    - generic: Network
+    - time: 23:44:05
+    - code: "#13"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /sim-swap/check · Environmental Sensor
+    - generic: Network
+    - time: 23:44:05
+    - code: "#12"
+    - strong: CONTEXT VERIFIED
+    - paragraph: Location mismatch; endpoint trust reduced
+    - generic: Network
+    - time: 23:44:04
+    - code: "#11"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /device/location/verify · Environmental Sensor
+    - generic: Network
+    - time: 23:44:04
+    - code: "#10"
+    - strong: NETWORK RESPONSE STARTED
+    - paragraph: SIMULATED NETWORK-AS-CODE ACTIONS · local deterministic provider.
+    - generic: Compliance
+    - time: 23:44:04
+    - code: "#09"
+    - strong: POLICY CHECK COMPLETE
+    - paragraph: Endpoint containment is bounded. Protected routes preserve all six critical services.
+    - generic: Compliance
+    - time: 23:44:02
+    - code: "#08"
+    - strong: POLICY CHECK STARTED
+    - paragraph: Validating simulation scope, service routes and isolation boundaries.
+    - generic: Response
+    - time: 23:44:02
+    - code: "#07"
+    - strong: RESPONSE PLAN CREATED
+    - paragraph: Preserve critical service availability before changing endpoint or segment access. Context checks, service rerouting and containment are ordered and policy validated.
+    - generic: Response
+    - time: 23:44:00
+    - code: "#06"
+    - strong: RESPONSE PLANNING
+    - paragraph: Selecting a service-preserving containment strategy.
+    - generic: Impact
+    - time: 23:44:00
+    - code: "#05"
+    - strong: IMPACT ANALYSIS COMPLETE
+    - paragraph: 6 critical services are reachable through enabled dependency links. Peak risk 73/100 combines asset criticality, exposure, graph distance, link trust and current protection.
+    - generic: Impact
+    - time: 23:43:59
+    - code: "#04"
+    - strong: IMPACT ANALYSIS STARTED
+    - paragraph: Calculating downstream exposure from the compromised asset.
+    - generic: Sentinel
+    - time: 23:43:59
+    - code: "#03"
+    - strong: THREAT CLASSIFIED
+    - paragraph: A recent SIM change plus an unconfirmed identity transfer and location anomaly supports a suspected SIM-swap mapping. A SIM change alone is not proof of compromise.
+    - generic: Sentinel
+    - time: 23:43:57
+    - code: "#02"
+    - strong: ANOMALY DETECTED
+    - paragraph: Trusted sensor identity re-registered from an unexpected city zone.
+    - generic: SYSTEM
+    - time: 23:43:55
+    - code: "#01"
+    - strong: INCIDENT STARTED
+    - paragraph: Telecom Identity / SIM-Swap Risk. Synthetic attack telemetry injected into the city twin.
+  - generic: Backend event stream
+  - generic: Ordered · persisted · replayable
+  - text: GuardianMesh AI
+  - text: Autonomous defense armed
+  - generic: Offline-ready · Rule-based agents · Simulated telecom capabilities
+  - link "API reference":
+    - /url: http://127.0.0.1:8000/docs
+    - text: API reference

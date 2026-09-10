@@ -1,0 +1,69 @@
+{
+  "validated_at": "2026-09-08T09:42:53.929214+00:00",
+  "pdf": "C:\\Users\\LOQ\\Documents\\ChatGPT\\Win\\GuardianMesh_AI_Complete_Project_Report.pdf",
+  "pdf_bytes": 5304727,
+  "pdf_sha256": "d65208ebab6b8c2980eb8d009fe064de7b4f63bfab501fad6408771b59dc4595",
+  "page_count": 54,
+  "unique_actual_screenshots": 20,
+  "screenshot_placements": 33,
+  "pdf_opens_and_all_pages_extract": true,
+  "all_pages_rendered_successfully": true,
+  "no_blank_pages": true,
+  "page_numbers_1_through_54": true,
+  "no_replacement_characters": true,
+  "app_source_hashes_match_evidence_capture": true,
+  "source_files_compared": 35,
+  "visual_review": {
+    "all_54_pages_contact_sheets": "PASS",
+    "cover_toc_architecture": "PASS",
+    "tables_and_native_text": "PASS",
+    "actual_screenshots_aspect_ratio_readability_captions": "PASS",
+    "all_three_scenarios": "PASS",
+    "test_and_build_evidence": "PASS",
+    "limitations_and_final_matrix": "PASS",
+    "full_size_sampled_pages": [
+      1,
+      2,
+      4,
+      6,
+      10,
+      16,
+      17,
+      18,
+      20,
+      25,
+      27,
+      29,
+      31,
+      33,
+      34,
+      39,
+      40,
+      46,
+      47,
+      49,
+      50,
+      54
+    ]
+  },
+  "backend_tests": "59 passed; 0 failed; 0 skipped; 2 deprecation warnings",
+  "frontend_tests": "11 passed in 4 files",
+  "frontend_build": "PASS; tsc -b && vite build; 2292 modules",
+  "judge_rehearsal": "PASS",
+  "remaining_partial_features": [
+    "Docker runtime unverified because Docker CLI unavailable"
+  ],
+  "not_implemented": [
+    "Real Nokia/CAMARA carrier execution or authorized sandbox",
+    "Optional external LLM interface",
+    "Production authentication/RBAC and distributed operation"
+  ],
+  "independent_final_audit": {
+    "result": "PASS",
+    "toc_links_resolve_to_printed_section_pages": 28,
+    "native_text_outside_page_bounds": 0,
+    "unique_embedded_image_streams_decoded": 20,
+    "required_content_and_evidence_consistency": "PASS",
+    "concrete_remaining_pdf_issues": []
+  }
+}

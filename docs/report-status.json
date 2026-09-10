@@ -1,0 +1,233 @@
+[
+  {
+    "feature": "Frontend command center",
+    "implementation": "IMPLEMENTED",
+    "code": "frontend/src/App.tsx; frontend/src/components/",
+    "verified": "Live application screenshots; 11 frontend tests; production build passed.",
+    "notes": "React interface renders incident snapshots; primary assets and fonts are local."
+  },
+  {
+    "feature": "FastAPI backend",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/main.py:create_app",
+    "verified": "health.json, openapi.json, Swagger screenshot; API tests passed.",
+    "notes": "Local REST controls and validation; no production authentication or multi-tenant isolation."
+  },
+  {
+    "feature": "SQLite database",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/persistence.py:Repository and five row models",
+    "verified": "database.json captures actual tables, schema and stored records.",
+    "notes": "SQLAlchemy stores JSON evidence in five tables; SQLite file remains local."
+  },
+  {
+    "feature": "Live WebSockets",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/main.py:stream; frontend/src/useGuardian.ts",
+    "verified": "websocket-runtime.json records SNAPSHOT updates, PONG, containment and report completion.",
+    "notes": "Full snapshots, sequence guard and reconnect; slow-client queues coalesce without discarding timeline evidence."
+  },
+  {
+    "feature": "Interactive digital twin",
+    "implementation": "IMPLEMENTED",
+    "code": "frontend/src/components/Topology.tsx; backend/app/topology.py",
+    "verified": "Idle, attack, hospital inspector, protected-route and isolated-camera screenshots.",
+    "notes": "Selectable assets, pan/zoom and backend-driven state; schematic topology is a simulation."
+  },
+  {
+    "feature": "14-node topology",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/topology.py:build_topology",
+    "verified": "topology.json: 14 assets, 21 links, six critical services; topology tests passed.",
+    "notes": "Six protected core routes begin disabled; management links do not propagate threats."
+  },
+  {
+    "feature": "Six coordinated agents",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/agents.py; backend/app/engine.py:run",
+    "verified": "Camera, identity and approved-energy evidence records contain six COMPLETE agent states.",
+    "notes": "Six deterministic logical agents exchange typed incident context; no LLM calls."
+  },
+  {
+    "feature": "Sentinel agent",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/agents.py:SentinelAgent.inspect",
+    "verified": "Telemetry rule tests; classification screenshot and actual scenario classifications.",
+    "notes": "Numeric/boolean rules reject benign or ambiguous evidence; confidence indicators are fixed, uncalibrated."
+  },
+  {
+    "feature": "Impact agent",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/agents.py:ImpactAgent.analyze; backend/app/risk.py",
+    "verified": "Camera hospital exposure 80/100; directed-path, cycle and isolation tests.",
+    "notes": "Computes graph exposure from scenario severity and current topology; no empirical outage prediction."
+  },
+  {
+    "feature": "Response agent",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/agents.py:ResponseAgent.plan",
+    "verified": "Camera and identity execute 11 actions; approved energy seven; rejection fallback six.",
+    "notes": "Protects affected routes before isolation; operator rejection creates a separately reviewed plan version."
+  },
+  {
+    "feature": "Compliance agent",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/agents.py:ComplianceAgent.validate; backend/app/policies.py",
+    "verified": "Approval screenshots and policy tests cover hard rejection, ordering and shared-segment gates.",
+    "notes": "Runs operational safety rules against an independent twin copy before execution."
+  },
+  {
+    "feature": "Network agent",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/agents.py:NetworkAgent.execute; backend/app/provider.py",
+    "verified": "Actual action results and network screenshots; deterministic idempotency tests passed.",
+    "notes": "Executes through the local simulated provider; engine applies returned effects to the twin."
+  },
+  {
+    "feature": "Report agent",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/agents.py:ReportAgent.generate; backend/app/reporting.py",
+    "verified": "Executive and technical screenshots; incident report payloads and report/recovery tests.",
+    "notes": "Derives both reports from stored incident evidence, approvals, actions and continuity samples."
+  },
+  {
+    "feature": "MITRE ATT&CK mapping",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/agents.py:SentinelAgent; backend/app/scenarios.py:SCENARIOS",
+    "verified": "Scenario records map camera T1210, identity T1451 and energy T1489; mapping tests passed.",
+    "notes": "Focused three-technique coverage; identity is Mobile, other scenarios Enterprise; no complete ATT&CK knowledge base."
+  },
+  {
+    "feature": "Graph impact analysis",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/risk.py:calculate_impact",
+    "verified": "Hospital path retained in camera evidence; directional, disconnected, cyclic and maximum-path tests.",
+    "notes": "Traverses enabled simple threat paths; retains maximum score per destination."
+  },
+  {
+    "feature": "Explainable risk scoring",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/risk.py:calculate_impact and risk_band",
+    "verified": "Camera initial risk 80; contained residual risk zero; factor and risk-band tests.",
+    "notes": "Weighted heuristic combines severity, criticality, exposure, distance, link weights and protection."
+  },
+  {
+    "feature": "Policy engine",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/policies.py:validate_plan; backend/app/topology.py:continuity_verified",
+    "verified": "Tests reject critical-service isolation, live providers, unsafe ordering and shared-scope bypasses.",
+    "notes": "Hard rejections cannot be overridden; connectivity is checked separately from asset cyber-risk state."
+  },
+  {
+    "feature": "Network-as-Code provider",
+    "implementation": "SIMULATED",
+    "code": "backend/app/provider.py:NetworkProvider and SimulatedNetworkProvider",
+    "verified": "Provider tests and action results show simulated=true with incident/action idempotency.",
+    "notes": "Interface plus local implementation; no carrier sockets, credentials or production Nokia integration."
+  },
+  {
+    "feature": "CAMARA/Nokia-inspired operations",
+    "implementation": "SIMULATED",
+    "code": "backend/app/provider.py:ENDPOINTS and execute; backend/app/engine.py",
+    "verified": "Location, SIM-swap, rerouting, QoD and isolation results; hospital inspector shows eight milliseconds.",
+    "notes": "Paths are internal conceptual labels, not REST routes; 45-to-8-ms QoD is synthetic."
+  },
+  {
+    "feature": "Human approval flow",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/engine.py:approve and approval; frontend/src/components/Panels.tsx",
+    "verified": "Manual approval/rejection screenshots and persisted OPERATOR decisions; gate/race tests passed.",
+    "notes": "Plan/version-bound decision precedes all network actions; demo auto-approval explicitly records DEMO_AUTOMATION."
+  },
+  {
+    "feature": "Incident timeline",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/engine.py:emit; frontend/src/components/Panels.tsx:TimelinePanel",
+    "verified": "Captured ordered event payloads and live timeline; WebSocket sequence evidence.",
+    "notes": "Timestamped agent/control/action events persist before publication; screenshots may include deliberate documentation pauses."
+  },
+  {
+    "feature": "Deterministic scenario engine",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/engine.py:SimulationEngine; backend/app/scenarios.py",
+    "verified": "Three complete scenario traces; repeat-run, cancellation, overlapping-run and recovery tests.",
+    "notes": "One active run per process; findings and action order deterministic, identifiers and elapsed times variable."
+  },
+  {
+    "feature": "Scenario 1: compromised IoT camera",
+    "implementation": "SIMULATED",
+    "code": "backend/app/scenarios.py:camera; backend/app/agents.py",
+    "verified": "camera-guided-final.json and screenshots: 11 actions, six agents complete, minimum six services online.",
+    "notes": "Synthetic exploit telemetry leads to T1210, hospital risk, route protection, QoD and camera isolation."
+  },
+  {
+    "feature": "Scenario 2: telecom identity risk",
+    "implementation": "SIMULATED",
+    "code": "backend/app/scenarios.py:identity; backend/app/provider.py",
+    "verified": "identity-final.json and screenshots: T1451, context checks, 11 actions and six services online.",
+    "notes": "Recent SIM swap plus unconfirmed ownership and location mismatch; suspected identity takeover, synthetic telemetry."
+  },
+  {
+    "feature": "Scenario 3: energy/city control",
+    "implementation": "SIMULATED",
+    "code": "backend/app/scenarios.py:energy; backend/app/engine.py:approval",
+    "verified": "Approved-energy and rejection reports/screenshots show seven/six actions respectively and retained six-service continuity.",
+    "notes": "T1489 targets the compute layer; rejection preserves the shared edge and retains both plan versions."
+  },
+  {
+    "feature": "Guided Demo and controls",
+    "implementation": "IMPLEMENTED",
+    "code": "frontend/src/App.tsx; frontend/src/useGuardian.ts; backend/app/engine.py:control",
+    "verified": "Guided camera evidence records pause/resume/skip; restart and reset screenshots; lifecycle tests passed.",
+    "notes": "Five-second steps; pause freezes progression, skip advances timing only, restart creates a fresh incident."
+  },
+  {
+    "feature": "Fast Pitch Mode",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/engine.py:start; frontend/src/App.tsx",
+    "verified": "Clean, attack, middle and final Fast Pitch screenshots; scenario engine timing configuration inspected.",
+    "notes": "Default 1.7-second steps; total wall time depends on execution, approval and operator interaction."
+  },
+  {
+    "feature": "Executive and technical reports",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/reporting.py; frontend/src/components/Reports.tsx; backend/app/main.py:report",
+    "verified": "Actual report screenshots, saved payloads, frontend rendering tests and API JSON attachment tests.",
+    "notes": "History, executive summary, technical JSON, export and browser print; generated after verified containment."
+  },
+  {
+    "feature": "Persistence and recovery",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/app/persistence.py:save, list and recover",
+    "verified": "Database capture; history ordering, interrupted-run and contained-report recovery tests passed.",
+    "notes": "Reset retains report evidence; unfinished runs become INTERRUPTED after restart, never silently resume execution."
+  },
+  {
+    "feature": "Automated tests and production build",
+    "implementation": "IMPLEMENTED",
+    "code": "backend/tests/; frontend/src/*test*; frontend/package.json",
+    "verified": "Backend: 59 passed, 33.88s; frontend: 11 passed, 2.15s; build: passed, 7.26s.",
+    "notes": "Two backend dependency deprecation warnings; zero failures/skips; production build emitted no warnings."
+  },
+  {
+    "feature": "Docker delivery",
+    "implementation": "PARTIAL",
+    "code": "compose.yaml; backend/Dockerfile; frontend/Dockerfile; frontend/nginx.conf",
+    "verified": "Compose, Dockerfiles, proxy settings and volume configuration inspected; Docker CLI unavailable.",
+    "notes": "Configuration is present; container image builds, health checks and compose runtime were not executed."
+  },
+  {
+    "feature": "README and startup instructions",
+    "implementation": "IMPLEMENTED",
+    "code": "README.md; scripts/setup.ps1; scripts/start.ps1; scripts/stop.ps1",
+    "verified": "README describes actual startup URLs, scenarios, architecture, simulation scope and validation commands.",
+    "notes": "Windows helpers and manual commands supplied; dependencies require internet on first installation."
+  },
+  {
+    "feature": "Optional LLM adapter",
+    "implementation": "OPTIONAL - NOT IMPLEMENTED",
+    "code": "backend/app/agents.py: deterministic implementations only",
+    "verified": "Inspected agent and engine code: no LLM client, adapter, model endpoint or key requirement.",
+    "notes": "Future extension only; the complete primary demo uses local deterministic rules."
+  }
+]

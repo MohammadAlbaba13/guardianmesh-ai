@@ -1,0 +1,38 @@
+/* Readability and live-story refinements applied to the existing command center. */
+.twin-agent-strip{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:11px 21px;border-top:1px solid #253744;background:#111f29}
+.twin-agent-strip>span{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#819aaa}
+.twin-agent-strip i{width:5px;height:5px;background:#587281;border-radius:50%}
+.twin-agent-strip .trace-complete{color:#8fdfb8}
+.twin-agent-strip .trace-analyzing,.twin-agent-strip .trace-executing{color:#dbf3ff}
+.twin-agent-strip .trace-waiting{color:#ebc179}
+.twin-agent-strip .trace-waiting i{background:#ebc179}
+.twin-stage{height:475px}
+.asset-node{width:197px}
+.asset-node strong{font-size:16px}
+.asset-state{font-size:11px}
+.asset-critical,.asset-uptime{font-size:10px}
+.asset-top{margin-bottom:9px}
+.agent-role,.agent-finding{font-size:12px;line-height:1.65}
+.agent-state{font-size:10px}
+.agent-card{min-height:199px}
+.agent-number{display:none}
+.agent-card h3{font-size:16px}
+.agent-card h3 span{font-size:12px}
+.source-line,.action-item p,.timeline-item p{font-size:13px}
+.endpoint code,.propagation p{font-size:13px}
+.event-meta,.feed-footer,.mitre-card p,.incident-id{font-size:11px}
+.event-meta>span,.timeline-item strong{font-size:11px}
+.eyebrow{font-size:10px}
+.mitre-card a{font-size:13px}
+.approval-card p,.auto-label{font-size:12px}
+.approval-card h4{font-size:14px}
+.header-local{display:flex!important}
+.header-nav button{white-space:nowrap}
+.standby-list span{font-size:12px}
+.report-section p,.technical-intro{font-size:14px}
+.report-metrics span{font-size:12px}
+@media(min-width:1500px){.twin-stage{height:495px}.agent-state{font-size:11px}}
+@media(max-width:1250px){.system-indicators>span:first-child{display:none}.header-local{font-size:10px}.agent-card-top{flex-wrap:wrap}.agent-state{font-size:9px}.twin-agent-strip{padding:10px 15px;gap:6px}.twin-agent-strip>span{font-size:10px}}
+@media(max-width:1050px){.workspace-grid{grid-template-columns:1fr}.threat-panel{min-height:0}.threat-content{display:grid;grid-template-columns:1fr 1fr;gap:13px 22px}.threat-content>*{margin-top:0!important}.threat-content .incident-id,.threat-content>h3,.threat-content .source-line,.threat-content .approval-card,.threat-content .containment-message,.threat-content .report-button,.threat-content .ready-radar,.threat-content .standby-list{grid-column:1/-1}.threat-content .risk-meter{grid-column:1/-1;grid-row:5}.threat-content .mitre-card{grid-column:2;grid-row:4}.threat-content .propagation{grid-column:1/-1}.twin-stage{height:455px}.agent-state{font-size:10px}}
+@media(max-width:800px){.app-header{gap:12px}.header-local{font-size:9px;letter-spacing:.6px}.system-indicators{gap:0}.twin-stage{height:410px}.threat-content{display:block}.threat-content>*{margin-top:14px!important}.threat-content .risk-meter{margin-top:8px!important}.source-line{font-size:13px}.twin-agent-strip{flex-wrap:wrap;justify-content:start;gap:10px 15px}.twin-agent-strip>span{font-size:11px}.agent-state{font-size:10px}.twin-footer{flex-wrap:wrap}.legend{flex-wrap:wrap;gap:10px 14px}.micro-label{font-size:10px}.asset-detail{font-size:13px}.asset-detail p,.asset-detail dl>div{font-size:12px}}
+@media(max-width:500px){.brand{font-size:18px;gap:8px}.brand-mark{width:36px;height:40px}.brand small{font-size:7px;letter-spacing:1.2px}.brand-ai{font-size:11px}.header-local svg{display:none}.header-local{font-size:8px}.twin-stage{height:340px}.agent-card{padding:13px;min-height:210px}.agent-card h3{font-size:15px}.agent-card h3 span{font-size:11px}.agent-state{font-size:9px}.twin-agent-strip{gap:10px 12px}.twin-agent-strip>span{font-size:10px}.report-tools{align-items:stretch}.report-metrics{grid-template-columns:1fr}.report-metrics span{font-size:12px}}

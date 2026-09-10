@@ -1,0 +1,394 @@
+- banner:
+  - link "GuardianMesh AI command center":
+    - /url: /
+    - text: GuardianMeshAI
+    - generic: AUTONOMOUS CYBER RESILIENCE
+  - generic: Defense command
+  - button "Incident reports":
+    - text: Incident reports
+  - generic: Threat monitoring active
+  - text: LOCAL SIMULATION
+- main:
+  - text: OPERATIONS
+  - text: CITY DEFENSE
+  - heading "Keep the city moving." [level=1]
+  - paragraph: Autonomous threat containment. Uninterrupted critical services.
+  - text: MENA IGNITE 2026
+  - paragraph: Smart Cities & Urban Safety
+  - text: GSMA × Nokia · Hackathon prototype
+  - region "Demo controls":
+    - text: THREAT SCENARIO
+    - combobox "THREAT SCENARIO":
+      - option "01 · Compromised IoT Camera"
+      - option "02 · Telecom Identity / SIM-Swap Risk"
+      - option "03 · Energy & City Control Threat" [selected]
+    - group "Demo mode":
+      - button "Fast pitch ~25 sec" [pressed]:
+        - text: Fast pitch
+        - generic: ~25 sec
+      - button "Guided ~1 min":
+        - text: Guided
+        - generic: ~1 min
+    - generic "When enabled, the energy scenario visibly records approval by DEMO_AUTOMATION.":
+      - checkbox "Demo auto-approval"
+      - generic: Demo auto-approval
+    - button "Run Autonomous Defense Demo":
+      - text: Run Autonomous Defense Demo
+  - region "Service continuity":
+    - strong: 6 / 6
+    - text: CRITICAL SERVICES
+    - text: ONLINE
+    - paragraph: Threat contained. Essential services uninterrupted.
+    - 'generic "Hospital: ONLINE; online"': Hospital
+    - 'generic "Emergency Response: ONLINE; online"': Emergency
+    - 'generic "Energy Grid: PROTECTED; online"': Energy grid
+    - 'generic "Traffic Management: ONLINE; online"': Traffic
+    - 'generic "Public Safety Service: ONLINE; online"': Public safety
+    - 'generic "Smart-City Control: PROTECTED; online"': City control
+    - generic: Service availability
+    - strong: 100%
+    - application
+  - generic "Defense progress":
+    - generic: Attack
+    - generic: Detect
+    - generic: Classify
+    - generic: Predict impact
+    - generic: Plan response
+    - generic: Policy check
+    - generic: Network response
+    - generic: Contained
+    - generic: "09"
+    - generic: Report
+  - region "Live digital twin":
+    - generic: LIVE DIGITAL TWIN
+    - heading "City infrastructure" [level=2]
+    - generic: 14 assets · 6 critical services
+    - generic "Live agent progress":
+      - 'generic "Sentinel: COMPLETE. T1489 · Service Stop · 98% rule confidence"':
+        - text: Sentinel
+      - 'generic "Impact: COMPLETE. Risk 72/100 · 2 critical services exposed"':
+        - text: Impact
+      - 'generic "Response: COMPLETE. 7 ordered actions · protect routes before isolation"':
+        - text: Response
+      - 'generic "Compliance: COMPLETE. Approval recorded; hard continuity policies remain enforced."':
+        - text: Compliance
+      - 'generic "Network: COMPLETE. 7 simulated actions completed · source isolated"':
+        - text: Network
+      - 'generic "Report: COMPLETE. Executive and technical reports ready · evidence and timeline included"':
+        - text: Report
+    - generic: CONNECTED ENDPOINTS
+    - generic: TELECOM & EDGE
+    - generic: CRITICAL SERVICES
+    - application "Interactive city network":
+      - strong: IoT Security Camera
+      - generic: ONLINE
+      - strong: Traffic Controller
+      - generic: ISOLATED
+      - strong: Environmental Sensor
+      - generic: ONLINE
+      - strong: Telecom Edge Gateway
+      - generic: ONLINE
+      - strong: Edge Compute Node
+      - generic: ISOLATED
+      - strong: 5G Core Network
+      - generic: ONLINE
+      - strong: City Network Gateway
+      - generic: ONLINE
+      - strong: GuardianMesh SOC
+      - generic: ONLINE
+      - generic: CRITICAL
+      - strong: Hospital
+      - text: ONLINE
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Emergency Response
+      - text: ONLINE
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Energy Grid
+      - text: PROTECTED
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Traffic Management
+      - text: ONLINE
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Public Safety Service
+      - text: ONLINE
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Smart-City Control
+      - text: PROTECTED
+      - generic: ● live
+      - generic "Control Panel":
+        - button "Zoom In":
+        - button "Zoom Out":
+        - button "Fit View":
+      - link "React Flow attribution":
+        - /url: https://reactflow.dev/attribution
+        - text: React Flow
+    - generic: Online
+    - generic: Threat path
+    - generic: Protected route
+    - generic: Isolated
+    - generic: Select an asset to inspect
+  - text: Live event stream
+  - generic: COMPLETE
+  - button "Pause" [disabled]:
+    - text: Pause
+  - button "Skip" [disabled]:
+    - text: Skip
+  - button "Restart":
+    - text: Restart
+  - button "Reset":
+    - text: Reset
+  - region "Incident intelligence":
+    - generic: INCIDENT INTELLIGENCE
+    - heading "Containment verified" [level=2]
+    - generic: CONTAINED
+    - generic: GM-48E962F8A27E
+    - generic: FAST PITCH
+    - heading "Energy & City Control Threat" [level=3]
+    - text: Traffic Controller
+    - generic: ISOLATED
+    - generic: RESIDUAL RISK
+    - strong: "0"
+    - generic: / 100
+    - generic: CONTAINED
+    - generic: MITRE ATT&CK · Enterprise
+    - link "T1489 Service Stop":
+      - /url: https://attack.mitre.org/techniques/T1489/
+      - code: T1489
+      - generic: Service Stop
+    - paragraph: Impact · 98% rule confidence
+    - text: PROJECTED PROPAGATION
+    - paragraph: Traffic Controller → Edge Compute Node → Energy Grid
+    - text: Source isolated.
+    - strong: 6 / 6 critical services online.
+    - button "Generate Incident Report":
+      - text: Generate Incident Report
+  - region "Six coordinated agents":
+    - generic: COORDINATED INTELLIGENCE
+    - heading "Six agents. One defense." [level=2]
+    - generic: Deterministic reasoning · shared incident context
+    - article:
+      - text: COMPLETE
+      - heading "SentinelAgent" [level=3]
+      - paragraph: Detect & classify
+      - paragraph: T1489 · Service Stop · 98% rule confidence
+    - article:
+      - text: COMPLETE
+      - heading "ImpactAgent" [level=3]
+      - paragraph: Trace service exposure
+      - paragraph: Risk 72/100 · 2 critical services exposed
+    - article:
+      - text: COMPLETE
+      - heading "ResponseAgent" [level=3]
+      - paragraph: Plan safe containment
+      - paragraph: 7 ordered actions · protect routes before isolation
+    - article:
+      - text: COMPLETE
+      - heading "ComplianceAgent" [level=3]
+      - paragraph: Enforce operational policy
+      - paragraph: Approval recorded; hard continuity policies remain enforced.
+    - article:
+      - text: COMPLETE
+      - heading "NetworkAgent" [level=3]
+      - paragraph: Execute simulated capabilities
+      - paragraph: 7 simulated actions completed · source isolated
+    - article:
+      - text: COMPLETE
+      - heading "ReportAgent" [level=3]
+      - paragraph: Explain the outcome
+      - paragraph: Executive and technical reports ready · evidence and timeline included
+  - generic: TELECOM DEFENSE LAYER
+  - heading "Network-as-Code actions" [level=2]
+  - generic: SIMULATED NETWORK-AS-CODE ACTIONS
+  - generic "Network actions":
+    - generic: POST
+    - code: /slice/isolate
+    - generic: traffic
+    - paragraph: Traffic Controller quarantined
+    - generic: POST
+    - code: /slice/isolate
+    - generic: edge
+    - paragraph: Edge Compute Node segment isolated after route protection
+    - generic: POST
+    - code: /qod/sessions
+    - generic: energy
+    - paragraph: Energy Grid priority active · 45 → 8 ms (simulated)
+    - generic: POST
+    - code: /routes/reroute
+    - generic: control
+    - paragraph: Smart-City Control moved to protected transport
+    - generic: POST
+    - code: /routes/reroute
+    - generic: energy
+    - paragraph: Energy Grid moved to protected transport
+    - generic: POST
+    - code: /sim-swap/check
+    - generic: traffic
+    - paragraph: No suspicious SIM change · low identity risk
+    - generic: POST
+    - code: /device/location/verify
+    - generic: traffic
+    - paragraph: Location verified · city-zone
+  - generic: 7 actions completed
+  - generic: Local provider · conceptual endpoints
+  - generic: EVIDENCE STREAM
+  - heading "Incident timeline" [level=2]
+  - text: 29 events
+  - generic "Incident timeline":
+    - generic: Report
+    - time: 18:25:38
+    - code: "#29"
+    - strong: REPORT GENERATED
+    - paragraph: Incident reports generated from actual state. Ready to review or export JSON.
+    - generic: Report
+    - time: 18:25:36
+    - code: "#28"
+    - strong: REPORT GENERATING
+    - paragraph: Compiling evidence, approval history, actions and continuity measurements.
+    - generic: Network
+    - time: 18:25:36
+    - code: "#27"
+    - strong: INCIDENT CONTAINED
+    - paragraph: Source isolated; residual propagation risk 0/100; all six critical services remained online.
+    - generic: Network
+    - time: 18:25:36
+    - code: "#26"
+    - strong: DEVICE ISOLATED
+    - paragraph: Traffic Controller quarantined
+    - generic: Network
+    - time: 18:25:35
+    - code: "#25"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /slice/isolate · Traffic Controller
+    - generic: Network
+    - time: 18:25:35
+    - code: "#24"
+    - strong: SEGMENT ISOLATED
+    - paragraph: Edge Compute Node segment isolated after route protection
+    - generic: Network
+    - time: 18:25:34
+    - code: "#23"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /slice/isolate · Edge Compute Node
+    - generic: Network
+    - time: 18:25:34
+    - code: "#22"
+    - strong: QOD ACTIVATED
+    - paragraph: Energy Grid priority active · 45 → 8 ms (simulated)
+    - generic: Network
+    - time: 18:25:33
+    - code: "#21"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /qod/sessions · Energy Grid
+    - generic: Network
+    - time: 18:25:32
+    - code: "#20"
+    - strong: TRAFFIC REROUTED
+    - paragraph: Smart-City Control moved to protected transport
+    - generic: Network
+    - time: 18:25:31
+    - code: "#19"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /routes/reroute · Smart-City Control
+    - generic: Network
+    - time: 18:25:31
+    - code: "#18"
+    - strong: TRAFFIC REROUTED
+    - paragraph: Energy Grid moved to protected transport
+    - generic: Network
+    - time: 18:25:30
+    - code: "#17"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /routes/reroute · Energy Grid
+    - generic: Network
+    - time: 18:25:30
+    - code: "#16"
+    - strong: CONTEXT VERIFIED
+    - paragraph: No suspicious SIM change · low identity risk
+    - generic: Network
+    - time: 18:25:29
+    - code: "#15"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /sim-swap/check · Traffic Controller
+    - generic: Network
+    - time: 18:25:29
+    - code: "#14"
+    - strong: CONTEXT VERIFIED
+    - paragraph: Location verified · city-zone
+    - generic: Network
+    - time: 18:25:28
+    - code: "#13"
+    - strong: ACTION EXECUTING
+    - paragraph: POST /device/location/verify · Traffic Controller
+    - generic: Network
+    - time: 18:25:28
+    - code: "#12"
+    - strong: NETWORK RESPONSE STARTED
+    - paragraph: SIMULATED NETWORK-AS-CODE ACTIONS · local deterministic provider.
+    - generic: Compliance
+    - time: 18:25:28
+    - code: "#11"
+    - strong: APPROVAL RECORDED
+    - paragraph: "Operator: approve for plan v1."
+    - generic: Compliance
+    - time: 18:24:48
+    - code: "#10"
+    - strong: APPROVAL REQUIRED
+    - paragraph: Approve shared edge-segment isolation, or reject to use endpoint-only containment.
+    - generic: Compliance
+    - time: 18:24:48
+    - code: "#09"
+    - strong: POLICY CHECK COMPLETE
+    - paragraph: Shared edge-segment isolation affects multiple tenants. Explicit approval is required; all critical service routes pass the safety dry-run.
+    - generic: Compliance
+    - time: 18:24:46
+    - code: "#08"
+    - strong: POLICY CHECK STARTED
+    - paragraph: Validating simulation scope, service routes and isolation boundaries.
+    - generic: Response
+    - time: 18:24:46
+    - code: "#07"
+    - strong: RESPONSE PLAN CREATED
+    - paragraph: Preserve critical service availability before changing endpoint or segment access. Context checks, service rerouting and containment are ordered and policy validated.
+    - generic: Response
+    - time: 18:24:44
+    - code: "#06"
+    - strong: RESPONSE PLANNING
+    - paragraph: Selecting a service-preserving containment strategy.
+    - generic: Impact
+    - time: 18:24:44
+    - code: "#05"
+    - strong: IMPACT ANALYSIS COMPLETE
+    - paragraph: 2 critical services are reachable through enabled dependency links. Peak risk 72/100 combines asset criticality, exposure, graph distance, link trust and current protection.
+    - generic: Impact
+    - time: 18:24:43
+    - code: "#04"
+    - strong: IMPACT ANALYSIS STARTED
+    - paragraph: Calculating downstream exposure from the compromised asset.
+    - generic: Sentinel
+    - time: 18:24:43
+    - code: "#03"
+    - strong: THREAT CLASSIFIED
+    - paragraph: Unauthorized service-stop commands attempt to disrupt the edge services supporting energy and city control. This is an Enterprise mapping for the compute layer, not a full ICS assessment.
+    - generic: Sentinel
+    - time: 18:24:41
+    - code: "#02"
+    - strong: ANOMALY DETECTED
+    - paragraph: Traffic controller sent 26 unauthorized service-stop requests to the edge compute plane.
+    - generic: SYSTEM
+    - time: 18:24:39
+    - code: "#01"
+    - strong: INCIDENT STARTED
+    - paragraph: Energy & City Control Threat. Synthetic attack telemetry injected into the city twin.
+  - generic: Backend event stream
+  - generic: Ordered · persisted · replayable
+  - text: GuardianMesh AI
+  - text: Autonomous defense armed
+  - generic: Offline-ready · Rule-based agents · Simulated telecom capabilities
+  - link "API reference":
+    - /url: http://127.0.0.1:8000/docs
+    - text: API reference

@@ -1,0 +1,286 @@
+- banner:
+  - link "GuardianMesh AI command center":
+    - /url: /
+    - text: GuardianMeshAI
+    - generic: AUTONOMOUS CYBER RESILIENCE
+  - generic: Defense command
+  - button "Incident reports":
+    - text: Incident reports
+  - generic: Threat monitoring active
+  - text: LOCAL SIMULATION
+- main:
+  - text: OPERATIONS
+  - text: CITY DEFENSE
+  - heading "Keep the city moving." [level=1]
+  - paragraph: Autonomous threat containment. Uninterrupted critical services.
+  - text: MENA IGNITE 2026
+  - paragraph: Smart Cities & Urban Safety
+  - text: GSMA × Nokia · Hackathon prototype
+  - region "Demo controls":
+    - text: THREAT SCENARIO
+    - combobox "THREAT SCENARIO" [disabled]:
+      - option "01 · Compromised IoT Camera" [selected]
+      - option "02 · Telecom Identity / SIM-Swap Risk"
+      - option "03 · Energy & City Control Threat"
+    - group "Demo mode":
+      - button "Fast pitch ~25 sec" [disabled]:
+        - text: Fast pitch
+        - generic: ~25 sec
+      - button "Guided ~1 min" [disabled] [pressed]:
+        - text: Guided
+        - generic: ~1 min
+    - generic "When enabled, the energy scenario visibly records approval by DEMO_AUTOMATION.":
+      - checkbox "Demo auto-approval" [checked] [disabled]
+      - generic: Demo auto-approval
+    - button "Autonomous defense running" [disabled]:
+      - text: Autonomous defense running
+  - region "Service continuity":
+    - strong: 6 / 6
+    - text: CRITICAL SERVICES
+    - text: ONLINE
+    - paragraph: Continuous protection for the services that matter.
+    - 'generic "Hospital: AT RISK; online"': Hospital
+    - 'generic "Emergency Response: AT RISK; online"': Emergency
+    - 'generic "Energy Grid: AT RISK; online"': Energy grid
+    - 'generic "Traffic Management: AT RISK; online"': Traffic
+    - 'generic "Public Safety Service: AT RISK; online"': Public safety
+    - 'generic "Smart-City Control: AT RISK; online"': City control
+    - generic: Service availability
+    - strong: 100%
+    - application
+  - generic "Defense progress":
+    - generic: Attack
+    - generic: Detect
+    - generic: Classify
+    - generic: "04"
+    - generic: Predict impact
+    - generic: "05"
+    - generic: Plan response
+    - generic: "06"
+    - generic: Policy check
+    - generic: "07"
+    - generic: Network response
+    - generic: "08"
+    - generic: Contained
+    - generic: "09"
+    - generic: Report
+  - region "Live digital twin":
+    - generic: LIVE DIGITAL TWIN
+    - heading "City infrastructure" [level=2]
+    - generic: 14 assets · 6 critical services
+    - generic "Live agent progress":
+      - 'generic "Sentinel: COMPLETE. T1210 · Exploitation of Remote Services · 97% rule confidence"':
+        - text: Sentinel
+      - 'generic "Impact: COMPLETE. Risk 80/100 · 6 critical services exposed"':
+        - text: Impact
+      - 'generic "Response: ANALYZING. Comparing endpoint containment with broader segment isolation."':
+        - text: Response
+      - 'generic "Compliance: IDLE. Ready for incident telemetry."': Compliance
+      - 'generic "Network: IDLE. Ready for incident telemetry."': Network
+      - 'generic "Report: IDLE. Ready for incident telemetry."': Report
+    - generic: CONNECTED ENDPOINTS
+    - generic: TELECOM & EDGE
+    - generic: CRITICAL SERVICES
+    - application "Interactive city network":
+      - strong: IoT Security Camera
+      - generic: COMPROMISED
+      - strong: Traffic Controller
+      - generic: ONLINE
+      - strong: Environmental Sensor
+      - generic: ONLINE
+      - strong: Telecom Edge Gateway
+      - generic: WARNING
+      - strong: Edge Compute Node
+      - generic: ONLINE
+      - strong: 5G Core Network
+      - generic: WARNING
+      - strong: City Network Gateway
+      - generic: WARNING
+      - strong: GuardianMesh SOC
+      - generic: ONLINE
+      - generic: CRITICAL
+      - strong: Hospital
+      - text: AT RISK
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Emergency Response
+      - text: AT RISK
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Energy Grid
+      - text: AT RISK
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Traffic Management
+      - text: AT RISK
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Public Safety Service
+      - text: AT RISK
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Smart-City Control
+      - text: AT RISK
+      - generic: ● live
+      - generic "Control Panel":
+        - button "Zoom In":
+        - button "Zoom Out":
+        - button "Fit View":
+      - link "React Flow attribution":
+        - /url: https://reactflow.dev/attribution
+        - text: React Flow
+    - generic: Online
+    - generic: Threat path
+    - generic: Protected route
+    - generic: Isolated
+    - generic: Select an asset to inspect
+  - text: Live event stream
+  - generic: PAUSED
+  - button "Resume":
+    - text: Resume
+  - button "Skip" [disabled]:
+    - text: Skip
+  - button "Restart":
+    - text: Restart
+  - button "Reset":
+    - text: Reset
+  - region "Incident intelligence":
+    - generic: INCIDENT INTELLIGENCE
+    - heading "Active investigation" [level=2]
+    - generic: ACTIVE
+    - generic: GM-0D632E900149
+    - generic: GUIDED
+    - heading "Compromised IoT Camera" [level=3]
+    - text: IoT Security Camera
+    - generic: SOURCE
+    - generic: PROJECTED SERVICE RISK
+    - strong: "80"
+    - generic: / 100
+    - generic: CRITICAL
+    - generic: MITRE ATT&CK · Enterprise
+    - link "T1210 Exploitation of Remote Services":
+      - /url: https://attack.mitre.org/techniques/T1210/
+      - code: T1210
+      - generic: Exploitation of Remote Services
+    - paragraph: Lateral Movement · 97% rule confidence
+    - text: PROJECTED PROPAGATION
+    - paragraph: IoT Security Camera → Telecom Edge Gateway → 5G Core Network → City Network Gateway → Hospital
+  - region "Six coordinated agents":
+    - generic: COORDINATED INTELLIGENCE
+    - heading "Six agents. One defense." [level=2]
+    - generic: Deterministic reasoning · shared incident context
+    - article:
+      - text: COMPLETE
+      - heading "SentinelAgent" [level=3]
+      - paragraph: Detect & classify
+      - paragraph: T1210 · Exploitation of Remote Services · 97% rule confidence
+    - article:
+      - text: COMPLETE
+      - heading "ImpactAgent" [level=3]
+      - paragraph: Trace service exposure
+      - paragraph: Risk 80/100 · 6 critical services exposed
+    - article:
+      - text: ANALYZING
+      - heading "ResponseAgent" [level=3]
+      - paragraph: Plan safe containment
+      - paragraph: Comparing endpoint containment with broader segment isolation.
+    - article:
+      - text: IDLE
+      - heading "ComplianceAgent" [level=3]
+      - paragraph: Enforce operational policy
+      - paragraph: Ready for incident telemetry.
+    - article:
+      - text: IDLE
+      - heading "NetworkAgent" [level=3]
+      - paragraph: Execute simulated capabilities
+      - paragraph: Ready for incident telemetry.
+    - article:
+      - text: IDLE
+      - heading "ReportAgent" [level=3]
+      - paragraph: Explain the outcome
+      - paragraph: Ready for incident telemetry.
+  - generic: TELECOM DEFENSE LAYER
+  - heading "Network-as-Code actions" [level=2]
+  - generic: SIMULATED NETWORK-AS-CODE ACTIONS
+  - generic "Network actions":
+    - paragraph: Network actions will appear here.
+    - generic: Location verification · SIM swap · QoD · isolation · rerouting
+  - generic: 0 actions completed
+  - generic: Local provider · conceptual endpoints
+  - generic: EVIDENCE STREAM
+  - heading "Incident timeline" [level=2]
+  - text: 13 events
+  - generic "Incident timeline":
+    - generic: SYSTEM
+    - time: 18:22:08
+    - code: "#13"
+    - strong: DEMO PAUSE
+    - paragraph: Operator selected pause.
+    - generic: Response
+    - time: 18:22:03
+    - code: "#12"
+    - strong: RESPONSE PLANNING
+    - paragraph: Selecting a service-preserving containment strategy.
+    - generic: Impact
+    - time: 18:22:03
+    - code: "#11"
+    - strong: IMPACT ANALYSIS COMPLETE
+    - paragraph: 6 critical services are reachable through enabled dependency links. Peak risk 80/100 combines asset criticality, exposure, graph distance, link trust and current protection.
+    - generic: Impact
+    - time: 18:21:58
+    - code: "#10"
+    - strong: IMPACT ANALYSIS STARTED
+    - paragraph: Calculating downstream exposure from the compromised asset.
+    - generic: Sentinel
+    - time: 18:21:58
+    - code: "#09"
+    - strong: THREAT CLASSIFIED
+    - paragraph: An exploit signature and unauthorized remote-service attempts indicate attempted lateral movement, not scanning alone.
+    - generic: SYSTEM
+    - time: 18:21:58
+    - code: "#08"
+    - strong: DEMO SKIP
+    - paragraph: Operator selected skip.
+    - generic: SYSTEM
+    - time: 18:21:57
+    - code: "#07"
+    - strong: DEMO RESUME
+    - paragraph: Operator selected resume.
+    - generic: SYSTEM
+    - time: 18:21:43
+    - code: "#06"
+    - strong: DEMO PAUSE
+    - paragraph: Operator selected pause.
+    - generic: Sentinel
+    - time: 18:21:43
+    - code: "#05"
+    - strong: ANOMALY DETECTED
+    - paragraph: Camera opened 48 unauthorized remote-service sessions in 10 seconds; baseline is 2.
+    - generic: SYSTEM
+    - time: 18:21:43
+    - code: "#04"
+    - strong: DEMO SKIP
+    - paragraph: Operator selected skip.
+    - generic: SYSTEM
+    - time: 18:21:42
+    - code: "#03"
+    - strong: DEMO RESUME
+    - paragraph: Operator selected resume.
+    - generic: SYSTEM
+    - time: 18:21:11
+    - code: "#02"
+    - strong: DEMO PAUSE
+    - paragraph: Operator selected pause.
+    - generic: SYSTEM
+    - time: 18:21:11
+    - code: "#01"
+    - strong: INCIDENT STARTED
+    - paragraph: Compromised IoT Camera. Synthetic attack telemetry injected into the city twin.
+  - generic: Backend event stream
+  - generic: Ordered · persisted · replayable
+  - text: GuardianMesh AI
+  - text: Autonomous defense armed
+  - generic: Offline-ready · Rule-based agents · Simulated telecom capabilities
+  - link "API reference":
+    - /url: http://127.0.0.1:8000/docs
+    - text: API reference

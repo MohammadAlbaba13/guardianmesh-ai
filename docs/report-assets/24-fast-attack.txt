@@ -1,0 +1,218 @@
+- banner:
+  - link "GuardianMesh AI command center":
+    - /url: /
+    - text: GuardianMeshAI
+    - generic: AUTONOMOUS CYBER RESILIENCE
+  - generic: Defense command
+  - button "Incident reports":
+    - text: Incident reports
+  - generic: Threat monitoring active
+  - text: LOCAL SIMULATION
+- main:
+  - text: OPERATIONS
+  - text: CITY DEFENSE
+  - heading "Keep the city moving." [level=1]
+  - paragraph: Autonomous threat containment. Uninterrupted critical services.
+  - text: MENA IGNITE 2026
+  - paragraph: Smart Cities & Urban Safety
+  - text: GSMA × Nokia · Hackathon prototype
+  - region "Demo controls":
+    - text: THREAT SCENARIO
+    - combobox "THREAT SCENARIO" [disabled]:
+      - option "01 · Compromised IoT Camera" [selected]
+      - option "02 · Telecom Identity / SIM-Swap Risk"
+      - option "03 · Energy & City Control Threat"
+    - group "Demo mode":
+      - button "Fast pitch ~25 sec" [disabled] [pressed]:
+        - text: Fast pitch
+        - generic: ~25 sec
+      - button "Guided ~1 min" [disabled]:
+        - text: Guided
+        - generic: ~1 min
+    - generic "When enabled, the energy scenario visibly records approval by DEMO_AUTOMATION.":
+      - checkbox "Demo auto-approval" [checked] [disabled]
+      - generic: Demo auto-approval
+    - button "Autonomous defense running" [disabled]:
+      - text: Autonomous defense running
+  - region "Service continuity":
+    - strong: 6 / 6
+    - text: CRITICAL SERVICES
+    - text: ONLINE
+    - paragraph: Continuous protection for the services that matter.
+    - 'generic "Hospital: ONLINE; online"': Hospital
+    - 'generic "Emergency Response: ONLINE; online"': Emergency
+    - 'generic "Energy Grid: ONLINE; online"': Energy grid
+    - 'generic "Traffic Management: ONLINE; online"': Traffic
+    - 'generic "Public Safety Service: ONLINE; online"': Public safety
+    - 'generic "Smart-City Control: ONLINE; online"': City control
+    - generic: Service availability
+    - strong: 100%
+    - application
+  - generic "Defense progress":
+    - generic: "01"
+    - generic: Attack
+    - generic: "02"
+    - generic: Detect
+    - generic: "03"
+    - generic: Classify
+    - generic: "04"
+    - generic: Predict impact
+    - generic: "05"
+    - generic: Plan response
+    - generic: "06"
+    - generic: Policy check
+    - generic: "07"
+    - generic: Network response
+    - generic: "08"
+    - generic: Contained
+    - generic: "09"
+    - generic: Report
+  - region "Live digital twin":
+    - generic: LIVE DIGITAL TWIN
+    - heading "City infrastructure" [level=2]
+    - generic: 14 assets · 6 critical services
+    - generic "Live agent progress":
+      - 'generic "Sentinel: IDLE. Ready for incident telemetry."': Sentinel
+      - 'generic "Impact: IDLE. Ready for incident telemetry."': Impact
+      - 'generic "Response: IDLE. Ready for incident telemetry."': Response
+      - 'generic "Compliance: IDLE. Ready for incident telemetry."': Compliance
+      - 'generic "Network: IDLE. Ready for incident telemetry."': Network
+      - 'generic "Report: IDLE. Ready for incident telemetry."': Report
+    - generic: CONNECTED ENDPOINTS
+    - generic: TELECOM & EDGE
+    - generic: CRITICAL SERVICES
+    - application "Interactive city network":
+      - strong: IoT Security Camera
+      - generic: COMPROMISED
+      - strong: Traffic Controller
+      - generic: ONLINE
+      - strong: Environmental Sensor
+      - generic: ONLINE
+      - strong: Telecom Edge Gateway
+      - generic: ONLINE
+      - strong: Edge Compute Node
+      - generic: ONLINE
+      - strong: 5G Core Network
+      - generic: ONLINE
+      - strong: City Network Gateway
+      - generic: ONLINE
+      - strong: GuardianMesh SOC
+      - generic: ONLINE
+      - generic: CRITICAL
+      - strong: Hospital
+      - text: ONLINE
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Emergency Response
+      - text: ONLINE
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Energy Grid
+      - text: ONLINE
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Traffic Management
+      - text: ONLINE
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Public Safety Service
+      - text: ONLINE
+      - generic: ● live
+      - generic: CRITICAL
+      - strong: Smart-City Control
+      - text: ONLINE
+      - generic: ● live
+      - generic "Control Panel":
+        - button "Zoom In":
+        - button "Zoom Out":
+        - button "Fit View":
+      - link "React Flow attribution":
+        - /url: https://reactflow.dev/attribution
+        - text: React Flow
+    - generic: Online
+    - generic: Threat path
+    - generic: Protected route
+    - generic: Isolated
+    - generic: Select an asset to inspect
+  - text: Live event stream
+  - generic: ATTACK
+  - button "Pause":
+    - text: Pause
+  - button "Skip":
+    - text: Skip
+  - button "Restart":
+    - text: Restart
+  - button "Reset":
+    - text: Reset
+  - region "Incident intelligence":
+    - generic: INCIDENT INTELLIGENCE
+    - heading "Active investigation" [level=2]
+    - generic: ACTIVE
+    - generic: GM-3760FF663212
+    - generic: FAST PITCH
+    - heading "Compromised IoT Camera" [level=3]
+    - text: IoT Security Camera
+    - generic: SOURCE
+    - generic: PROJECTED SERVICE RISK
+    - strong: —
+    - generic: / 100
+    - generic: ASSESSING
+  - region "Six coordinated agents":
+    - generic: COORDINATED INTELLIGENCE
+    - heading "Six agents. One defense." [level=2]
+    - generic: Deterministic reasoning · shared incident context
+    - article:
+      - text: IDLE
+      - heading "SentinelAgent" [level=3]
+      - paragraph: Detect & classify
+      - paragraph: Ready for incident telemetry.
+    - article:
+      - text: IDLE
+      - heading "ImpactAgent" [level=3]
+      - paragraph: Trace service exposure
+      - paragraph: Ready for incident telemetry.
+    - article:
+      - text: IDLE
+      - heading "ResponseAgent" [level=3]
+      - paragraph: Plan safe containment
+      - paragraph: Ready for incident telemetry.
+    - article:
+      - text: IDLE
+      - heading "ComplianceAgent" [level=3]
+      - paragraph: Enforce operational policy
+      - paragraph: Ready for incident telemetry.
+    - article:
+      - text: IDLE
+      - heading "NetworkAgent" [level=3]
+      - paragraph: Execute simulated capabilities
+      - paragraph: Ready for incident telemetry.
+    - article:
+      - text: IDLE
+      - heading "ReportAgent" [level=3]
+      - paragraph: Explain the outcome
+      - paragraph: Ready for incident telemetry.
+  - generic: TELECOM DEFENSE LAYER
+  - heading "Network-as-Code actions" [level=2]
+  - generic: SIMULATED NETWORK-AS-CODE ACTIONS
+  - generic "Network actions":
+    - paragraph: Network actions will appear here.
+    - generic: Location verification · SIM swap · QoD · isolation · rerouting
+  - generic: 0 actions completed
+  - generic: Local provider · conceptual endpoints
+  - generic: EVIDENCE STREAM
+  - heading "Incident timeline" [level=2]
+  - text: 1 events
+  - generic "Incident timeline":
+    - generic: SYSTEM
+    - time: 23:45:49
+    - code: "#01"
+    - strong: INCIDENT STARTED
+    - paragraph: Compromised IoT Camera. Synthetic attack telemetry injected into the city twin.
+  - generic: Backend event stream
+  - generic: Ordered · persisted · replayable
+  - text: GuardianMesh AI
+  - text: Autonomous defense armed
+  - generic: Offline-ready · Rule-based agents · Simulated telecom capabilities
+  - link "API reference":
+    - /url: http://127.0.0.1:8000/docs
+    - text: API reference

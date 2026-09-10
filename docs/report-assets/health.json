@@ -1,0 +1,7 @@
+{
+  "status": "ok",
+  "simulation": true,
+  "provider": "local",
+  "agents": 6,
+  "critical_services": 6
+}

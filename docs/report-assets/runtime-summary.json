@@ -1,0 +1,151 @@
+{
+  "camera_fast": {
+    "id": "GM-3760FF663212",
+    "snapshot_status": "CONTAINED",
+    "report_final_state": "CONTAINED",
+    "started_at": "2026-09-07T20:45:49.122874+00:00",
+    "contained_at": "2026-09-07T20:46:09.470009+00:00",
+    "report_at": "2026-09-07T20:46:11.357567+00:00",
+    "containment_seconds": 20.347,
+    "report_seconds": 22.235,
+    "peak_risk": 80,
+    "residual_risk": 0,
+    "critical_services_exposed": 6,
+    "minimum_online": 6,
+    "actions": 11,
+    "events": 35,
+    "approval": [],
+    "plan_versions": [
+      1
+    ]
+  },
+  "camera_guided": {
+    "id": "GM-DC9807B37482",
+    "snapshot_status": "CONTAINED",
+    "report_final_state": "CONTAINED",
+    "started_at": "2026-09-07T20:47:31.606595+00:00",
+    "contained_at": "2026-09-07T20:48:28.680947+00:00",
+    "report_at": "2026-09-07T20:48:33.873800+00:00",
+    "containment_seconds": 57.074,
+    "report_seconds": 62.267,
+    "peak_risk": 80,
+    "residual_risk": 0,
+    "critical_services_exposed": 6,
+    "minimum_online": 6,
+    "actions": 11,
+    "events": 35,
+    "approval": [],
+    "plan_versions": [
+      1
+    ]
+  },
+  "camera_walkthrough": {
+    "id": "GM-0D632E900149",
+    "snapshot_status": "CONTAINED",
+    "report_final_state": "CONTAINED",
+    "started_at": "2026-09-07T15:21:11.381899+00:00",
+    "contained_at": "2026-09-07T15:23:58.676691+00:00",
+    "report_at": "2026-09-07T15:24:03.849618+00:00",
+    "containment_seconds": 167.295,
+    "report_seconds": 172.468,
+    "peak_risk": 80,
+    "residual_risk": 0,
+    "critical_services_exposed": 6,
+    "minimum_online": 6,
+    "actions": 11,
+    "events": 46,
+    "approval": [],
+    "plan_versions": [
+      1
+    ]
+  },
+  "identity": {
+    "id": "GM-B7F27B4C6506",
+    "snapshot_status": "CONTAINED",
+    "report_final_state": "CONTAINED",
+    "started_at": "2026-09-07T20:43:55.708982+00:00",
+    "contained_at": "2026-09-07T20:44:15.563068+00:00",
+    "report_at": "2026-09-07T20:44:17.317620+00:00",
+    "containment_seconds": 19.854,
+    "report_seconds": 21.609,
+    "peak_risk": 73,
+    "residual_risk": 0,
+    "critical_services_exposed": 6,
+    "minimum_online": 6,
+    "actions": 11,
+    "events": 35,
+    "approval": [],
+    "plan_versions": [
+      1
+    ]
+  },
+  "energy_approve": {
+    "id": "GM-48E962F8A27E",
+    "snapshot_status": "CONTAINED",
+    "report_final_state": "CONTAINED",
+    "started_at": "2026-09-07T15:24:39.656647+00:00",
+    "contained_at": "2026-09-07T15:25:36.220530+00:00",
+    "report_at": "2026-09-07T15:25:38.063059+00:00",
+    "containment_seconds": 56.564,
+    "report_seconds": 58.406,
+    "peak_risk": 72,
+    "residual_risk": 0,
+    "critical_services_exposed": 2,
+    "minimum_online": 6,
+    "actions": 7,
+    "events": 29,
+    "approval": [
+      {
+        "plan_id": "GM-48E962F8A27E-plan",
+        "plan_version": 1,
+        "decision": "APPROVE",
+        "actor": "OPERATOR",
+        "timestamp": "2026-09-07T15:25:28.708740+00:00"
+      }
+    ],
+    "plan_versions": [
+      1
+    ]
+  },
+  "energy_reject": {
+    "id": "GM-3B9DF73610B7",
+    "snapshot_status": "RESET",
+    "report_final_state": "CONTAINED",
+    "started_at": "2026-09-07T15:26:19.994818+00:00",
+    "contained_at": "2026-09-07T15:26:56.584696+00:00",
+    "report_at": "2026-09-07T15:26:58.375151+00:00",
+    "containment_seconds": 36.59,
+    "report_seconds": 38.38,
+    "peak_risk": 72,
+    "residual_risk": 0,
+    "critical_services_exposed": 2,
+    "minimum_online": 6,
+    "actions": 6,
+    "events": 28,
+    "approval": [
+      {
+        "plan_id": "GM-3B9DF73610B7-plan",
+        "plan_version": 1,
+        "decision": "REJECT",
+        "actor": "OPERATOR",
+        "timestamp": "2026-09-07T15:26:50.115518+00:00"
+      }
+    ],
+    "plan_versions": [
+      1,
+      2
+    ]
+  },
+  "json_export": {
+    "status": 200,
+    "content_disposition": "attachment; filename=\"GM-3760FF663212-incident-report.json\"",
+    "matches_incident": true
+  },
+  "websocket": {
+    "messages": 21,
+    "ordered": true,
+    "ping_pong": true,
+    "last_sequence": 46
+  },
+  "console": []
+}

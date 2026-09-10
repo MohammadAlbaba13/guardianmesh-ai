@@ -1,0 +1,18 @@
+
+> guardianmesh-command-center@1.0.0 test
+> vitest run
+
+
+ RUN  v3.2.7 C:/Users/LOQ/Documents/ChatGPT/Win/frontend
+
+ ✓ src/api.test.ts (3 tests) 10ms
+ ✓ src/useGuardian.test.tsx (3 tests) 179ms
+ ✓ src/components/Reports.test.tsx (2 tests) 234ms
+ ✓ src/App.test.tsx (3 tests) 686ms
+   ✓ renders the primary command center and launches the configured demo  407ms
+
+ Test Files  4 passed (4)
+      Tests  11 passed (11)
+   Start at  14:32:41
+   Duration  24.39s (transform 513ms, setup 12.89s, collect 8.17s, tests 1.11s, environment 62.03s, prepare 3.45s)
+

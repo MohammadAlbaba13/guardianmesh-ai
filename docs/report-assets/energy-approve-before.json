@@ -1,0 +1,943 @@
+{
+  "id": "GM-48E962F8A27E",
+  "scenario_id": "energy",
+  "title": "Energy & City Control Threat",
+  "source": "traffic",
+  "started_at": "2026-09-07T15:24:39.656647+00:00",
+  "ended_at": null,
+  "status": "AWAITING_APPROVAL",
+  "phase": "APPROVAL",
+  "mode": "fast",
+  "auto_approve": false,
+  "step_duration": 1.7,
+  "topology": {
+    "nodes": [
+      {
+        "id": "camera",
+        "name": "IoT Security Camera",
+        "kind": "camera",
+        "zone": "hospital-zone",
+        "critical": false,
+        "criticality": 0.45,
+        "exposure": 0.95,
+        "protection": 0.0,
+        "state": "ONLINE",
+        "operational": true,
+        "latency_ms": 45,
+        "x": 0,
+        "y": 40
+      },
+      {
+        "id": "traffic",
+        "name": "Traffic Controller",
+        "kind": "traffic",
+        "zone": "city-zone",
+        "critical": false,
+        "criticality": 0.7,
+        "exposure": 0.8,
+        "protection": 0.0,
+        "state": "COMPROMISED",
+        "operational": true,
+        "latency_ms": 45,
+        "x": 0,
+        "y": 200
+      },
+      {
+        "id": "sensor",
+        "name": "Environmental Sensor",
+        "kind": "sensor",
+        "zone": "city-zone",
+        "critical": false,
+        "criticality": 0.35,
+        "exposure": 0.75,
+        "protection": 0.0,
+        "state": "ONLINE",
+        "operational": true,
+        "latency_ms": 45,
+        "x": 0,
+        "y": 360
+      },
+      {
+        "id": "telecom",
+        "name": "Telecom Edge Gateway",
+        "kind": "gateway",
+        "zone": "access-zone",
+        "critical": false,
+        "criticality": 0.8,
+        "exposure": 0.7,
+        "protection": 0.0,
+        "state": "ONLINE",
+        "operational": true,
+        "latency_ms": 45,
+        "x": 240,
+        "y": 40
+      },
+      {
+        "id": "edge",
+        "name": "Edge Compute Node",
+        "kind": "edge",
+        "zone": "energy-zone",
+        "critical": false,
+        "criticality": 0.85,
+        "exposure": 0.6,
+        "protection": 0.0,
+        "state": "WARNING",
+        "operational": true,
+        "latency_ms": 45,
+        "x": 240,
+        "y": 280
+      },
+      {
+        "id": "core",
+        "name": "5G Core Network",
+        "kind": "core",
+        "zone": "core-zone",
+        "critical": false,
+        "criticality": 0.95,
+        "exposure": 0.45,
+        "protection": 0.0,
+        "state": "ONLINE",
+        "operational": true,
+        "latency_ms": 45,
+        "x": 480,
+        "y": 40
+      },
+      {
+        "id": "city",
+        "name": "City Network Gateway",
+        "kind": "gateway",
+        "zone": "city-zone",
+        "critical": false,
+        "criticality": 0.9,
+        "exposure": 0.6,
+        "protection": 0.0,
+        "state": "ONLINE",
+        "operational": true,
+        "latency_ms": 45,
+        "x": 710,
+        "y": 40
+      },
+      {
+        "id": "guardian",
+        "name": "GuardianMesh SOC",
+        "kind": "guardian",
+        "zone": "security-zone",
+        "critical": false,
+        "criticality": 1.0,
+        "exposure": 0.1,
+        "protection": 0.0,
+        "state": "ONLINE",
+        "operational": true,
+        "latency_ms": 45,
+        "x": 490,
+        "y": 340
+      },
+      {
+        "id": "hospital",
+        "name": "Hospital",
+        "kind": "hospital",
+        "zone": "hospital-zone",
+        "critical": true,
+        "criticality": 1.0,
+        "exposure": 0.85,
+        "protection": 0.0,
+        "state": "ONLINE",
+        "operational": true,
+        "latency_ms": 45,
+        "x": 950,
+        "y": 0
+      },
+      {
+        "id": "emergency",
+        "name": "Emergency Response",
+        "kind": "emergency",
+        "zone": "emergency-zone",
+        "critical": true,
+        "criticality": 1.0,
+        "exposure": 0.8,
+        "protection": 0.0,
+        "state": "ONLINE",
+        "operational": true,
+        "latency_ms": 45,
+        "x": 950,
+        "y": 135
+      },
+      {
+        "id": "energy",
+        "name": "Energy Grid",
+        "kind": "energy",
+        "zone": "energy-zone",
+        "critical": true,
+        "criticality": 1.0,
+        "exposure": 0.8,
+        "protection": 0.0,
+        "state": "AT_RISK",
+        "operational": true,
+        "latency_ms": 45,
+        "x": 710,
+        "y": 290
+      },
+      {
+        "id": "traffic_center",
+        "name": "Traffic Management",
+        "kind": "traffic",
+        "zone": "city-zone",
+        "critical": true,
+        "criticality": 0.9,
+        "exposure": 0.75,
+        "protection": 0.0,
+        "state": "ONLINE",
+        "operational": true,
+        "latency_ms": 45,
+        "x": 950,
+        "y": 275
+      },
+      {
+        "id": "safety",
+        "name": "Public Safety Service",
+        "kind": "safety",
+        "zone": "city-zone",
+        "critical": true,
+        "criticality": 0.95,
+        "exposure": 0.8,
+        "protection": 0.0,
+        "state": "ONLINE",
+        "operational": true,
+        "latency_ms": 45,
+        "x": 950,
+        "y": 410
+      },
+      {
+        "id": "control",
+        "name": "Smart-City Control",
+        "kind": "control",
+        "zone": "city-zone",
+        "critical": true,
+        "criticality": 0.95,
+        "exposure": 0.8,
+        "protection": 0.0,
+        "state": "AT_RISK",
+        "operational": true,
+        "latency_ms": 45,
+        "x": 710,
+        "y": 460
+      }
+    ],
+    "edges": [
+      {
+        "id": "camera-telecom",
+        "source": "camera",
+        "target": "telecom",
+        "kind": "data",
+        "weight": 1.0,
+        "propagates_threat": true,
+        "carries_service": true,
+        "enabled": true,
+        "state": "NORMAL"
+      },
+      {
+        "id": "sensor-telecom",
+        "source": "sensor",
+        "target": "telecom",
+        "kind": "data",
+        "weight": 1.0,
+        "propagates_threat": true,
+        "carries_service": true,
+        "enabled": true,
+        "state": "NORMAL"
+      },
+      {
+        "id": "traffic-edge",
+        "source": "traffic",
+        "target": "edge",
+        "kind": "control",
+        "weight": 0.9,
+        "propagates_threat": true,
+        "carries_service": true,
+        "enabled": true,
+        "state": "THREAT"
+      },
+      {
+        "id": "telecom-core",
+        "source": "telecom",
+        "target": "core",
+        "kind": "identity",
+        "weight": 0.95,
+        "propagates_threat": true,
+        "carries_service": true,
+        "enabled": true,
+        "state": "NORMAL"
+      },
+      {
+        "id": "core-city",
+        "source": "core",
+        "target": "city",
+        "kind": "data",
+        "weight": 1.0,
+        "propagates_threat": true,
+        "carries_service": true,
+        "enabled": true,
+        "state": "NORMAL"
+      },
+      {
+        "id": "edge-energy",
+        "source": "edge",
+        "target": "energy",
+        "kind": "control",
+        "weight": 0.9,
+        "propagates_threat": true,
+        "carries_service": true,
+        "enabled": true,
+        "state": "THREAT"
+      },
+      {
+        "id": "edge-control",
+        "source": "edge",
+        "target": "control",
+        "kind": "control",
+        "weight": 0.9,
+        "propagates_threat": true,
+        "carries_service": true,
+        "enabled": true,
+        "state": "THREAT"
+      },
+      {
+        "id": "city-hospital",
+        "source": "city",
+        "target": "hospital",
+        "kind": "data",
+        "weight": 1.0,
+        "propagates_threat": true,
+        "carries_service": true,
+        "enabled": true,
+        "state": "NORMAL"
+      },
+      {
+        "id": "city-emergency",
+        "source": "city",
+        "target": "emergency",
+        "kind": "data",
+        "weight": 1.0,
+        "propagates_threat": true,
+        "carries_service": true,
+        "enabled": true,
+        "state": "NORMAL"
+      },
+      {
+        "id": "city-energy",
+        "source": "city",
+        "target": "energy",
+        "kind": "data",
+        "weight": 1.0,
+        "propagates_threat": true,
+        "carries_service": true,
+        "enabled": true,
+        "state": "NORMAL"
+      },
+      {
+        "id": "city-traffic_center",
+        "source": "city",
+        "target": "traffic_center",
+        "kind": "data",
+        "weight": 1.0,
+        "propagates_threat": true,
+        "carries_service": true,
+        "enabled": true,
+        "state": "NORMAL"
+      },
+      {
+        "id": "city-safety",
+        "source": "city",
+        "target": "safety",
+        "kind": "data",
+        "weight": 1.0,
+        "propagates_threat": true,
+        "carries_service": true,
+        "enabled": true,
+        "state": "NORMAL"
+      },
+      {
+        "id": "city-control",
+        "source": "city",
+        "target": "control",
+        "kind": "data",
+        "weight": 1.0,
+        "propagates_threat": true,
+        "carries_service": true,
+        "enabled": true,
+        "state": "NORMAL"
+      },
+      {
+        "id": "guardian-core",
+        "source": "guardian",
+        "target": "core",
+        "kind": "management",
+        "weight": 0.0,
+        "propagates_threat": false,
+        "carries_service": false,
+        "enabled": true,
+        "state": "NORMAL"
+      },
+      {
+        "id": "guardian-edge",
+        "source": "guardian",
+        "target": "edge",
+        "kind": "management",
+        "weight": 0.0,
+        "propagates_threat": false,
+        "carries_service": false,
+        "enabled": true,
+        "state": "NORMAL"
+      },
+      {
+        "id": "protected-hospital",
+        "source": "core",
+        "target": "hospital",
+        "kind": "protected",
+        "weight": 0.25,
+        "propagates_threat": false,
+        "carries_service": true,
+        "enabled": false,
+        "state": "NORMAL"
+      },
+      {
+        "id": "protected-emergency",
+        "source": "core",
+        "target": "emergency",
+        "kind": "protected",
+        "weight": 0.25,
+        "propagates_threat": false,
+        "carries_service": true,
+        "enabled": false,
+        "state": "NORMAL"
+      },
+      {
+        "id": "protected-energy",
+        "source": "core",
+        "target": "energy",
+        "kind": "protected",
+        "weight": 0.25,
+        "propagates_threat": false,
+        "carries_service": true,
+        "enabled": false,
+        "state": "NORMAL"
+      },
+      {
+        "id": "protected-traffic_center",
+        "source": "core",
+        "target": "traffic_center",
+        "kind": "protected",
+        "weight": 0.25,
+        "propagates_threat": false,
+        "carries_service": true,
+        "enabled": false,
+        "state": "NORMAL"
+      },
+      {
+        "id": "protected-safety",
+        "source": "core",
+        "target": "safety",
+        "kind": "protected",
+        "weight": 0.25,
+        "propagates_threat": false,
+        "carries_service": true,
+        "enabled": false,
+        "state": "NORMAL"
+      },
+      {
+        "id": "protected-control",
+        "source": "core",
+        "target": "control",
+        "kind": "protected",
+        "weight": 0.25,
+        "propagates_threat": false,
+        "carries_service": true,
+        "enabled": false,
+        "state": "NORMAL"
+      }
+    ]
+  },
+  "agents": [
+    {
+      "name": "Sentinel",
+      "role": "Detect & classify",
+      "state": "COMPLETE",
+      "finding": "T1489 \u00b7 Service Stop \u00b7 98% rule confidence"
+    },
+    {
+      "name": "Impact",
+      "role": "Trace service exposure",
+      "state": "COMPLETE",
+      "finding": "Risk 72/100 \u00b7 2 critical services exposed"
+    },
+    {
+      "name": "Response",
+      "role": "Plan safe containment",
+      "state": "COMPLETE",
+      "finding": "7 ordered actions \u00b7 protect routes before isolation"
+    },
+    {
+      "name": "Compliance",
+      "role": "Enforce operational policy",
+      "state": "WAITING",
+      "finding": "Shared-segment isolation requires approval. Safe fallback is available on rejection."
+    },
+    {
+      "name": "Network",
+      "role": "Execute simulated capabilities",
+      "state": "IDLE",
+      "finding": "Ready for incident telemetry."
+    },
+    {
+      "name": "Report",
+      "role": "Explain the outcome",
+      "state": "IDLE",
+      "finding": "Ready for incident telemetry."
+    }
+  ],
+  "telemetry": {
+    "remote_sessions": 0,
+    "baseline_sessions": 2,
+    "exploit_signature": false,
+    "sim_swap_minutes_ago": null,
+    "ownership_confirmed": true,
+    "location_matches": true,
+    "service_stop_requests": 26,
+    "maintenance_window": false
+  },
+  "classification": {
+    "threat_type": "Unauthorized infrastructure control",
+    "confidence": 0.98,
+    "source": "traffic",
+    "evidence": [
+      "Traffic controller sent 26 unauthorized service-stop requests to the edge compute plane.",
+      "Command source is outside the signed controller maintenance window.",
+      "Shared edge segment supplies energy telemetry and smart-city control."
+    ],
+    "reasoning": "Unauthorized service-stop commands attempt to disrupt the edge services supporting energy and city control. This is an Enterprise mapping for the compute layer, not a full ICS assessment.",
+    "techniques": [
+      {
+        "id": "T1489",
+        "name": "Service Stop",
+        "tactic": "Impact",
+        "domain": "Enterprise",
+        "explanation": "Unauthorized service-stop commands attempt to disrupt the edge services supporting energy and city control. This is an Enterprise mapping for the compute layer, not a full ICS assessment.",
+        "url": "https://attack.mitre.org/techniques/T1489/"
+      }
+    ]
+  },
+  "impact": {
+    "score": 72,
+    "severity": "HIGH",
+    "impacted": [
+      {
+        "node_id": "energy",
+        "score": 72,
+        "distance": 2,
+        "path": [
+          "traffic",
+          "edge",
+          "energy"
+        ],
+        "critical": true,
+        "factors": {
+          "severity": 0.99,
+          "criticality": 1.0,
+          "exposure": 0.8,
+          "proximity": 0.7142857142857143,
+          "path_weight": 0.81,
+          "protection": 0.0
+        }
+      },
+      {
+        "node_id": "edge",
+        "score": 70,
+        "distance": 1,
+        "path": [
+          "traffic",
+          "edge"
+        ],
+        "critical": false,
+        "factors": {
+          "severity": 0.99,
+          "criticality": 0.85,
+          "exposure": 0.6,
+          "proximity": 0.8333333333333334,
+          "path_weight": 0.9,
+          "protection": 0.0
+        }
+      },
+      {
+        "node_id": "control",
+        "score": 69,
+        "distance": 2,
+        "path": [
+          "traffic",
+          "edge",
+          "control"
+        ],
+        "critical": true,
+        "factors": {
+          "severity": 0.99,
+          "criticality": 0.95,
+          "exposure": 0.8,
+          "proximity": 0.7142857142857143,
+          "path_weight": 0.81,
+          "protection": 0.0
+        }
+      }
+    ],
+    "critical_services": [
+      "energy",
+      "control"
+    ],
+    "propagation_path": [
+      "traffic",
+      "edge",
+      "energy"
+    ],
+    "explanation": "2 critical services are reachable through enabled dependency links. Peak risk 72/100 combines asset criticality, exposure, graph distance, link trust and current protection."
+  },
+  "residual_impact": null,
+  "plan": {
+    "id": "GM-48E962F8A27E-plan",
+    "version": 1,
+    "strategy": "Protect service routes, prioritize critical connectivity, then contain the source",
+    "rationale": "Preserve critical service availability before changing endpoint or segment access. Context checks, service rerouting and containment are ordered and policy validated.",
+    "actions": [
+      {
+        "id": "v1-01",
+        "kind": "verify_location",
+        "target": "traffic",
+        "endpoint": "/device/location/verify",
+        "rationale": "Verify the endpoint's network context.",
+        "expected_effect": "Establish location trust.",
+        "status": "PENDING",
+        "result": {},
+        "executed_at": null
+      },
+      {
+        "id": "v1-02",
+        "kind": "sim_swap",
+        "target": "traffic",
+        "endpoint": "/sim-swap/check",
+        "rationale": "Correlate identity changes with detection evidence.",
+        "expected_effect": "Assess derived identity risk.",
+        "status": "PENDING",
+        "result": {},
+        "executed_at": null
+      },
+      {
+        "id": "v1-03",
+        "kind": "reroute",
+        "target": "energy",
+        "endpoint": "/routes/reroute",
+        "rationale": "Keep this dependent service reachable before containment.",
+        "expected_effect": "Use protected core transport.",
+        "status": "PENDING",
+        "result": {},
+        "executed_at": null
+      },
+      {
+        "id": "v1-04",
+        "kind": "reroute",
+        "target": "control",
+        "endpoint": "/routes/reroute",
+        "rationale": "Keep this dependent service reachable before containment.",
+        "expected_effect": "Use protected core transport.",
+        "status": "PENDING",
+        "result": {},
+        "executed_at": null
+      },
+      {
+        "id": "v1-05",
+        "kind": "qod",
+        "target": "energy",
+        "endpoint": "/qod/sessions",
+        "rationale": "Reserve emergency connectivity during remediation.",
+        "expected_effect": "Simulated latency improves from 45 to 8 ms.",
+        "status": "PENDING",
+        "result": {},
+        "executed_at": null
+      },
+      {
+        "id": "v1-06",
+        "kind": "isolate_segment",
+        "target": "edge",
+        "endpoint": "/slice/isolate",
+        "rationale": "Stop service-stop commands traversing the shared edge segment.",
+        "expected_effect": "Segment is isolated after dependent services reroute.",
+        "status": "PENDING",
+        "result": {},
+        "executed_at": null
+      },
+      {
+        "id": "v1-07",
+        "kind": "quarantine",
+        "target": "traffic",
+        "endpoint": "/slice/isolate",
+        "rationale": "Contain the source without shutting down dependent services.",
+        "expected_effect": "Disable all source threat paths.",
+        "status": "PENDING",
+        "result": {},
+        "executed_at": null
+      }
+    ]
+  },
+  "policy": {
+    "decision": "APPROVAL_REQUIRED",
+    "reasons": [
+      "Shared edge-segment isolation affects multiple tenants. Explicit approval is required; all critical service routes pass the safety dry-run."
+    ],
+    "rules": [
+      "SIMULATION_ONLY",
+      "NO_CRITICAL_ISOLATION",
+      "PRESERVE_SERVICE_ROUTES",
+      "APPROVE_SHARED_SEGMENT"
+    ]
+  },
+  "plan_history": [
+    {
+      "id": "GM-48E962F8A27E-plan",
+      "version": 1,
+      "strategy": "Protect service routes, prioritize critical connectivity, then contain the source",
+      "rationale": "Preserve critical service availability before changing endpoint or segment access. Context checks, service rerouting and containment are ordered and policy validated.",
+      "actions": [
+        {
+          "id": "v1-01",
+          "kind": "verify_location",
+          "target": "traffic",
+          "endpoint": "/device/location/verify",
+          "rationale": "Verify the endpoint's network context.",
+          "expected_effect": "Establish location trust.",
+          "status": "PENDING",
+          "result": {},
+          "executed_at": null
+        },
+        {
+          "id": "v1-02",
+          "kind": "sim_swap",
+          "target": "traffic",
+          "endpoint": "/sim-swap/check",
+          "rationale": "Correlate identity changes with detection evidence.",
+          "expected_effect": "Assess derived identity risk.",
+          "status": "PENDING",
+          "result": {},
+          "executed_at": null
+        },
+        {
+          "id": "v1-03",
+          "kind": "reroute",
+          "target": "energy",
+          "endpoint": "/routes/reroute",
+          "rationale": "Keep this dependent service reachable before containment.",
+          "expected_effect": "Use protected core transport.",
+          "status": "PENDING",
+          "result": {},
+          "executed_at": null
+        },
+        {
+          "id": "v1-04",
+          "kind": "reroute",
+          "target": "control",
+          "endpoint": "/routes/reroute",
+          "rationale": "Keep this dependent service reachable before containment.",
+          "expected_effect": "Use protected core transport.",
+          "status": "PENDING",
+          "result": {},
+          "executed_at": null
+        },
+        {
+          "id": "v1-05",
+          "kind": "qod",
+          "target": "energy",
+          "endpoint": "/qod/sessions",
+          "rationale": "Reserve emergency connectivity during remediation.",
+          "expected_effect": "Simulated latency improves from 45 to 8 ms.",
+          "status": "PENDING",
+          "result": {},
+          "executed_at": null
+        },
+        {
+          "id": "v1-06",
+          "kind": "isolate_segment",
+          "target": "edge",
+          "endpoint": "/slice/isolate",
+          "rationale": "Stop service-stop commands traversing the shared edge segment.",
+          "expected_effect": "Segment is isolated after dependent services reroute.",
+          "status": "PENDING",
+          "result": {},
+          "executed_at": null
+        },
+        {
+          "id": "v1-07",
+          "kind": "quarantine",
+          "target": "traffic",
+          "endpoint": "/slice/isolate",
+          "rationale": "Contain the source without shutting down dependent services.",
+          "expected_effect": "Disable all source threat paths.",
+          "status": "PENDING",
+          "result": {},
+          "executed_at": null
+        }
+      ]
+    }
+  ],
+  "policy_history": [
+    {
+      "plan_id": "GM-48E962F8A27E-plan",
+      "plan_version": 1,
+      "timestamp": "2026-09-07T15:24:48.470812+00:00",
+      "result": {
+        "decision": "APPROVAL_REQUIRED",
+        "reasons": [
+          "Shared edge-segment isolation affects multiple tenants. Explicit approval is required; all critical service routes pass the safety dry-run."
+        ],
+        "rules": [
+          "SIMULATION_ONLY",
+          "NO_CRITICAL_ISOLATION",
+          "PRESERVE_SERVICE_ROUTES",
+          "APPROVE_SHARED_SEGMENT"
+        ]
+      }
+    }
+  ],
+  "approvals": [],
+  "actions": [],
+  "timeline": [
+    {
+      "seq": 1,
+      "timestamp": "2026-09-07T15:24:39.656647+00:00",
+      "type": "INCIDENT_STARTED",
+      "agent": null,
+      "message": "Energy & City Control Threat. Synthetic attack telemetry injected into the city twin."
+    },
+    {
+      "seq": 2,
+      "timestamp": "2026-09-07T15:24:41.386959+00:00",
+      "type": "ANOMALY_DETECTED",
+      "agent": "Sentinel",
+      "message": "Traffic controller sent 26 unauthorized service-stop requests to the edge compute plane."
+    },
+    {
+      "seq": 3,
+      "timestamp": "2026-09-07T15:24:43.127560+00:00",
+      "type": "THREAT_CLASSIFIED",
+      "agent": "Sentinel",
+      "message": "Unauthorized service-stop commands attempt to disrupt the edge services supporting energy and city control. This is an Enterprise mapping for the compute layer, not a full ICS assessment."
+    },
+    {
+      "seq": 4,
+      "timestamp": "2026-09-07T15:24:43.165446+00:00",
+      "type": "IMPACT_ANALYSIS_STARTED",
+      "agent": "Impact",
+      "message": "Calculating downstream exposure from the compromised asset."
+    },
+    {
+      "seq": 5,
+      "timestamp": "2026-09-07T15:24:44.898173+00:00",
+      "type": "IMPACT_ANALYSIS_COMPLETE",
+      "agent": "Impact",
+      "message": "2 critical services are reachable through enabled dependency links. Peak risk 72/100 combines asset criticality, exposure, graph distance, link trust and current protection."
+    },
+    {
+      "seq": 6,
+      "timestamp": "2026-09-07T15:24:44.932802+00:00",
+      "type": "RESPONSE_PLANNING",
+      "agent": "Response",
+      "message": "Selecting a service-preserving containment strategy."
+    },
+    {
+      "seq": 7,
+      "timestamp": "2026-09-07T15:24:46.668210+00:00",
+      "type": "RESPONSE_PLAN_CREATED",
+      "agent": "Response",
+      "message": "Preserve critical service availability before changing endpoint or segment access. Context checks, service rerouting and containment are ordered and policy validated."
+    },
+    {
+      "seq": 8,
+      "timestamp": "2026-09-07T15:24:46.719261+00:00",
+      "type": "POLICY_CHECK_STARTED",
+      "agent": "Compliance",
+      "message": "Validating simulation scope, service routes and isolation boundaries."
+    },
+    {
+      "seq": 9,
+      "timestamp": "2026-09-07T15:24:48.470812+00:00",
+      "type": "POLICY_CHECK_COMPLETE",
+      "agent": "Compliance",
+      "message": "Shared edge-segment isolation affects multiple tenants. Explicit approval is required; all critical service routes pass the safety dry-run."
+    },
+    {
+      "seq": 10,
+      "timestamp": "2026-09-07T15:24:48.494494+00:00",
+      "type": "APPROVAL_REQUIRED",
+      "agent": "Compliance",
+      "message": "Approve shared edge-segment isolation, or reject to use endpoint-only containment."
+    }
+  ],
+  "samples": [
+    {
+      "step": 1,
+      "online": 6,
+      "risk": 0,
+      "latency": 45
+    },
+    {
+      "step": 2,
+      "online": 6,
+      "risk": 0,
+      "latency": 45
+    },
+    {
+      "step": 3,
+      "online": 6,
+      "risk": 0,
+      "latency": 45
+    },
+    {
+      "step": 4,
+      "online": 6,
+      "risk": 0,
+      "latency": 45
+    },
+    {
+      "step": 5,
+      "online": 6,
+      "risk": 72,
+      "latency": 45
+    },
+    {
+      "step": 6,
+      "online": 6,
+      "risk": 72,
+      "latency": 45
+    },
+    {
+      "step": 7,
+      "online": 6,
+      "risk": 72,
+      "latency": 45
+    },
+    {
+      "step": 8,
+      "online": 6,
+      "risk": 72,
+      "latency": 45
+    },
+    {
+      "step": 9,
+      "online": 6,
+      "risk": 72,
+      "latency": 45
+    },
+    {
+      "step": 10,
+      "online": 6,
+      "risk": 72,
+      "latency": 45
+    }
+  ],
+  "report": null,
+  "outcome": null
+}

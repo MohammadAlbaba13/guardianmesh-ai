@@ -1,0 +1,23 @@
+[
+  {
+    "id": "camera",
+    "title": "Compromised IoT Camera",
+    "subtitle": "Lateral movement \u00b7 hospital exposure",
+    "source": "camera",
+    "requires_approval": false
+  },
+  {
+    "id": "identity",
+    "title": "Telecom Identity / SIM-Swap Risk",
+    "subtitle": "Identity anomaly \u00b7 trusted endpoint",
+    "source": "sensor",
+    "requires_approval": false
+  },
+  {
+    "id": "energy",
+    "title": "Energy & City Control Threat",
+    "subtitle": "Control-plane abuse \u00b7 shared segment",
+    "source": "traffic",
+    "requires_approval": true
+  }
+]

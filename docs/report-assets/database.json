@@ -1,0 +1,147 @@
+{
+  "incidents": {
+    "schema": [
+      [
+        0,
+        "id",
+        "VARCHAR",
+        1,
+        null,
+        1
+      ],
+      [
+        1,
+        "status",
+        "VARCHAR",
+        1,
+        null,
+        0
+      ],
+      [
+        2,
+        "payload",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "rows": 21
+  },
+  "events": {
+    "schema": [
+      [
+        0,
+        "id",
+        "VARCHAR",
+        1,
+        null,
+        1
+      ],
+      [
+        1,
+        "incident_id",
+        "VARCHAR",
+        1,
+        null,
+        0
+      ],
+      [
+        2,
+        "seq",
+        "INTEGER",
+        1,
+        null,
+        0
+      ],
+      [
+        3,
+        "payload",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "rows": 703
+  },
+  "network_actions": {
+    "schema": [
+      [
+        0,
+        "id",
+        "VARCHAR",
+        1,
+        null,
+        1
+      ],
+      [
+        1,
+        "incident_id",
+        "VARCHAR",
+        1,
+        null,
+        0
+      ],
+      [
+        2,
+        "payload",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "rows": 198
+  },
+  "approvals": {
+    "schema": [
+      [
+        0,
+        "id",
+        "VARCHAR",
+        1,
+        null,
+        1
+      ],
+      [
+        1,
+        "incident_id",
+        "VARCHAR",
+        1,
+        null,
+        0
+      ],
+      [
+        2,
+        "payload",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "rows": 5
+  },
+  "reports": {
+    "schema": [
+      [
+        0,
+        "incident_id",
+        "VARCHAR",
+        1,
+        null,
+        1
+      ],
+      [
+        1,
+        "payload",
+        "TEXT",
+        1,
+        null,
+        0
+      ]
+    ],
+    "rows": 20
+  }
+}
