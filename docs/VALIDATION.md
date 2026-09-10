@@ -1,6 +1,24 @@
 # GuardianMesh AI — validation record
 
-Verified locally on Windows on **2026-09-07**. This is a safe, deterministic simulation with no production telecom connectivity.
+The original Smart City evidence below was verified locally on Windows on **2026-09-07** and is retained as regression evidence. The multi-domain extension was verified locally on **2026-09-10**. All runs are safe deterministic simulations with no production telecom connectivity.
+
+## Current multi-domain extension
+
+The backend registry exposes seven unique Domain Packs and seven backend-driven domain details. Each pack has a distinct graph, typed signal schema, scenario, permitted capability set, metrics and residual verifier. The shared engine ran the first scenario in each pack through detection, graph impact, response planning, Compliance, simulated provider actions, residual verification, report generation and SQLite round-trip.
+
+| Current check | Result |
+|---|---|
+| Domain REST catalog | **7 domains**, unique ids; OpenAPI version 2.0.0 |
+| Domain detail contract | **7 passed**; topology roots, scenarios, capability allowlists, metrics and truthful SIMULATED runtime labels |
+| Domain end-to-end API/WS | **7 passed**; all seven contained, residual score 0, declared services online, six agents complete, reports persisted |
+| Full backend suite | **115 passed**, two dependency deprecation warnings |
+| Frontend Vitest | **17 passed** across four files |
+| Frontend production build | **Passed**: TypeScript plus Vite, 2,294 modules, no warnings |
+| Browser domain switching | Trusted Digital Identity loaded from backend; unique topology, 4/4 services and identity capabilities visible |
+| Browser identity rehearsal | Completed: T1451 mapping, risk 63, session restriction, pending step-up verification, 4/4 services online, residual 0 |
+| Browser console | No warning/error entries during visual rehearsal |
+
+The existing `GuardianMesh_AI_Complete_Project_Report.pdf` remains the dated Smart City evidence package. `docs/MULTI_DOMAIN_ARCHITECTURE.md` documents the current seven-pack implementation and extension boundary.
 
 ## Automated checks
 

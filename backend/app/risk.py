@@ -14,7 +14,7 @@ def calculate_impact(twin: Topology, source: str, severity: float) -> Impact:
     """
     start = asset(twin, source)
     if start.state in (SecurityState.ISOLATED, SecurityState.OFFLINE):
-        return Impact(explanation="Source is isolated. No enabled threat path reaches a dependent service.")
+        return Impact(explanation="Source is isolated. No enabled risk path reaches a dependent service.")
     best: dict[str, AssetRisk] = {}
     outgoing = {n.id: [] for n in twin.nodes}
     for edge in twin.edges:
@@ -46,9 +46,10 @@ def calculate_impact(twin: Topology, source: str, severity: float) -> Impact:
     critical = [r for r in impacted if r.critical and r.score > 0]
     worst = max(critical or impacted, key=lambda r: r.score, default=None)
     score = worst.score if worst else 0
-    # Prefer the hospital story when its risk equals the maximum.
-    hospital = next((r for r in critical if r.node_id == "hospital" and r.score == score), None)
-    worst = hospital or worst
+    # Domain storytelling preferences only break equal scores; never alter risk.
+    preferred = next((r for target in twin.preferred_targets for r in critical
+                      if r.node_id == target and r.score == score), None)
+    worst = preferred or worst
     return Impact(score=score, severity=risk_band(score), impacted=impacted,
                   critical_services=[r.node_id for r in critical], propagation_path=worst.path if worst else [],
                   explanation=f"{len(critical)} critical services are reachable through enabled dependency links. Peak risk {score}/100 combines asset criticality, exposure, graph distance, link trust and current protection.")

@@ -1,10 +1,10 @@
 # GuardianMesh AI
 
-**Autonomous Cyber Resilience for Critical Infrastructure**
+**Autonomous Multi-Domain Resilience & Trust Platform**
 
-A new, local hackathon prototype for **MENA Ignite 2026 — GSMA × Nokia**, aligned with **Smart Cities, Urban Safety & Mega-Project Infrastructure**. A compromised endpoint is detected, its service dependencies are assessed, a safe containment plan is checked, and simulated telecom capabilities preserve essential connectivity.
+GuardianMesh is one policy-governed intelligence engine for seven MENA Ignite challenge environments: Trusted Digital Identity, Smart Cities & Urban Safety, Secure Fintech & Anti-Fraud, Tourism & Cultural Experience, Industrial & Enterprise AI, Climate Resilience, and Open Innovation. Each Domain Pack supplies its own typed signals, directed digital twin, scenario catalog, risk context, response policy, capabilities and outcome metrics while the core preserves the same six-agent execution lifecycle.
 
-The defining moment: **the compromised source is visibly isolated while 6 / 6 critical services remain online.**
+The default provider is a deterministic offline simulator. Every capability result is marked `SIMULATED`; no carrier, bank, identity provider, factory, emergency service or cloud API is contacted.
 
 ## Run on this Windows machine
 
@@ -16,7 +16,7 @@ Dependencies are already installed. From PowerShell in that directory:
 .\scripts\start.ps1
 ```
 
-Open **http://127.0.0.1:5173/**. API docs: **http://127.0.0.1:8000/docs**.
+Open **http://127.0.0.1:5173/**. API docs: **http://127.0.0.1:8000/docs**. The container frontend, when Docker is available, is **http://127.0.0.1:8080/**.
 
 Stop servers started by this script with:
 
@@ -35,14 +35,33 @@ On a fresh machine, install **Python 3.12+ and Node.js 22+**, then run once with
 
 The locked dependencies and container images must be downloaded before going offline. **After installation, every primary demo capability runs without internet, API keys, paid services, external fonts, an LLM, or cloud databases.** MITRE documentation links are optional external reading; all classification content is stored locally.
 
+## Multi-domain command center
+
+Choose a domain card, choose its scenario, then run Fast Pitch or Guided mode. The catalog, topology, typed signals, capabilities, KPIs, report wording and provider/reasoner labels come from the backend. Switching domains resets an active incident on the server before loading the new pack, so stale WebSocket events cannot cross domains.
+
+The backend source-of-truth endpoints are:
+
+```text
+GET  /api/v1/domains
+GET  /api/v1/domains/{domain_id}
+GET  /api/v1/domains/{domain_id}/scenarios
+GET  /api/v1/capabilities
+GET  /api/v1/runtime
+POST /api/v1/domains/{domain_id}/scenarios/{scenario_id}/start
+```
+
+The original `/api/topology`, `/api/scenarios` and `/api/scenarios/{scenario_id}/start` routes remain available for the Smart City regression flow. SQLite stores the domain identifier and full typed incident snapshot alongside the existing event, action, approval and report tables.
+
+See [the multi-domain architecture](docs/MULTI_DOMAIN_ARCHITECTURE.md), [capability boundary](docs/NETWORK_CAPABILITIES.md), and [current validation record](docs/VALIDATION.md) for extension rules, truthful provider semantics and the latest verification results.
+
 ## Judge demonstration
 
-1. Select **01 · Compromised IoT Camera**, **Fast pitch**, and keep **Demo auto-approval** enabled.
+1. Select **Smart Cities & Urban Safety**, **Compromised IoT Camera**, **Fast pitch**, and keep **Demo auto-approval** enabled.
 2. Click **Run Autonomous Defense Demo**. Expect roughly **20–25 seconds** to the completed report, depending on the machine.
 3. Watch the camera turn compromised, red threat paths reach hospital dependencies, the six logical agents complete their work, protected transport appears, and the source becomes isolated.
 4. Point to **6 / 6 CRITICAL SERVICES ONLINE**, residual risk **0**, and the simulated network actions.
 5. Click **Generate Incident Report** to open the already-generated evidence report. Switch between Executive summary and Technical report; export JSON or print.
-6. Click **Reset** for a clean city twin. **Restart** resets and launches the selected scenario in one operation.
+6. Click **Reset** for a clean domain twin. **Restart** resets and launches the selected scenario in one operation.
 
 For a longer walkthrough use **Guided** (approximately one minute). **Pause**, **Resume**, and **Skip** control the backend engine. Skip advances the current timed step; it never bypasses human approval. The UI is responsive; use a full-width browser at 1440px or wider for the clearest command-center presentation. Smaller screens stack panels vertically.
 
@@ -195,7 +214,7 @@ npm --prefix frontend test
 npm --prefix frontend run build
 ```
 
-Backend coverage: topology direction/cycles/alternative paths, exact risk factors and bands, ATT&CK rules, all six agents, policy dry-run, shared-target approval, safe rejection, simulator idempotency, all three complete scenarios, reports/persistence, pause/resume/skip, cancellation during approval/provider execution, historical reset isolation, reconnect/backpressure, malformed WebSocket frames, origin rejection and schema validation.
+Backend coverage: seven-pack registry integrity, unique topologies and typed signals, topology direction/cycles/alternative paths, exact risk factors and bands, defensible ATT&CK rules, operational/environmental classifications, all six agents, policy dry-run, shared-target approval, safe rejection, semantic capability validation, simulator idempotency, all seven domain scenarios plus the three Smart City regressions, reports/persistence, pause/resume/skip, cancellation during approval/provider execution, historical reset isolation, reconnect/backpressure, malformed WebSocket frames, origin rejection and schema validation.
 
 Frontend coverage: command-center rendering, mode/approval selection, action callbacks, approval/rejection UI, API errors, WebSocket state reduction, actual hook lifecycle and reset behavior. Browser verification exercises the full local application, scenario controls, source state changes, continuity, six agents and both report views. See `docs/VALIDATION.md` for recorded results.
 
@@ -206,7 +225,7 @@ backend/
   app/
     main.py           REST, WebSocket, application lifecycle
     models.py         Typed shared incident and API schemas
-    topology.py       14-asset city twin and continuity checks
+    topology.py       shared topology validation, continuity and action effects
     scenarios.py      Three deterministic evidence sets
     risk.py           Directed graph traversal and risk factors
     agents.py         Six logical agents

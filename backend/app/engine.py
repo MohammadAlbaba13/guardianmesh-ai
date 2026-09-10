@@ -4,10 +4,12 @@ import logging
 import time
 from uuid import uuid4
 from .models import Incident, StartRequest, ApprovalRequest, Approval, PolicyReview, TimelineEvent, ServiceSample, SecurityState, now
-from .scenarios import SCENARIOS, scenario_telemetry
-from .topology import build_topology, asset, online_services, isolate, protect, continuity_verified
+from .domains.registry import get_domain
+from .topology import asset, online_services, apply_action_effect, continuity_verified
 from .agents import initial_agents, SentinelAgent, ImpactAgent, ResponseAgent, ComplianceAgent, NetworkAgent, ReportAgent
-from .provider import SimulatedNetworkProvider
+from .providers import select_provider
+from .intelligence import choose_reasoner
+from .capabilities.registry import get_capability
 from .persistence import Repository
 
 log = logging.getLogger("guardianmesh.engine")
@@ -18,9 +20,10 @@ class Conflict(Exception):
 
 
 class SimulationEngine:
-    def __init__(self, repository: Repository, provider=None):
+    def __init__(self, repository: Repository, provider=None, reasoner=None):
         self.repository = repository
-        self.provider = provider or SimulatedNetworkProvider()
+        self.provider = provider or select_provider()
+        self.reasoner = reasoner or choose_reasoner()
         self.current: Incident | None = None
         self.task: asyncio.Task | None = None
         self.lock = asyncio.Lock()
@@ -62,8 +65,10 @@ class SimulationEngine:
         incident.timeline.append(TimelineEvent(seq=len(incident.timeline)+1, type=event_type, message=message, agent=agent))
         critical = [n for n in incident.topology.nodes if n.critical]
         risk = incident.residual_impact.score if incident.residual_impact else incident.impact.score if incident.impact else 0
+        incident.metrics = get_domain(incident.domain_id).metrics(incident)
         incident.samples.append(ServiceSample(step=len(incident.timeline), online=online_services(incident.topology), risk=risk,
-                                             latency=round(sum(n.latency_ms for n in critical)/len(critical))))
+                                             latency=round(sum(n.latency_ms for n in critical)/max(1, len(critical))),
+                                             total=len(critical), metrics=[m.model_copy(deep=True) for m in incident.metrics]))
         if event_type == "REPORT_GENERATED":
             incident.report = ReportAgent().generate(incident)
         self.repository.save(incident)
@@ -75,23 +80,28 @@ class SimulationEngine:
         agent.state = state
         agent.finding = finding
 
-    async def start(self, scenario_id: str, request: StartRequest) -> Incident:
-        if scenario_id not in SCENARIOS:
+    async def start(self, scenario_id: str, request: StartRequest, domain_id: str = "smart_city") -> Incident:
+        pack = get_domain(domain_id)
+        if scenario_id not in pack.scenarios:
             raise KeyError(scenario_id)
         async with self.lock:
             if self.task and not self.task.done():
                 raise Conflict("An incident is already active. Reset it before starting another scenario.")
-            scenario = SCENARIOS[scenario_id]
+            scenario = pack.scenarios[scenario_id]
             incident = Incident(id=f"GM-{uuid4().hex[:12].upper()}", scenario_id=scenario_id, title=scenario.title,
+                                domain_id=domain_id, domain=pack.metadata, category=scenario.category,
+                                provider_name=getattr(self.provider, "name", type(self.provider).__name__), provider_mode=getattr(self.provider, "mode", "SIMULATED"),
+                                provider_notice=getattr(self.provider, "notice", None),
                                 source=scenario.source, mode=request.mode, auto_approve=request.auto_approve,
                                 step_duration=request.step_duration or (1.7 if request.mode == "fast" else 5),
-                                topology=build_topology(), agents=initial_agents(), telemetry=scenario_telemetry(scenario_id))
+                                topology=pack.topology(), agents=initial_agents(), telemetry=pack.telemetry(scenario_id))
             self.current = incident
             self.resume_gate.set()
             self.skip_gate.clear()
             self.approval_gate.clear()
-            asset(incident.topology, incident.source).state = SecurityState.COMPROMISED
-            self.emit(incident, "INCIDENT_STARTED", f"{scenario.title}. Synthetic attack telemetry injected into the city twin.")
+            asset(incident.topology, incident.source).state = SecurityState.COMPROMISED if incident.category == "CYBER" else SecurityState.WARNING
+            incident.metrics_before = pack.metrics(incident)
+            self.emit(incident, "INCIDENT_STARTED", f"{scenario.title}. Synthetic {incident.category.lower()} evidence loaded into the {pack.metadata.name} twin.")
             self.task = asyncio.create_task(self.run(incident))
             return incident
 
@@ -119,12 +129,12 @@ class SimulationEngine:
                         await self.task
                 incident.status = "RESET"
                 incident.phase = "READY"
-                incident.topology = build_topology()
+                incident.topology = get_domain(incident.domain_id).topology()
                 if incident is self.current:
                     self.resume_gate.set()
                     self.approval_gate.set()
                     self.skip_gate.clear()
-                self.emit(incident, "INCIDENT_RESET", "City twin reset. The incident record and reports remain in local history.")
+                self.emit(incident, "INCIDENT_RESET", "Domain twin reset. The incident record and reports remain in local history.")
                 return incident
             if not active:
                 raise Conflict("This incident is no longer running.")
@@ -201,13 +211,15 @@ class SimulationEngine:
             await self.delay(incident)
             incident.classification = detection
             incident.phase = "CLASSIFY"
-            technique = incident.classification.techniques[0]
-            self.agent(incident, "Sentinel", "COMPLETE", f"{technique.id} · {technique.name} · {incident.classification.confidence:.0%} rule confidence")
+            label = " · ".join(f"{t.id} {t.name}" for t in incident.classification.techniques) or incident.classification.threat_type
+            self.agent(incident, "Sentinel", "COMPLETE", f"{label} · {incident.classification.confidence:.0%} rule confidence")
             self.emit(incident, "THREAT_CLASSIFIED", incident.classification.reasoning, "Sentinel")
             self.agent(incident, "Impact", "ANALYZING", "Traversing enabled service dependencies and scoring each propagation path.")
             self.emit(incident, "IMPACT_ANALYSIS_STARTED", "Calculating downstream exposure from the compromised asset.", "Impact")
             await self.delay(incident)
             incident.impact = ImpactAgent().analyze(incident)
+            get_domain(incident.domain_id).assess_context(incident)
+            incident.metrics_before = get_domain(incident.domain_id).metrics(incident)
             incident.phase = "IMPACT"
             for risk in incident.impact.impacted:
                 asset(incident.topology, risk.node_id).state = SecurityState.AT_RISK if risk.critical else SecurityState.WARNING
@@ -217,6 +229,10 @@ class SimulationEngine:
                             edge.state = "THREAT"
             self.agent(incident, "Impact", "COMPLETE", f"Risk {incident.impact.score}/100 · {len(incident.impact.critical_services)} critical services exposed")
             self.emit(incident, "IMPACT_ANALYSIS_COMPLETE", incident.impact.explanation, "Impact")
+            incident.reasoning = await self.reasoner.reason(incident, list(get_domain(incident.domain_id).permitted_capabilities))
+            incident.reasoner_mode = incident.reasoning.mode
+            self.emit(incident, "REASONING_COMPLETE", incident.reasoning.interpretation +
+                      (f" Deterministic fallback: {incident.reasoning.fallback_reason}" if incident.reasoning.fallback_reason else ""), "Response")
             self.agent(incident, "Response", "ANALYZING", "Comparing endpoint containment with broader segment isolation.")
             self.emit(incident, "RESPONSE_PLANNING", "Selecting a service-preserving containment strategy.", "Response")
             await self.delay(incident)
@@ -251,7 +267,7 @@ class SimulationEngine:
                 action = planned.model_copy(deep=True)
                 action.status = "EXECUTING"
                 incident.actions.append(action)
-                self.emit(incident, "ACTION_EXECUTING", f"POST {action.endpoint} · {asset(incident.topology, action.target).name}", "Network")
+                self.emit(incident, "ACTION_EXECUTING", f"{get_capability(action.kind).name} · {asset(incident.topology, action.target).name}", "Network")
                 await self.delay(incident, .55)
                 try:
                     action.result = await network.execute(action, incident)
@@ -259,32 +275,36 @@ class SimulationEngine:
                     action.status = "FAILED"
                     raise
                 await self.resume_gate.wait()
-                if action.kind == "reroute":
-                    protect(incident.topology, [action.target])
-                elif action.kind == "qod":
-                    asset(incident.topology, action.target).latency_ms = 8
-                elif action.kind in ("quarantine", "isolate_segment"):
-                    isolate(incident.topology, action.target)
-                elif action.kind == "verify_location" and action.result.get("verification") == "FALSE":
+                if not action.result.get("simulated") or action.result.get("mode") != "SIMULATED":
+                    action.status = "FAILED"
+                    raise ValueError("Provider result is outside the authorized simulation scope")
+                apply_action_effect(action, incident.topology)
+                if action.kind == "verify_location" and action.result.get("verification") == "FALSE":
                     action.result["trust"] = "RESTRICTED"
                 action.status = "COMPLETE"
                 action.executed_at = now()
                 event_type = {"reroute":"TRAFFIC_REROUTED", "qod":"QOD_ACTIVATED", "quarantine":"DEVICE_ISOLATED", "isolate_segment":"SEGMENT_ISOLATED"}.get(action.kind, "CONTEXT_VERIFIED")
                 self.emit(incident, event_type, action.result["summary"], "Network")
             incident.residual_impact = ImpactAgent().analyze(incident)
-            if incident.residual_impact.score != 0 or not continuity_verified(incident.topology):
-                raise ValueError("Containment or service continuity verification failed")
+            errors = get_domain(incident.domain_id).verify(incident)
+            if not continuity_verified(incident.topology):
+                errors.append("Required service connectivity verification failed")
+            if errors:
+                raise ValueError("; ".join(errors))
             for node in incident.topology.nodes:
                 if node.state in (SecurityState.WARNING, SecurityState.AT_RISK):
                     node.state = SecurityState.ONLINE
             for edge in incident.topology.edges:
                 if edge.state == "THREAT":
                     edge.state = "NORMAL"
-            self.agent(incident, "Network", "COMPLETE", f"{len(incident.actions)} simulated actions completed · source isolated")
+            self.agent(incident, "Network", "COMPLETE", f"{len(incident.actions)} simulated actions completed · domain verification passed")
             incident.phase = "CONTAINED"
             incident.status = "CONTAINED"
             incident.ended_at = now()
-            incident.outcome = "Source isolated; residual propagation risk 0/100; all six critical services remained online."
+            source = asset(incident.topology, incident.source)
+            total = sum(n.critical for n in incident.topology.nodes)
+            source_result = "Source isolated" if source.state == SecurityState.ISOLATED else "Affected session restricted; step-up verification required" if source.session_restricted else "Connectivity stabilized; source remains operational"
+            incident.outcome = f"{source_result}; residual dependency risk {incident.residual_impact.score}/100; {online_services(incident.topology)}/{total} required services online."
             self.emit(incident, "INCIDENT_CONTAINED", incident.outcome, "Network")
             self.agent(incident, "Report", "ANALYZING", "Building technical and executive reports from the incident evidence.")
             self.emit(incident, "REPORT_GENERATING", "Compiling evidence, approval history, actions and continuity measurements.", "Report")

@@ -1,12 +1,12 @@
 import { memo, useState } from 'react';
 import { ReactFlow, Background, Controls, Handle, Position, MarkerType } from '@xyflow/react';
 import type { NodeProps, Node } from '@xyflow/react';
-import { Camera, Radio, Router, Network, Hospital, Ambulance, Zap, TrafficCone, Shield, Building2, Cpu, Radar, X, LockKeyhole, ScanLine, Check, LoaderCircle } from 'lucide-react';
-import type { Asset, Topology as Twin, Incident } from '../types';
+import { Camera, Radio, Router, Network, Hospital, Ambulance, Zap, TrafficCone, Shield, Building2, Cpu, Radar, X, LockKeyhole, ScanLine, Check, LoaderCircle, Smartphone, Fingerprint, Landmark, CreditCard, Factory, Bot, Compass, Leaf, CloudRain, Ticket, Glasses, Database } from 'lucide-react';
+import type { Asset, Topology as Twin, Incident, DomainDetail } from '../types';
 import { idleAgents } from '../types';
 import '@xyflow/react/dist/style.css';
 
-const icons:Record<string,typeof Shield>={camera:Camera,sensor:Radio,gateway:Router,core:Network,hospital:Hospital,emergency:Ambulance,energy:Zap,traffic:TrafficCone,safety:Shield,control:Building2,edge:Cpu,guardian:Radar};
+const icons:Record<string,typeof Shield>={camera:Camera,sensor:Radio,gateway:Router,core:Network,hospital:Hospital,emergency:Ambulance,energy:Zap,traffic:TrafficCone,safety:Shield,control:Building2,edge:Cpu,guardian:Radar,device:Smartphone,mobile:Smartphone,identity:Fingerprint,identity_provider:Fingerprint,bank:Landmark,payment:CreditCard,finance:Landmark,factory:Factory,robot:Bot,controller:Cpu,venue:Ticket,tourism:Compass,experience:Glasses,climate:CloudRain,environment:Leaf,database:Database,application:Building2,service:Building2};
 type AssetNodeType=Node<{asset:Asset},'asset'>;
 const AssetNode=memo(({data,selected}:NodeProps<AssetNodeType>)=>{
   const node=data.asset; const Icon=icons[node.kind]??Network;
@@ -18,7 +18,7 @@ const AssetNode=memo(({data,selected}:NodeProps<AssetNodeType>)=>{
 });
 const nodeTypes={asset:AssetNode};
 
-export function Topology({topology,incident}:{topology:Twin;incident:Incident|null}) {
+export function Topology({topology,incident,domain}:{topology:Twin;incident:Incident|null;domain?:DomainDetail|null}) {
   const [selected,setSelected]=useState<string|null>(null);
   const selectedAsset=topology.nodes.find(n=>n.id===selected);
   const nodes:AssetNodeType[]=topology.nodes.map(asset=>({id:asset.id,type:'asset',position:{x:asset.x,y:asset.y},data:{asset},draggable:false,selected:asset.id===selected}));
@@ -27,14 +27,14 @@ export function Topology({topology,incident}:{topology:Twin;incident:Incident|nu
     return {...edge,animated:edge.state==='THREAT'||edge.state==='PROTECTED',type:'smoothstep',style:{stroke:color,strokeWidth:edge.state==='NORMAL'?1.25:2,strokeDasharray:edge.state==='BLOCKED'?'5 5':edge.kind==='management'?'3 5':undefined,opacity:edge.state==='BLOCKED'?.5:edge.kind==='management'?.5:.9},markerEnd:{type:MarkerType.ArrowClosed,color,width:14,height:14}};
   });
   return <section className="panel twin-panel" aria-label="Live digital twin">
-    <div className="panel-heading"><div><span className="eyebrow">LIVE DIGITAL TWIN</span><h2>City infrastructure</h2></div><span className="micro-label"><i className="status-dot"/>14 assets · 6 critical services</span></div>
+    <div className="panel-heading"><div><span className="eyebrow">LIVE DIGITAL TWIN</span><h2>{domain?.twin_title??'Operational infrastructure'}</h2></div><span className="micro-label"><i className="status-dot"/>{topology.nodes.length} assets · {topology.nodes.filter(n=>n.critical).length} critical services</span></div>
     <div className="twin-agent-strip" aria-label="Live agent progress">{(incident?.agents??idleAgents).map(agent=><span key={agent.name} className={`trace-${agent.state.toLowerCase()}`} title={`${agent.name}: ${agent.state}. ${agent.finding}`}>{agent.state==='COMPLETE'?<Check size={12}/>:['ANALYZING','EXECUTING'].includes(agent.state)?<LoaderCircle size={12} className="spin"/>:<i/>}{agent.name}</span>)}</div>
     <div className="twin-stage">
-      <div className="network-zones"><span>CONNECTED ENDPOINTS</span><span>TELECOM & EDGE</span><span>CRITICAL SERVICES</span></div>
-      <ReactFlow nodes={nodes} edges={edges} nodeTypes={nodeTypes} fitView fitViewOptions={{padding:.08}} minZoom={.2} maxZoom={1.8} onNodeClick={(_,node)=>setSelected(node.id)} onPaneClick={()=>setSelected(null)} nodesConnectable={false} zoomOnScroll={false} preventScrolling={false} aria-label="Interactive city network">
+      <div className="network-zones"><span>ENDPOINTS & SIGNALS</span><span>NETWORK & DEPENDENCIES</span><span>CRITICAL SERVICES</span></div>
+      <ReactFlow nodes={nodes} edges={edges} nodeTypes={nodeTypes} fitView fitViewOptions={{padding:.08}} minZoom={.2} maxZoom={1.8} onNodeClick={(_,node)=>setSelected(node.id)} onPaneClick={()=>setSelected(null)} nodesConnectable={false} zoomOnScroll={false} preventScrolling={false} aria-label="Interactive domain network">
         <Background color="#2a3946" gap={24} size={1}/><Controls showInteractive={false}/>
       </ReactFlow>
-      {selectedAsset&&<div className="asset-detail"><button className="icon-button" aria-label="Close asset details" onClick={()=>setSelected(null)}><X size={16}/></button><span className="eyebrow">ASSET INSPECTOR</span><h3>{selectedAsset.name}</h3><p>{selectedAsset.zone} · {selectedAsset.state.replace('_',' ')}</p><dl><div><dt>Service availability</dt><dd>{selectedAsset.operational?'Online':'Offline'}</dd></div><div><dt>Protection</dt><dd>{Math.round(selectedAsset.protection*100)}%</dd></div><div><dt>Simulated latency</dt><dd>{selectedAsset.latency_ms} ms</dd></div></dl></div>}
+      {selectedAsset&&<div className="asset-detail"><button className="icon-button" aria-label="Close asset details" onClick={()=>setSelected(null)}><X size={16}/></button><span className="eyebrow">ASSET INSPECTOR</span><h3>{selectedAsset.name}</h3><p>{selectedAsset.zone} · {selectedAsset.state.replace('_',' ')}</p><dl><div><dt>Service availability</dt><dd>{selectedAsset.operational?'Online':'Offline'}</dd></div><div><dt>Protection</dt><dd>{Math.round(selectedAsset.protection*100)}%</dd></div><div><dt>{incident?.provider_mode==='LIVE'?'Latency':'Simulated latency'}</dt><dd>{selectedAsset.latency_ms} ms</dd></div>{selectedAsset.trust_score!==undefined&&<div><dt>Context trust</dt><dd>{selectedAsset.trust_score} / 100</dd></div>}{selectedAsset.session_restricted&&<div><dt>Session</dt><dd>Restricted</dd></div>}{selectedAsset.verification_required&&<div><dt>Verification</dt><dd>Required</dd></div>}{selectedAsset.shared&&<div><dt>Infrastructure</dt><dd>Shared</dd></div>}</dl></div>}
       {!incident&&<div className="twin-idle"><ScanLine size={16}/><span>Monitoring all dependency paths</span></div>}
     </div>
     <div className="twin-footer"><div className="legend"><span><i className="legend-normal"/>Online</span><span><i className="legend-threat"/>Threat path</span><span><i className="legend-protected"/>Protected route</span><span><i className="legend-isolated"/>Isolated</span></div><span className="muted">Select an asset to inspect</span></div>

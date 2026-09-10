@@ -7,10 +7,13 @@ from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect, Requ
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import JSONResponse
 from .engine import SimulationEngine, Conflict
-from .models import StartRequest, ApprovalRequest
+from .models import StartRequest, ApprovalRequest, Incident
 from .persistence import Repository
 from .scenarios import scenario_catalog
 from .topology import build_topology
+from .domains.registry import get_domain, list_domains
+from .capabilities.registry import list_capabilities, get_capability
+from .agents import initial_agents
 
 
 class JsonFormatter(logging.Formatter):
@@ -38,7 +41,7 @@ def create_app(database_url: str | None = None) -> FastAPI:
         await app.state.engine.close()
         repository.engine.dispose()
 
-    app = FastAPI(title="GuardianMesh AI", version="1.0.0", description="Local defensive simulation. No real telecom connectivity.", lifespan=lifespan)
+    app = FastAPI(title="GuardianMesh AI", version="2.0.0", description="Autonomous Multi-Domain Resilience & Trust Platform. Local simulation; optional advisory AI.", lifespan=lifespan)
     app.add_middleware(CORSMiddleware, allow_origins=sorted(ORIGINS), allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
 
     @app.middleware("http")
@@ -57,9 +60,58 @@ def create_app(database_url: str | None = None) -> FastAPI:
     async def missing_handler(request, exc):
         return JSONResponse({"detail":"Unknown incident, scenario or control."}, status_code=404)
 
+    @app.exception_handler(ValueError)
+    async def validation_handler(request, exc):
+        message = str(exc)
+        if message.startswith("Unknown GuardianMesh domain") or message.startswith("Unknown scenario"):
+            return JSONResponse({"detail": message}, status_code=404)
+        return JSONResponse({"detail": message}, status_code=422)
+
     @app.get("/api/health")
     async def health():
-        return {"status":"ok", "simulation":True, "provider":"local", "agents":6, "critical_services":6}
+        return {"status":"ok", "simulation":True, "provider":"local", "agents":6,
+                "critical_services":sum(n.critical for n in build_topology().nodes), "domains":len(list_domains()), "version":"2.0.0"}
+
+    def runtime_metadata():
+        engine = app.state.engine
+        return {"provider": {"name": engine.provider.name, "mode": engine.provider.mode,
+                             "simulated": engine.provider.simulated,
+                             "requested": getattr(engine.provider, "requested_mode", "simulated"),
+                             "notice": getattr(engine.provider, "notice", None)},
+                "reasoner": {"mode": engine.reasoner.mode, "requested": engine.reasoner.requested_mode,
+                             "notice": getattr(engine.reasoner, "notice", None)}}
+
+    @app.get("/api/v1/domains")
+    async def domains():
+        return [pack.metadata for pack in list_domains()]
+
+    @app.get("/api/v1/capabilities")
+    async def capabilities():
+        return list_capabilities()
+
+    @app.get("/api/v1/runtime")
+    async def runtime():
+        return runtime_metadata()
+
+    @app.get("/api/v1/domains/{domain_id}")
+    async def domain_detail(domain_id: str):
+        pack = get_domain(domain_id)
+        scenario = next(iter(pack.scenarios.values()))
+        preview = Incident(id="PREVIEW", domain_id=domain_id, domain=pack.metadata,
+                           category=scenario.category, scenario_id=scenario.id, title=scenario.title,
+                           source=scenario.source, mode="fast", auto_approve=True, step_duration=1.7,
+                           topology=pack.topology(), telemetry=pack.telemetry(scenario.id), agents=initial_agents())
+        return {**pack.metadata.model_dump(), "topology": preview.topology, "scenarios": pack.catalog(),
+                "capabilities": [get_capability(k) for k in pack.permitted_capabilities],
+                "metrics": pack.metrics(preview), **runtime_metadata()}
+
+    @app.get("/api/v1/domains/{domain_id}/scenarios")
+    async def domain_scenarios(domain_id: str):
+        return get_domain(domain_id).catalog()
+
+    @app.post("/api/v1/domains/{domain_id}/scenarios/{scenario_id}/start", status_code=201)
+    async def domain_start(domain_id: str, scenario_id: str, payload: StartRequest):
+        return await app.state.engine.start(scenario_id, payload, domain_id=domain_id)
 
     @app.get("/api/topology")
     async def topology():
@@ -70,8 +122,12 @@ def create_app(database_url: str | None = None) -> FastAPI:
         return scenario_catalog()
 
     @app.get("/api/incidents")
-    async def incidents():
-        return [{"id":i.id, "title":i.title, "status":i.status, "started_at":i.started_at, "has_report":bool(i.report)} for i in app.state.engine.repository.list()]
+    async def incidents(domain_id: str | None = None):
+        if domain_id:
+            get_domain(domain_id)
+        return [{"id":i.id, "domain_id": i.domain_id, "domain_name": (i.domain or get_domain(i.domain_id).metadata).name,
+                 "title":i.title, "status":i.status, "started_at":i.started_at, "has_report":bool(i.report)}
+                for i in app.state.engine.repository.list() if domain_id is None or i.domain_id == domain_id]
 
     @app.post("/api/scenarios/{scenario_id}/start", status_code=201)
     async def start(scenario_id: str, payload: StartRequest):

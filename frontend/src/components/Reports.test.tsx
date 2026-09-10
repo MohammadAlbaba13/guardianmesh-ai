@@ -26,3 +26,13 @@ it('technical view contains actual incident evidence and close is operable',asyn
   expect(document.querySelector('.technical-report')).toHaveTextContent('T1210');
   fireEvent.click(screen.getByRole('button',{name:'Close report'}));expect(close).toHaveBeenCalledOnce();
 });
+
+it('renders a historical domain denominator and reasoning mode from that report',async()=>{
+  const incident=reportIncident();
+  Object.assign(incident.report!.executive,{total_services:4,minimum_services_online:4,availability:'4/4 trust services online',domain_name:'Trusted Digital Identity',reasoner_mode:'local_llm',provider_mode:'SIMULATED'});
+  render(<Reports incident={incident} onClose={vi.fn()}/>);
+  expect(await screen.findByText('4/4')).toBeInTheDocument();
+  expect(screen.queryByText('4/6')).not.toBeInTheDocument();
+  expect(screen.getByText('Trusted Digital Identity')).toBeInTheDocument();
+  expect(screen.getByText(/AI Reasoning: Local LLM/)).toBeInTheDocument();
+});
