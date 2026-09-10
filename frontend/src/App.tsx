@@ -39,4 +39,3 @@ export default function App() {
 }
 
 function RadarPlaceholder(){return <div className="loading-symbol"><Radio size={32}/></div>;}
-

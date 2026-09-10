@@ -13,4 +13,3 @@ export function RuntimeContext({domain,incident}:{domain:DomainDetail|null;incid
   const reasoner=incident?.reasoner_mode??domain.reasoner.mode;
   return <div className="runtime-context" aria-label="Execution context"><span title={domain.provider.notice??undefined}><Radio size={13}/><b>Network provider</b>{provider}<small>{incident?.provider_name??domain.provider.name}</small></span><span title={incident?.reasoning?.fallback_reason??domain.reasoner.notice??undefined}><Cpu size={13}/><b>AI Reasoning:</b>{reasoner==='local_llm'?'Local LLM':'Deterministic'}{incident?.reasoning?.fallback_reason&&<small>Safe fallback</small>}</span><span className="runtime-policy"><Check size={13}/>Policy governed execution</span></div>;
 }
-

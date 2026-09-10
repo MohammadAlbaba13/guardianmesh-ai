@@ -52,4 +52,3 @@ it('renders real approval decisions with a safe rejection option',()=>{
   fireEvent.click(screen.getByRole('button',{name:'Reject · safe fallback'}));expect(approve).toHaveBeenCalledWith('REJECT');
   fireEvent.click(screen.getByRole('button',{name:'Approve'}));expect(approve).toHaveBeenCalledWith('APPROVE');
 });
-

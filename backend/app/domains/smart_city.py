@@ -108,4 +108,3 @@ PACK = DomainPack(
         DetectionRule("energy", lambda t: t.service_stop_requests>=10 and not t.maintenance_window, energy_evidence),
     ),
 )
-
