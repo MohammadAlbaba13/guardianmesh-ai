@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: guardianmesh-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    autoDeploy: true
+
+  - type: web
+    name: guardianmesh-frontend
+    runtime: docker
+    dockerfilePath: ./frontend/Dockerfile
+    dockerContext: ./frontend
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: BACKEND_URL
+        value: https://guardianmesh-backend.onrender.com
