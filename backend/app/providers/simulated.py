@@ -104,5 +104,6 @@ class SimulatedNetworkProvider:
         result = CapabilityResult(provider=self.name, mode=self.mode, simulated=True,
             capability=action.kind, summary=summary, evidence=evidence).model_dump()
         result.update(evidence)  # v1 clients read evidence keys at top level.
+        result.update(execution_state="SIMULATED", verification_state="MODELED")
         self._completed[key] = (signature, deepcopy(result))
         return result

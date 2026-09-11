@@ -1,0 +1,47 @@
+import { useEffect, useState } from 'react';
+import { Activity, ShieldCheck, Radio, RotateCcw } from 'lucide-react';
+import { request } from '../api';
+import type { Incident, RunOptions, TimelineEvent } from '../types';
+
+interface Diagnostics {backend:string;database:string;ai:{state:string;model:string;deterministic:string};network:{configured:boolean;provider:string;environment:string;reachability:string;notice:string;bound_targets:string[]}}
+export const defaultOptions:RunOptions={execution_mode:'SIMULATION',ai_mode:'deterministic',manual_approval:false,allow_fallback:false};
+
+export function MissionControl({options,onChange,active,judge,onJudge,connection,onHero,onReset,canRun}:{options:RunOptions;onChange:(o:RunOptions)=>void;active:boolean;judge:boolean;onJudge:()=>void;connection:string;onHero:()=>Promise<unknown>;onReset:()=>unknown;canRun:boolean}) {
+  const [health,setHealth]=useState<Diagnostics|null>(null),[checking,setChecking]=useState(false),[ws,setWs]=useState('NOT CHECKED'),[error,setError]=useState('');
+  const check=async()=>{setChecking(true);setError('');setHealth(null);try{setHealth(await request<Diagnostics>('/v1/diagnostics'));}catch{setError('Backend diagnostics unavailable');}finally{setChecking(false);}
+    setWs('CHECKING');const socket=new WebSocket(`${location.protocol==='https:'?'wss':'ws'}://${location.host}/ws/health`);
+    const timer=setTimeout(()=>{setWs('UNAVAILABLE');socket.close();},4000);
+    socket.onmessage=e=>{try{if(JSON.parse(e.data).status==='READY')setWs('CONNECTED');}catch{setWs('INVALID');}clearTimeout(timer);socket.close();};socket.onerror=()=>{clearTimeout(timer);setWs('UNAVAILABLE');socket.close();};
+  };
+  useEffect(()=>{if(judge)void check();},[judge]);
+  const ready=health?.backend==='READY'&&health.database==='READY'&&(ws==='CONNECTED'||connection==='live');
+  return <section className="mission-control" aria-label="Mission configuration"><div className="mission-title"><span><ShieldCheck size={17}/>MISSION CONTROL</span><button className="button small" onClick={onJudge}>{judge?'Exit Judge Mode':'Judge Mode'}</button></div><div className="mission-options">
+    <label>Network execution<select aria-label="Network execution" disabled={active} value={options.execution_mode} onChange={e=>onChange({...options,execution_mode:e.target.value as RunOptions['execution_mode']})}><option>SIMULATION</option><option>LIVE</option><option>AUTO</option></select></label>
+    <label>AI advisor<select aria-label="AI advisor" disabled={active} value={options.ai_mode} onChange={e=>onChange({...options,ai_mode:e.target.value as RunOptions['ai_mode']})}><option value="deterministic">Deterministic</option><option value="local_llm">Local LLM + safe fallback</option></select></label>
+    <label>Injected severity<select aria-label="Injected severity" disabled={active} value={options.severity??''} onChange={e=>onChange({...options,severity:(e.target.value||undefined) as RunOptions['severity']})}><option value="">Scenario default</option>{['LOW','MEDIUM','HIGH','CRITICAL'].map(x=><option key={x}>{x}</option>)}</select></label>
+    {options.execution_mode==='AUTO'&&<label className="fallback-choice"><input type="checkbox" disabled={active} checked={options.allow_fallback} onChange={e=>onChange({...options,allow_fallback:e.target.checked})}/>Allow explicit simulation fallback</label>}
+    <span className="scope-note">Signals, topology and resilience metrics are simulated. LIVE applies only to configured QoD targets.</span></div>
+    {judge&&<div className={`readiness ${active?'mission-active':''}`}><div className="readiness-heading"><h3>Hospital hero · {active?'incident in progress':'preflight'}</h3><button className="button small" disabled={checking} onClick={()=>void check()}>{checking?'Checking…':'Check readiness'}</button></div>{error&&<p role="alert">{error}</p>}<div className="readiness-grid"><span>Backend<b>{health?.backend??'NOT CHECKED'}</b></span><span>Database<b>{health?.database??'NOT CHECKED'}</b></span><span>AI<b>{options.ai_mode==='deterministic'?'DETERMINISTIC':health?.ai.state==='READY'?'LOCAL MODEL READY':'DETERMINISTIC FALLBACK'}</b></span><span>QoD sandbox<b>{health?.network.configured?`CONFIGURED · ${health.network.reachability}`:'UNAVAILABLE'}</b></span><span>WebSocket<b>{connection==='live'?'CONNECTED':ws}</b></span></div><p>{health?.network.notice}</p><div className="judge-launch"><button className="button primary" disabled={!ready||!canRun||(options.execution_mode==='LIVE'&&!health?.network.configured)} onClick={()=>void onHero()}><Activity size={17}/>{options.execution_mode==='LIVE'?'Start Live Demo':'Inject Hospital Incident'}</button><button className="button" disabled={active} onClick={()=>void onReset()}><RotateCcw size={15}/>Reset Demo</button></div></div>}
+  </section>;
+}
+
+export function NetworkEvidence({incident}:{incident:Incident|null}) {
+  const [error,setError]=useState(''),[busy,setBusy]=useState(false);
+  const actions=incident?.actions.filter(a=>a.kind==='qod')??[];
+  const manage=async(id:string,operation:string)=>{setBusy(true);setError('');try{await request(`/incidents/${incident?.id}/actions/${id}/${operation}`,{});}catch(e){setError(String(e));}finally{setBusy(false);}};
+  const active=!!incident&&['RUNNING','PAUSED','AWAITING_APPROVAL'].includes(incident.status);
+  return <section className="panel network-evidence" aria-label="Network execution evidence"><div className="panel-heading"><div><span className="eyebrow">PROVIDER PROOF</span><h2><Radio size={19}/> Critical-flow protection</h2></div><span className="pill neutral">{incident?.execution_mode??'SIMULATION'} REQUESTED</span></div><p className="evidence-scope">GuardianMesh → policy / approval → provider → critical service. Session establishment is API evidence, not a measured latency improvement.</p>
+    {!actions.length?<p className="evidence-empty">No QoD request sent. Awaiting a policy-approved response.</p>:<div className="qod-grid">{actions.map(a=>{const r=a.result;const state=String(r.execution_state??(a.status==='EXECUTING'?'WAITING':'SIMULATED'));return <article className={`qod-card execution-${state.toLowerCase()}`} key={a.id}><strong>{a.target.replaceAll('_',' ')}</strong><b className="execution-badge">{state==='LIVE'?'LIVE API ACTION':state}</b><dl><div><dt>Environment</dt><dd>{String(r.provider_environment??'LOCAL SIMULATOR')}</dd></div><div><dt>Provider</dt><dd>{String(r.provider??'Awaiting provider')}</dd></div><div><dt>QoD state</dt><dd>{String(r.qos_status??(r.simulated?'MODELED':'PENDING'))}</dd></div><div><dt>Verification</dt><dd>{String(r.verification_state??(r.simulated?'MODELED':r.verification??'NOT VERIFIED'))}</dd></div><div><dt>External session</dt><dd>{String(r.external_session_id??'None')}</dd></div><div><dt>HTTP status</dt><dd>{String(r.http_status??'No response')}</dd></div></dl><p>{String(r.summary??a.rationale)}</p>{!!r.external_session_id&&<div className="session-tools"><button disabled={busy||active} onClick={()=>void manage(a.id,'lookup')}>Verify status</button><button disabled={busy||active||r.cleanup==='DELETED'} onClick={()=>void manage(a.id,'extend')}>Extend 300s</button><button disabled={busy||active||r.cleanup==='DELETED'} onClick={()=>void manage(a.id,'delete')}>End session</button></div>}</article>;})}</div>}{error&&<p role="alert">{error}</p>}
+    {!!incident?.metrics_before?.length&&<details className="comparison"><summary>Before / current resilience · SIMULATED DIGITAL TWIN</summary><table><thead><tr><th>Measure</th><th>Before</th><th>Current</th></tr></thead><tbody>{incident.metrics?.map(m=><tr key={m.id}><th>{m.label}</th><td>{incident.metrics_before?.find(b=>b.id===m.id)?.value??'—'} {m.unit}</td><td>{m.value} {m.unit}</td></tr>)}</tbody></table></details>}
+  </section>;
+}
+
+export function IncidentReplay({incident}:{incident:Incident|null}) {
+  const [events,setEvents]=useState<TimelineEvent[]>([]),[position,setPosition]=useState(0),[playing,setPlaying]=useState(false),[error,setError]=useState('');
+  useEffect(()=>{setEvents([]);setPosition(0);setPlaying(false);},[incident?.id]);
+  useEffect(()=>{if(!playing)return;const timer=setInterval(()=>setPosition(p=>{if(p>=events.length){setPlaying(false);return p;}return p+1;}),700);return()=>clearInterval(timer);},[playing,events.length]);
+  const load=async()=>{try{const data=await request<TimelineEvent[]>(`/incidents/${incident?.id}/timeline`);setEvents(data);setPosition(1);setPlaying(true);setError('');}catch{setError('Stored timeline unavailable');}};
+  if(!incident||!['CONTAINED','FAILED','INTERRUPTED'].includes(incident.status))return null;
+  const event=events[position-1];
+  return <section className="incident-replay" aria-label="Persisted incident replay"><div><button className="button small" onClick={()=>void load()}>Replay Incident</button><span>Read-only persisted evidence · no external actions rerun</span></div>{event&&<><input aria-label="Replay position" type="range" min={1} max={events.length} value={position} onChange={e=>{setPlaying(false);setPosition(Number(e.target.value));}}/><button className="button small" onClick={()=>setPlaying(!playing)}>{playing?'Pause replay':'Play replay'}</button><p><time>{new Date(event.timestamp).toLocaleTimeString()}</time> · {event.agent??'SYSTEM'} · <b>{event.type.replaceAll('_',' ')}</b></p><p>{event.message}</p><small>{position} / {events.length} events</small></>}{error&&<p role="alert">{error}</p>}</section>;
+}

@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { request, applySnapshot } from './api';
-import type { DomainDetail, DomainMetadata, Incident, Snapshot } from './types';
+import type { DomainDetail, DomainMetadata, Incident, Snapshot, RunOptions } from './types';
 
 const ACTIVE_INCIDENT = 'guardianmesh-active-incident';
 const ACTIVE_DOMAIN = 'guardianmesh-domain';
@@ -105,16 +105,16 @@ export function useGuardian() {
     if(current!==generation.current) return;
     acceptDomain(detail); setReady(true); setConnection('ready');
   });
-  const startRun = async(scenario:string,mode:'fast'|'guided',auto:boolean)=>{
+  const startRun = async(scenario:string,mode:'fast'|'guided',auto:boolean,options?:RunOptions)=>{
     const selected=domainRef.current;
     if(!selected||!selected.scenarios.some(s=>s.id===scenario)) throw new Error('Select a scenario in the current domain.');
     const current=generation.current;
-    const value=await request<Incident>(`/v1/domains/${selected.id}/scenarios/${encodeURIComponent(scenario)}/start`,{mode,auto_approve:auto});
+    const value=await request<Incident>(`/v1/domains/${selected.id}/scenarios/${encodeURIComponent(scenario)}/start`,{mode,auto_approve:auto,...options});
     if(current!==generation.current) return;
     if(domainOf(value)!==selected.id) throw new Error('The incident response belongs to a different domain.');
     acceptIncident(value); return value;
   };
-  const start = (scenario:string,mode:'fast'|'guided',auto:boolean)=>perform(()=>startRun(scenario,mode,auto));
+  const start = (scenario:string,mode:'fast'|'guided',auto:boolean,options?:RunOptions)=>perform(()=>startRun(scenario,mode,auto,options));
   const control = (command:'pause'|'resume'|'skip'|'reset')=>perform(async()=>{
     const active=incidentRef.current;
     if(!active) return;
@@ -124,10 +124,10 @@ export function useGuardian() {
     else acceptIncident(applySnapshot(incidentRef.current,{type:'SNAPSHOT',seq:value.timeline.length,incident:value}));
     return value;
   });
-  const restart = (scenario:string,mode:'fast'|'guided',auto:boolean)=>perform(async()=>{
+  const restart = (scenario:string,mode:'fast'|'guided',auto:boolean,options?:RunOptions)=>perform(async()=>{
     const active=incidentRef.current;
     if(active) {await request<Incident>(`/incidents/${active.id}/reset`,{});acceptIncident(null);}
-    return startRun(scenario,mode,auto);
+    return startRun(scenario,mode,auto,options);
   });
   const approve = (decision:'APPROVE'|'REJECT')=>perform(async()=>{
     const active=incidentRef.current;

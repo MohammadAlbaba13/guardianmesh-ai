@@ -114,7 +114,9 @@ async def test_provider_failure_never_claims_containment(repository):
     engine=SimulationEngine(repository,FailingProvider())
     incident=await engine.start("camera",StartRequest(step_duration=.01))
     await engine.task
-    assert incident.status=="FAILED" and incident.report is None
+    assert incident.status=="FAILED" and incident.report is not None
+    assert incident.report.executive["headline"] == "Incident requires operator attention."
+    assert incident.report.technical["final_state"] == "FAILED"
     assert incident.actions[0].status=="FAILED"
     assert not any(e.type=="INCIDENT_CONTAINED" for e in incident.timeline)
 

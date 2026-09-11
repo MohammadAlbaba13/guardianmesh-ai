@@ -1,0 +1,30 @@
+{
+  "incident_id": "GM-79655F7687B0",
+  "domain": "smart_city",
+  "scenario": "camera",
+  "mode": "GUIDED",
+  "execution_mode": "SIMULATION",
+  "reasoner_mode": "local_llm",
+  "model": "qwen2.5:0.5b",
+  "steps_verified": [
+    "clean reset",
+    "Judge Mode readiness",
+    "real WebSocket connection",
+    "pause",
+    "resume",
+    "skip timed step",
+    "manual approval",
+    "14-node topology rendered without overlap",
+    "MITRE T1210 classification",
+    "camera isolated",
+    "residual risk 0/100",
+    "6/6 critical services online",
+    "executive and technical reports"
+  ],
+  "status": "CONTAINED",
+  "agents_complete": 6,
+  "critical_services_online": "6/6",
+  "provider_modes": ["SIMULATED"],
+  "external_network_call": false,
+  "notes": "QoD actions in this rehearsal are deterministic digital-twin simulations; no provider credential was available or used."
+}

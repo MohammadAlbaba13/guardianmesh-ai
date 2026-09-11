@@ -1,0 +1,226 @@
+.git/ [generated/local/unrelated; not application source]
+.logs/ [generated/local/unrelated; not application source]
+.venv/ [generated/local/unrelated; not application source]
+alarqam-fi-ajyal/ [generated/local/unrelated; not application source]
+backend/
+docs/
+frontend/
+scripts/
+tmp/ [generated/local/unrelated; not application source]
+.env
+.env.example
+.gitignore
+GuardianMesh_AI_Complete_Project_Report.md
+GuardianMesh_AI_Complete_Project_Report.pdf
+README.md
+Win.rar
+Win.zip
+compose.yaml
+  .pytest_cache/ [generated/local/unrelated; not application source]
+  app/
+  data/ [generated/local/unrelated; not application source]
+  tests/
+  .dockerignore
+  Dockerfile
+  pytest.ini
+  requirements.lock.txt
+  requirements.txt
+    __pycache__/ [generated/local/unrelated; not application source]
+    capabilities/
+    domains/
+    intelligence/
+    providers/
+    __init__.py
+    agents.py
+    diagnostics.py
+    engine.py
+    main.py
+    models.py
+    persistence.py
+    policies.py
+    provider.py
+    reporting.py
+    risk.py
+    scenarios.py
+    topology.py
+      __pycache__/ [generated/local/unrelated; not application source]
+      __init__.py
+      registry.py
+      __pycache__/ [generated/local/unrelated; not application source]
+      __init__.py
+      base.py
+      climate.py
+      fintech.py
+      identity.py
+      industry.py
+      open_innovation.py
+      registry.py
+      smart_city.py
+      tourism.py
+      __pycache__/ [generated/local/unrelated; not application source]
+      __init__.py
+      base.py
+      deterministic.py
+      llm.py
+      __pycache__/ [generated/local/unrelated; not application source]
+      __init__.py
+      base.py
+      camara.py
+      nokia.py
+      qod.py
+      service.py
+      simulated.py
+    __pycache__/ [generated/local/unrelated; not application source]
+    conftest.py
+    test_api.py
+    test_domain_api.py
+    test_engine.py
+    test_intelligence.py
+    test_live_network.py
+    test_persistence.py
+    test_providers.py
+    test_reasoners.py
+  final-audit/
+  multi-domain-evidence/
+  report-assets/
+  DEMO_RUNBOOK.md
+  HACKATHON_LIVE_INTEGRATION.md
+  LIVE_VALIDATION.md
+  MULTI_DOMAIN_ARCHITECTURE.md
+  NETWORK_CAPABILITIES.md
+  VALIDATION.md
+  build_project_report.py
+  collect_report_evidence.py
+  live-ai-evidence.json
+  live-integration-backend.xml
+  live-judge-rehearsal.json
+  live-rehearsal.json
+  report-status.json
+  verify_report_evidence.py
+    baseline/
+    backend-final.xml
+      backend-tests.txt
+      backend-tests.xml
+      frontend-build.txt
+      frontend-tests.txt
+    01-idle-full.png
+    01-idle.png
+    01-idle.txt
+    02-camera-attack-paused.png
+    02-camera-attack-paused.txt
+    03-camera-sentinel.png
+    03-camera-sentinel.txt
+    04-camera-classification.png
+    04-camera-classification.txt
+    05-hospital-risk.png
+    05-hospital-risk.txt
+    06-camera-plan-policy.png
+    06-camera-plan-policy.txt
+    07-camera-network-executing.png
+    07-camera-network-executing.txt
+    08-camera-contained.png
+    08-camera-contained.txt
+    09-hospital-protected-qod.png
+    09-hospital-protected-qod.txt
+    10-executive-report.png
+    10-executive-report.txt
+    11-technical-report.png
+    11-technical-report.txt
+    12-swagger.png
+    13-energy-approval-before.png
+    13-energy-approval-before.txt
+    14-energy-approved-executing.png
+    14-energy-approved-executing.txt
+    15-energy-approved-final.png
+    15-energy-approved-final.txt
+    16-restart-new-energy.png
+    16-restart-new-energy.txt
+    17-energy-reject-before.png
+    17-energy-reject-before.txt
+    18-energy-rejection-fallback.png
+    18-energy-rejection-fallback.txt
+    19-energy-reject-final.png
+    19-energy-reject-final.txt
+    20-identity-start.png
+    20-identity-start.txt
+    21-identity-contained.png
+    21-identity-contained.txt
+    22-identity-context-checks.png
+    22-identity-context-checks.txt
+    23-fast-clean.png
+    23-fast-clean.txt
+    24-fast-attack.png
+    24-fast-attack.txt
+    25-fast-middle.png
+    25-fast-middle.txt
+    26-fast-final.png
+    26-fast-final.txt
+    27-fast-executive.png
+    28-fast-technical.png
+    29-guided-uninterrupted-final.png
+    29-guided-uninterrupted-final.txt
+    backend-tests.txt
+    backend-tests.xml
+    browser-console.json
+    camera-fast-final.json
+    camera-guided-final.json
+    camera-guided-network.json
+    camera-guided-uninterrupted.json
+    database.json
+    energy-approve-before.json
+    energy-approve-final.json
+    energy-reject-final.json
+    frontend-build.txt
+    frontend-tests.txt
+    health.json
+    identity-final.json
+    openapi.json
+    pdf-validation.json
+    report-manifest.json
+    runtime-summary.json
+    scenarios.json
+    screenshots.jsonl
+    source-manifest.json
+    topology.json
+    websocket-runtime.json
+  dist/ [generated/local/unrelated; not application source]
+  node_modules/ [generated/local/unrelated; not application source]
+  public/
+  src/
+  .dockerignore
+  Dockerfile
+  index.html
+  nginx.conf
+  package-lock.json
+  package.json
+  tsconfig.json
+  tsconfig.tsbuildinfo
+  vite.config.ts
+    guardian.svg
+    components/
+    App.test.tsx
+    App.tsx
+    api.test.ts
+    api.ts
+    domains.css
+    fixtures.ts
+    main.tsx
+    mission.css
+    polish.css
+    styles.css
+    test-setup.ts
+    types.ts
+    useGuardian.test.tsx
+    useGuardian.ts
+      Domains.tsx
+      MissionControl.test.tsx
+      MissionControl.tsx
+      Panels.tsx
+      Reports.test.tsx
+      Reports.tsx
+      Topology.tsx
+  check_local_ai.py
+  rehearse.py
+  setup.ps1
+  start.ps1
+  stop.ps1

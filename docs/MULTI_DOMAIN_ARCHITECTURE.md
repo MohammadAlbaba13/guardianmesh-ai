@@ -26,7 +26,7 @@ The optional `local_llm` reasoner is advisory only. It receives bounded incident
 
 `backend/app/capabilities/registry.py` describes semantic capabilities such as SIM Swap, Number Verification, Device Swap, Location Verification, Device Reachability, Simple Edge Discovery and Quality on Demand. Protected routing, quarantine, session restriction, shared-segment isolation, step-up and stabilization are explicitly GuardianMesh conceptual controls. Internal endpoint labels are not presented as production REST contracts.
 
-`SimulatedNetworkProvider` is the default and returns a validated envelope containing `provider`, `mode: SIMULATED`, `simulated: true`, `capability`, `summary` and evidence. `GUARDIANMESH_NETWORK_PROVIDER=camara|nokia` currently keeps the simulator active with a truthful missing-authorized-binding notice. No undocumented network request or fake live response is possible. A reviewed future adapter would need exact operator OpenAPI versions, authorized sandbox credentials/consent, device identifiers, asynchronous session handling, idempotency and compensating actions.
+`SimulatedNetworkProvider` remains the default. `NetworkActionService` routes explicitly bound QoD intents through a bounded asynchronous Nokia/CAMARA v1 transport, and retains local simulation for every other control. Requested execution mode and actual per-action provenance are separate. Versioned policy/approval gates precede execution; durable lifecycle checkpoints capture accepted IDs before verification. See [live integration architecture](HACKATHON_LIVE_INTEGRATION.md) for configuration and exact limits.
 
 ## Run and verify
 

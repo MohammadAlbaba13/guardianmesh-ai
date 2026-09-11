@@ -6,7 +6,13 @@ from .camara import CamaraNetworkProvider
 from .nokia import NokiaNetworkProvider
 
 
-def select_provider() -> NetworkProvider:
+def select_provider(execution_mode=None, allow_fallback=False) -> NetworkProvider:
+    mode = execution_mode or os.getenv("GUARDIANMESH_NETWORK_MODE", "SIMULATION").upper()
+    if mode not in ("SIMULATION", "LIVE", "AUTO"):
+        raise ValueError("GUARDIANMESH_NETWORK_MODE must be SIMULATION, LIVE or AUTO")
+    if mode != "SIMULATION":
+        from .service import NetworkActionService
+        return NetworkActionService(mode, allow_fallback)
     requested = os.getenv("GUARDIANMESH_NETWORK_PROVIDER", "simulated").strip().lower()
     if requested == "simulated":
         return SimulatedNetworkProvider()

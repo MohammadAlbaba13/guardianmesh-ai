@@ -1,0 +1,77 @@
+ M .env.example
+ M README.md
+ M backend/app/agents.py
+ M backend/app/engine.py
+ M backend/app/intelligence/__init__.py
+ M backend/app/intelligence/llm.py
+ M backend/app/main.py
+ M backend/app/models.py
+ M backend/app/policies.py
+ M backend/app/providers/__init__.py
+ M backend/app/providers/camara.py
+ M backend/app/providers/nokia.py
+ M backend/app/providers/simulated.py
+ M backend/app/reporting.py
+ M backend/app/topology.py
+ M backend/requirements.txt
+ M backend/tests/test_engine.py
+ M docs/MULTI_DOMAIN_ARCHITECTURE.md
+ M docs/NETWORK_CAPABILITIES.md
+ M docs/VALIDATION.md
+ M frontend/src/App.test.tsx
+ M frontend/src/App.tsx
+ M frontend/src/components/Domains.tsx
+ M frontend/src/components/Panels.tsx
+ M frontend/src/components/Reports.tsx
+ M frontend/src/components/Topology.tsx
+ M frontend/src/types.ts
+ M frontend/src/useGuardian.ts
+?? Win.rar
+?? Win.zip
+?? alarqam-fi-ajyal/
+?? backend/app/diagnostics.py
+?? backend/app/providers/qod.py
+?? backend/app/providers/service.py
+?? backend/tests/test_live_network.py
+?? docs/DEMO_RUNBOOK.md
+?? docs/HACKATHON_LIVE_INTEGRATION.md
+?? docs/LIVE_VALIDATION.md
+?? docs/live-ai-evidence.json
+?? docs/live-integration-backend.xml
+?? docs/live-judge-rehearsal.json
+?? docs/live-rehearsal.json
+?? frontend/src/components/MissionControl.test.tsx
+?? frontend/src/components/MissionControl.tsx
+?? frontend/src/mission.css
+?? scripts/check_local_ai.py
+?? scripts/rehearse.py
+?? tmp/
+ .env.example                         | 17 +++++++++
+ README.md                            | 10 +++--
+ backend/app/agents.py                |  2 +-
+ backend/app/engine.py                | 59 ++++++++++++++++++++++------
+ backend/app/intelligence/__init__.py |  7 ++--
+ backend/app/intelligence/llm.py      | 26 +++++++++----
+ backend/app/main.py                  | 56 ++++++++++++++++++++++++++-
+ backend/app/models.py                | 10 +++++
+ backend/app/policies.py              |  8 ++--
+ backend/app/providers/__init__.py    |  8 +++-
+ backend/app/providers/camara.py      | 12 +++++-
+ backend/app/providers/nokia.py       |  2 +-
+ backend/app/providers/simulated.py   |  1 +
+ backend/app/reporting.py             |  5 ++-
+ backend/app/topology.py              |  3 +-
+ backend/requirements.txt             |  1 +
+ backend/tests/test_engine.py         |  4 +-
+ docs/MULTI_DOMAIN_ARCHITECTURE.md    |  2 +-
+ docs/NETWORK_CAPABILITIES.md         |  6 +--
+ docs/VALIDATION.md                   | 10 +++--
+ frontend/src/App.test.tsx            |  6 +--
+ frontend/src/App.tsx                 | 15 ++++++--
+ frontend/src/components/Domains.tsx  |  2 +-
+ frontend/src/components/Panels.tsx   | 74 ++++++++++++++++++++++++++++++++----
+ frontend/src/components/Reports.tsx  | 20 +++++++++-
+ frontend/src/components/Topology.tsx |  9 +++--
+ frontend/src/types.ts                |  4 +-
+ frontend/src/useGuardian.ts          | 12 +++---
+ 28 files changed, 319 insertions(+), 72 deletions(-)

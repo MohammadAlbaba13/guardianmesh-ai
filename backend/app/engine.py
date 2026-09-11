@@ -2,12 +2,15 @@ import asyncio
 import contextlib
 import logging
 import time
+import os
 from uuid import uuid4
 from .models import Incident, StartRequest, ApprovalRequest, Approval, PolicyReview, TimelineEvent, ServiceSample, SecurityState, now
 from .domains.registry import get_domain
 from .topology import asset, online_services, apply_action_effect, continuity_verified
 from .agents import initial_agents, SentinelAgent, ImpactAgent, ResponseAgent, ComplianceAgent, NetworkAgent, ReportAgent
 from .providers import select_provider
+from .providers.service import NetworkActionService
+from .providers.qod import NetworkError
 from .intelligence import choose_reasoner
 from .capabilities.registry import get_capability
 from .persistence import Repository
@@ -22,6 +25,7 @@ class Conflict(Exception):
 class SimulationEngine:
     def __init__(self, repository: Repository, provider=None, reasoner=None):
         self.repository = repository
+        self._custom_provider = provider is not None
         self.provider = provider or select_provider()
         self.reasoner = reasoner or choose_reasoner()
         self.current: Incident | None = None
@@ -87,14 +91,26 @@ class SimulationEngine:
         async with self.lock:
             if self.task and not self.task.done():
                 raise Conflict("An incident is already active. Reset it before starting another scenario.")
+            if not self._custom_provider:
+                self.provider = select_provider(request.execution_mode, request.allow_fallback)
+            if request.ai_mode is not None:
+                self.reasoner = choose_reasoner(request.ai_mode)
+            if isinstance(self.provider, NetworkActionService):
+                self.provider.checkpoint = self.emit
             scenario = pack.scenarios[scenario_id]
             incident = Incident(id=f"GM-{uuid4().hex[:12].upper()}", scenario_id=scenario_id, title=scenario.title,
                                 domain_id=domain_id, domain=pack.metadata, category=scenario.category,
+                                execution_mode=request.execution_mode or os.getenv("GUARDIANMESH_NETWORK_MODE", "SIMULATION").upper(),
+                                allow_fallback=request.allow_fallback, manual_approval=request.manual_approval,
+                                severity_override={"LOW":.3,"MEDIUM":.5,"HIGH":.75,"CRITICAL":1}.get(request.severity),
                                 provider_name=getattr(self.provider, "name", type(self.provider).__name__), provider_mode=getattr(self.provider, "mode", "SIMULATED"),
                                 provider_notice=getattr(self.provider, "notice", None),
                                 source=scenario.source, mode=request.mode, auto_approve=request.auto_approve,
                                 step_duration=request.step_duration or (1.7 if request.mode == "fast" else 5),
                                 topology=pack.topology(), agents=initial_agents(), telemetry=pack.telemetry(scenario_id))
+            # Persist the effective setting so clients never advertise automation
+            # while the backend is waiting for a real operator decision.
+            incident.auto_approve = request.auto_approve and incident.execution_mode == "SIMULATION" and not incident.manual_approval
             self.current = incident
             self.resume_gate.set()
             self.skip_gate.clear()
@@ -123,10 +139,20 @@ class SimulationEngine:
             incident = self.get(incident_id)
             active = self.current is incident and self.task and not self.task.done()
             if command == "reset":
+                if active and any(a.status == "EXECUTING" and a.result.get("execution_state") in ("SENDING", "ACCEPTED") for a in incident.actions):
+                    raise Conflict("Network request in flight. Wait for its bounded completion before resetting.")
                 if active:
                     self.task.cancel()
                     with contextlib.suppress(asyncio.CancelledError):
                         await self.task
+                if any(a.result.get("external_session_id") and a.result.get("cleanup") != "DELETED" for a in incident.actions):
+                    manager = self.provider if isinstance(self.provider, NetworkActionService) else NetworkActionService("LIVE")
+                    manager.checkpoint = self.emit
+                    try:
+                        await manager.cleanup(incident)
+                        if incident.report:
+                            incident.report = ReportAgent().generate(incident)
+                    except NetworkError as exc: raise Conflict("QoD cleanup failed: " + exc.code + ". Retry Reset; evidence retained.") from None
                 incident.status = "RESET"
                 incident.phase = "READY"
                 incident.topology = get_domain(incident.domain_id).topology()
@@ -175,9 +201,9 @@ class SimulationEngine:
         assert incident.plan
         incident.status = "AWAITING_APPROVAL"
         incident.phase = "APPROVAL"
-        self.agent(incident, "Compliance", "WAITING", "Shared-segment isolation requires approval. Safe fallback is available on rejection.")
-        self.emit(incident, "APPROVAL_REQUIRED", "Approve shared edge-segment isolation, or reject to use endpoint-only containment.", "Compliance")
-        if incident.auto_approve:
+        self.agent(incident, "Compliance", "WAITING", "Review the validated plan before provider execution. No network calls have been sent.")
+        self.emit(incident, "APPROVAL_REQUIRED", "Approve the policy-validated response plan. Rejection prevents the proposed execution.", "Compliance")
+        if incident.auto_approve and incident.execution_mode == "SIMULATION" and not incident.manual_approval:
             try:
                 await asyncio.wait_for(self.approval_gate.wait(), timeout=max(.05, incident.step_duration*1.2))
             except TimeoutError:
@@ -193,6 +219,9 @@ class SimulationEngine:
         decision = incident.approvals[-1]
         incident.status = "RUNNING"
         if decision.decision == "REJECT":
+            if incident.manual_approval or incident.execution_mode != "SIMULATION":
+                self.emit(incident, "ACTION_REJECTED", "Operator rejected this plan. No network action executed.", "Compliance")
+                raise NetworkError("APPROVAL_REJECTED")
             incident.plan = ResponseAgent().plan(incident, fallback=True)
             incident.policy = ComplianceAgent().validate(incident, self.provider.simulated)
             incident.plan_history.append(incident.plan.model_copy(deep=True))
@@ -229,6 +258,7 @@ class SimulationEngine:
                             edge.state = "THREAT"
             self.agent(incident, "Impact", "COMPLETE", f"Risk {incident.impact.score}/100 · {len(incident.impact.critical_services)} critical services exposed")
             self.emit(incident, "IMPACT_ANALYSIS_COMPLETE", incident.impact.explanation, "Impact")
+            self.emit(incident, "REASONING_STARTED", "Advisory reasoning started; deterministic policy retains execution authority.", "Response")
             incident.reasoning = await self.reasoner.reason(incident, list(get_domain(incident.domain_id).permitted_capabilities))
             incident.reasoner_mode = incident.reasoning.mode
             self.emit(incident, "REASONING_COMPLETE", incident.reasoning.interpretation +
@@ -242,7 +272,7 @@ class SimulationEngine:
             self.agent(incident, "Response", "COMPLETE", f"{len(incident.plan.actions)} ordered actions · protect routes before isolation")
             self.emit(incident, "RESPONSE_PLAN_CREATED", incident.plan.rationale, "Response")
             self.agent(incident, "Compliance", "ANALYZING", "Dry-running the plan against critical-service continuity policies.")
-            self.emit(incident, "POLICY_CHECK_STARTED", "Validating simulation scope, service routes and isolation boundaries.", "Compliance")
+            self.emit(incident, "POLICY_CHECK_STARTED", "Validating capability scope, service routes and isolation boundaries.", "Compliance")
             await self.delay(incident)
             incident.policy = ComplianceAgent().validate(incident, self.provider.simulated)
             incident.policy_history.append(PolicyReview(plan_id=incident.plan.id, plan_version=incident.plan.version, result=incident.policy.model_copy(deep=True)))
@@ -259,8 +289,8 @@ class SimulationEngine:
             if check.decision == "APPROVAL_REQUIRED" and not any(a.decision == "APPROVE" and a.plan_version == incident.plan.version for a in incident.approvals):
                 raise ValueError("Plan lacks a matching approval")
             incident.phase = "NETWORK"
-            self.agent(incident, "Network", "EXECUTING", "Applying simulated telecom capabilities in policy-approved order.")
-            self.emit(incident, "NETWORK_RESPONSE_STARTED", "SIMULATED NETWORK-AS-CODE ACTIONS · local deterministic provider.", "Network")
+            self.agent(incident, "Network", "EXECUTING", "Applying capabilities in policy-approved order; each result records its execution provenance.")
+            self.emit(incident, "NETWORK_RESPONSE_STARTED", f"{incident.execution_mode} requested. {self.provider.name if hasattr(self.provider, 'name') else 'Configured provider'}. Twin controls remain simulated.", "Network")
             network = NetworkAgent(self.provider)
             for planned in incident.plan.actions:
                 await self.resume_gate.wait()
@@ -273,11 +303,18 @@ class SimulationEngine:
                     action.result = await network.execute(action, incident)
                 except Exception:
                     action.status = "FAILED"
+                    self.emit(incident, "ACTION_FAILED", action.result.get("summary", "Provider execution failed safely."), "Network")
                     raise
                 await self.resume_gate.wait()
-                if not action.result.get("simulated") or action.result.get("mode") != "SIMULATED":
+                is_sim = action.result.get("simulated") is True and action.result.get("mode") == "SIMULATED"
+                is_live = (isinstance(self.provider, NetworkActionService) and action.kind == "qod"
+                           and action.result.get("mode") == "LIVE" and action.result.get("simulated") is False
+                           and action.result.get("verification") == "VERIFIED" and action.result.get("external_session_id"))
+                if not (is_sim or is_live):
                     action.status = "FAILED"
-                    raise ValueError("Provider result is outside the authorized simulation scope")
+                    raise ValueError("Provider result lacks authorized execution evidence")
+                if is_live:
+                    incident.provider_mode = "LIVE"
                 apply_action_effect(action, incident.topology)
                 if action.kind == "verify_location" and action.result.get("verification") == "FALSE":
                     action.result["trust"] = "RESTRICTED"
@@ -297,7 +334,7 @@ class SimulationEngine:
             for edge in incident.topology.edges:
                 if edge.state == "THREAT":
                     edge.state = "NORMAL"
-            self.agent(incident, "Network", "COMPLETE", f"{len(incident.actions)} simulated actions completed · domain verification passed")
+            self.agent(incident, "Network", "COMPLETE", f"{len(incident.actions)} evidenced actions completed · digital twin verification passed")
             incident.phase = "CONTAINED"
             incident.status = "CONTAINED"
             incident.ended_at = now()
@@ -314,13 +351,16 @@ class SimulationEngine:
             self.emit(incident, "REPORT_GENERATED", "Incident reports generated from actual state. Ready to review or export JSON.", "Report")
         except asyncio.CancelledError:
             raise
-        except Exception:
-            log.exception("simulation_failed", extra={"incident_id":incident.id})
+        except Exception as exc:
+            log.error("incident_execution_failed", extra={"incident_id":incident.id})
             incident.status = "FAILED"
             incident.phase = "FAILED"
             incident.ended_at = now()
-            incident.outcome = "Simulation stopped safely. Inspect local backend logs, then reset and rerun."
+            incident.outcome = ("Execution stopped safely: " + exc.code) if isinstance(exc, NetworkError) else "Execution stopped safely; deterministic validation failed."
             self.emit(incident, "INCIDENT_FAILED", incident.outcome)
+            incident.report = ReportAgent().generate(incident)
+            self.repository.save(incident)
+            self.publish(incident)
 
     async def close(self):
         if self.task and not self.task.done():

@@ -9,7 +9,7 @@ export function DomainSelector({domains,selected,busy,onSelect}:{domains:DomainM
 
 export function RuntimeContext({domain,incident}:{domain:DomainDetail|null;incident:Incident|null}) {
   if(!domain) return null;
-  const provider=incident?.provider_mode??domain.provider.mode;
+  const provider=incident?.actions.some(a=>a.result.execution_state==='LIVE_FAILED')?'LIVE FAILED':incident?.actions.some(a=>a.result.execution_state==='FALLBACK_SIMULATED')?'FALLBACK SIMULATED':incident?.actions.some(a=>a.result.mode==='LIVE')?'LIVE QoD + SIMULATED TWIN':incident?.execution_mode?`${incident.execution_mode} REQUESTED`:domain.provider.mode;
   const reasoner=incident?.reasoner_mode??domain.reasoner.mode;
   return <div className="runtime-context" aria-label="Execution context"><span title={domain.provider.notice??undefined}><Radio size={13}/><b>Network provider</b>{provider}<small>{incident?.provider_name??domain.provider.name}</small></span><span title={incident?.reasoning?.fallback_reason??domain.reasoner.notice??undefined}><Cpu size={13}/><b>AI Reasoning:</b>{reasoner==='local_llm'?'Local LLM':'Deterministic'}{incident?.reasoning?.fallback_reason&&<small>Safe fallback</small>}</span><span className="runtime-policy"><Check size={13}/>Policy governed execution</span></div>;
 }

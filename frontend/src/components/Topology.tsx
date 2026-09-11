@@ -11,9 +11,9 @@ type AssetNodeType=Node<{asset:Asset},'asset'>;
 const AssetNode=memo(({data,selected}:NodeProps<AssetNodeType>)=>{
   const node=data.asset; const Icon=icons[node.kind]??Network;
   return <div className={`asset-node state-${node.state.toLowerCase()} ${node.critical?'critical-node':''} ${selected?'selected':''}`} data-testid={`asset-${node.id}`}>
-    <Handle type="target" position={Position.Left}/><Handle type="source" position={Position.Right}/>
+    <Handle type="target" position={Position.Left} className="topology-handle topology-handle-target" aria-label={`${node.name} input connector`}/><Handle type="source" position={Position.Right} className="topology-handle topology-handle-source" aria-label={`${node.name} output connector`}/>
     <div className="asset-top"><span className="asset-icon"><Icon size={20}/></span>{node.critical&&<span className="asset-critical">CRITICAL</span>}{node.state==='ISOLATED'&&<LockKeyhole size={15}/>}</div>
-    <strong>{node.name}</strong><div className="asset-state"><i/>{node.state.replace('_',' ')}{node.critical&&<span className="asset-uptime">{node.operational?'● live':'offline'}</span>}</div>
+    <strong>{node.name}</strong><div className="asset-state"><i/>{node.state.replace('_',' ')}{node.critical&&<span className="asset-uptime">{node.operational?'● online':'offline'}</span>}</div>
   </div>;
 });
 const nodeTypes={asset:AssetNode};
@@ -21,10 +21,13 @@ const nodeTypes={asset:AssetNode};
 export function Topology({topology,incident,domain}:{topology:Twin;incident:Incident|null;domain?:DomainDetail|null}) {
   const [selected,setSelected]=useState<string|null>(null);
   const selectedAsset=topology.nodes.find(n=>n.id===selected);
-  const nodes:AssetNodeType[]=topology.nodes.map(asset=>({id:asset.id,type:'asset',position:{x:asset.x,y:asset.y},data:{asset},draggable:false,selected:asset.id===selected}));
+  // React Flow hides nodes until it has measured them. The twin can update while
+  // a run is active (and during a reset), so provide stable dimensions up front
+  // instead of allowing a state update to briefly drop every node back to hidden.
+  const nodes:AssetNodeType[]=topology.nodes.map(asset=>({id:asset.id,type:'asset',position:{x:asset.x,y:asset.y},data:{asset},draggable:false,selected:asset.id===selected,width:194,height:94,zIndex:2,style:{width:194,height:94}}));
   const edges=topology.edges.filter(edge=>edge.kind!=='protected'||edge.enabled).map(edge=>{
-    const color=edge.state==='THREAT'?'#ed806e':edge.state==='PROTECTED'?'#77dcb5':edge.state==='BLOCKED'?'#775d64':edge.kind==='management'?'#435567':'#46596a';
-    return {...edge,animated:edge.state==='THREAT'||edge.state==='PROTECTED',type:'smoothstep',style:{stroke:color,strokeWidth:edge.state==='NORMAL'?1.25:2,strokeDasharray:edge.state==='BLOCKED'?'5 5':edge.kind==='management'?'3 5':undefined,opacity:edge.state==='BLOCKED'?.5:edge.kind==='management'?.5:.9},markerEnd:{type:MarkerType.ArrowClosed,color,width:14,height:14}};
+    const color=edge.state==='THREAT'?'#ed806e':edge.state==='PROTECTED'?'#77dcb5':edge.state==='BLOCKED'?'#a4798a':edge.kind==='management'?'#60788c':'#6f8ea2';
+    return {...edge,animated:edge.state==='THREAT'||edge.state==='PROTECTED',type:'smoothstep',zIndex:1,style:{stroke:color,strokeWidth:edge.state==='NORMAL'?2:3,strokeDasharray:edge.state==='BLOCKED'?'6 5':edge.kind==='management'?'4 5':undefined,opacity:edge.state==='BLOCKED'?.8:edge.kind==='management'?.75:1},markerEnd:{type:MarkerType.ArrowClosed,color,width:16,height:16}};
   });
   return <section className="panel twin-panel" aria-label="Live digital twin">
     <div className="panel-heading"><div><span className="eyebrow">LIVE DIGITAL TWIN</span><h2>{domain?.twin_title??'Operational infrastructure'}</h2></div><span className="micro-label"><i className="status-dot"/>{topology.nodes.length} assets · {topology.nodes.filter(n=>n.critical).length} critical services</span></div>
@@ -34,7 +37,7 @@ export function Topology({topology,incident,domain}:{topology:Twin;incident:Inci
       <ReactFlow nodes={nodes} edges={edges} nodeTypes={nodeTypes} fitView fitViewOptions={{padding:.08}} minZoom={.2} maxZoom={1.8} onNodeClick={(_,node)=>setSelected(node.id)} onPaneClick={()=>setSelected(null)} nodesConnectable={false} zoomOnScroll={false} preventScrolling={false} aria-label="Interactive domain network">
         <Background color="#2a3946" gap={24} size={1}/><Controls showInteractive={false}/>
       </ReactFlow>
-      {selectedAsset&&<div className="asset-detail"><button className="icon-button" aria-label="Close asset details" onClick={()=>setSelected(null)}><X size={16}/></button><span className="eyebrow">ASSET INSPECTOR</span><h3>{selectedAsset.name}</h3><p>{selectedAsset.zone} · {selectedAsset.state.replace('_',' ')}</p><dl><div><dt>Service availability</dt><dd>{selectedAsset.operational?'Online':'Offline'}</dd></div><div><dt>Protection</dt><dd>{Math.round(selectedAsset.protection*100)}%</dd></div><div><dt>{incident?.provider_mode==='LIVE'?'Latency':'Simulated latency'}</dt><dd>{selectedAsset.latency_ms} ms</dd></div>{selectedAsset.trust_score!==undefined&&<div><dt>Context trust</dt><dd>{selectedAsset.trust_score} / 100</dd></div>}{selectedAsset.session_restricted&&<div><dt>Session</dt><dd>Restricted</dd></div>}{selectedAsset.verification_required&&<div><dt>Verification</dt><dd>Required</dd></div>}{selectedAsset.shared&&<div><dt>Infrastructure</dt><dd>Shared</dd></div>}</dl></div>}
+      {selectedAsset&&<div className="asset-detail"><button className="icon-button" aria-label="Close asset details" onClick={()=>setSelected(null)}><X size={16}/></button><span className="eyebrow">ASSET INSPECTOR</span><h3>{selectedAsset.name}</h3><p>{selectedAsset.zone} · {selectedAsset.state.replace('_',' ')}</p><dl><div><dt>Service availability</dt><dd>{selectedAsset.operational?'Online':'Offline'}</dd></div><div><dt>Modeled protection</dt><dd>{Math.round(selectedAsset.protection*100)}%</dd></div><div><dt>Simulated latency</dt><dd>{selectedAsset.latency_ms} ms</dd></div>{selectedAsset.trust_score!==undefined&&<div><dt>Context trust</dt><dd>{selectedAsset.trust_score} / 100</dd></div>}{selectedAsset.session_restricted&&<div><dt>Session</dt><dd>Restricted</dd></div>}{selectedAsset.verification_required&&<div><dt>Verification</dt><dd>Required</dd></div>}{selectedAsset.shared&&<div><dt>Infrastructure</dt><dd>Shared</dd></div>}<div><dt>Dependencies</dt><dd>{topology.edges.filter(e=>e.enabled&&(e.source===selectedAsset.id||e.target===selectedAsset.id)).map(e=>e.source===selectedAsset.id?e.target:e.source).join(', ')||'None'}</dd></div><div><dt>{incident?.residual_impact?'Residual risk':'Projected risk'}</dt><dd>{(incident?.residual_impact??incident?.impact)?.impacted.find(n=>n.node_id===selectedAsset.id)?.score??0}/100</dd></div>{incident?.actions.filter(a=>a.target===selectedAsset.id&&a.kind==='qod').map(a=><div key={a.id}><dt>QoD {String(a.result.mode??'PENDING')}</dt><dd>{String(a.result.qos_status??a.status)}<br/>{String(a.result.external_session_id??'No external session')}</dd></div>)}</dl></div>}
       {!incident&&<div className="twin-idle"><ScanLine size={16}/><span>Monitoring all dependency paths</span></div>}
     </div>
     <div className="twin-footer"><div className="legend"><span><i className="legend-normal"/>Online</span><span><i className="legend-threat"/>Threat path</span><span><i className="legend-protected"/>Protected route</span><span><i className="legend-isolated"/>Isolated</span></div><span className="muted">Select an asset to inspect</span></div>

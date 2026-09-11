@@ -1,0 +1,119 @@
+[
+  {
+    "domain": "identity",
+    "scenario": "re_registration",
+    "incident_id": "GM-6F6457A07065",
+    "status": "CONTAINED",
+    "agents": 6,
+    "events": 37,
+    "critical_services": 4,
+    "residual_risk": 0,
+    "provider_modes": [
+      "SIMULATED"
+    ]
+  },
+  {
+    "domain": "smart_city",
+    "scenario": "camera",
+    "incident_id": "GM-70A0AACE71CB",
+    "status": "CONTAINED",
+    "agents": 6,
+    "events": 37,
+    "critical_services": 6,
+    "residual_risk": 0,
+    "provider_modes": [
+      "SIMULATED"
+    ]
+  },
+  {
+    "domain": "smart_city",
+    "scenario": "identity",
+    "incident_id": "GM-09D785EF7D6C",
+    "status": "CONTAINED",
+    "agents": 6,
+    "events": 37,
+    "critical_services": 6,
+    "residual_risk": 0,
+    "provider_modes": [
+      "SIMULATED"
+    ]
+  },
+  {
+    "domain": "smart_city",
+    "scenario": "energy",
+    "incident_id": "GM-D8F2C7FB5462",
+    "status": "CONTAINED",
+    "agents": 6,
+    "events": 31,
+    "critical_services": 6,
+    "residual_risk": 0,
+    "provider_modes": [
+      "SIMULATED"
+    ]
+  },
+  {
+    "domain": "fintech",
+    "scenario": "high_value_payment",
+    "incident_id": "GM-D89FC93673D4",
+    "status": "CONTAINED",
+    "agents": 6,
+    "events": 39,
+    "critical_services": 4,
+    "residual_risk": 0,
+    "provider_modes": [
+      "SIMULATED"
+    ]
+  },
+  {
+    "domain": "tourism",
+    "scenario": "visitor_experience",
+    "incident_id": "GM-49E961DB3479",
+    "status": "CONTAINED",
+    "agents": 6,
+    "events": 39,
+    "critical_services": 4,
+    "residual_risk": 0,
+    "provider_modes": [
+      "SIMULATED"
+    ]
+  },
+  {
+    "domain": "industry",
+    "scenario": "edge_controller",
+    "incident_id": "GM-BC25BF25986D",
+    "status": "CONTAINED",
+    "agents": 6,
+    "events": 37,
+    "critical_services": 4,
+    "residual_risk": 0,
+    "provider_modes": [
+      "SIMULATED"
+    ]
+  },
+  {
+    "domain": "climate",
+    "scenario": "flood_congestion",
+    "incident_id": "GM-53EF3E72956A",
+    "status": "CONTAINED",
+    "agents": 6,
+    "events": 41,
+    "critical_services": 5,
+    "residual_risk": 0,
+    "provider_modes": [
+      "SIMULATED"
+    ]
+  },
+  {
+    "domain": "open_innovation",
+    "scenario": "regional_cascade",
+    "incident_id": "GM-F1FA396A977B",
+    "status": "CONTAINED",
+    "agents": 6,
+    "events": 45,
+    "critical_services": 6,
+    "residual_risk": 0,
+    "provider_modes": [
+      "SIMULATED"
+    ]
+  }
+]

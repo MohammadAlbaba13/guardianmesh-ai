@@ -16,6 +16,7 @@ def generate_report(incident: Incident) -> Report:
     total = sum(n.critical for n in incident.topology.nodes)
     return Report(domain_id=incident.domain_id, domain=domain, executive={
         "domain_id": incident.domain_id, "domain_name": domain.name, "theme": domain.theme,
+        "execution_mode": incident.execution_mode, "metrics_source": "SIMULATED DIGITAL TWIN",
         "provider_mode": incident.provider_mode, "reasoner_mode": incident.reasoner_mode,
         "category": incident.category, "total_services": total,
         "headline": domain.outcome_label if incident.status == "CONTAINED" else "Incident requires operator attention.",
@@ -54,8 +55,8 @@ def generate_report(incident: Incident) -> Report:
         "timeline": [e.model_dump() for e in incident.timeline],
         "service_samples": [s.model_dump() for s in incident.samples],
         "final_state": incident.status, "outcome": incident.outcome,
-        "scope": "Local synthetic defensive simulation; no carrier, bank, identity-provider or industrial actuation. Network QoD figures are modeled, not carrier guarantees.",
+        "scope": "All incidents, topology and metrics are modeled. Only actions with mode LIVE have external QoD evidence; provider_environment distinguishes sandbox from operator. QoD status does not measure latency.",
         "limitations": ["Results measure the declared digital twin, not physical outcomes.",
-                        "Network and trust controls are simulated; pending identity verification is not proof of identity.",
+                        "Containment and trust controls remain simulated. External QoD is limited to explicitly bound targets.",
                         "Optional AI advice cannot authorize or execute actions."],
     })

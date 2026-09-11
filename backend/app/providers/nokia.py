@@ -1,4 +1,4 @@
-"""Nokia integration boundary: no fabricated production API routes."""
+"""Nokia QoD adapter using the documented v1 RapidAPI transport via QoDConfig."""
 from .camara import CamaraNetworkProvider
 
 

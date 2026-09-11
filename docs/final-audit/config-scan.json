@@ -1,0 +1,14 @@
+{
+  "environment_variable_names": [
+    "GUARDIANMESH_NETWORK_MODE",
+    "GUARDIANMESH_NETWORK_PROVIDER",
+    "GUARDIANMESH_OLLAMA_BASE_URL",
+    "GUARDIANMESH_OLLAMA_CPU_ONLY",
+    "GUARDIANMESH_OLLAMA_MODEL",
+    "GUARDIANMESH_OLLAMA_TIMEOUT",
+    "GUARDIANMESH_REASONER"
+  ],
+  "configured_secret_values_scanned": 0,
+  "source_matches": [],
+  "env_tracked": false
+}

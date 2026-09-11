@@ -100,6 +100,7 @@ class Metric(Schema):
 
 
 class ReasoningRecommendation(Schema):
+    model: str | None = None
     mode: Literal["deterministic", "local_llm"] = "deterministic"
     requested_mode: str = "deterministic"
     interpretation: str
@@ -259,6 +260,10 @@ class SignalTelemetry(Schema):
 
 
 class Incident(Schema):
+    execution_mode: Literal["SIMULATION", "LIVE", "AUTO"] = "SIMULATION"
+    allow_fallback: bool = False
+    manual_approval: bool = False
+    severity_override: float | None = None
     id: str
     schema_version: int = 2
     domain_id: str = "smart_city"
@@ -300,6 +305,11 @@ class Incident(Schema):
 
 
 class StartRequest(Schema):
+    execution_mode: Literal["SIMULATION", "LIVE", "AUTO"] | None = None
+    ai_mode: Literal["deterministic", "local_llm"] | None = None
+    allow_fallback: bool = False
+    manual_approval: bool = False
+    severity: Literal["LOW", "MEDIUM", "HIGH", "CRITICAL"] | None = None
     mode: Literal["fast", "guided"] = "fast"
     auto_approve: bool = True
     step_duration: float | None = Field(default=None, ge=0.01, le=10)

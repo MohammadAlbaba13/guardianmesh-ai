@@ -62,7 +62,8 @@ def apply_action_effect(action, twin: Topology) -> None:
     if action.kind == "reroute":
         protect(twin, [node.id])
     elif action.kind == "qod":
-        node.latency_ms = int(action.result.get("latency_after_ms", 8))
+        if action.result.get("simulated", True):
+            node.latency_ms = int(action.result.get("latency_after_ms", 8))
     elif action.kind in ("quarantine", "isolate_segment"):
         isolate(twin, node.id)
     elif action.kind == "restrict_session":

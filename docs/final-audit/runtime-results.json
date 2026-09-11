@@ -1,0 +1,54 @@
+[
+  {
+    "test": "/api/health",
+    "status": "PASS"
+  },
+  {
+    "test": "/api/topology",
+    "status": "PASS"
+  },
+  {
+    "test": "/api/scenarios",
+    "status": "PASS"
+  },
+  {
+    "test": "/api/v1/domains",
+    "status": "PASS"
+  },
+  {
+    "test": "/api/v1/capabilities",
+    "status": "PASS"
+  },
+  {
+    "test": "/api/v1/runtime",
+    "status": "PASS"
+  },
+  {
+    "test": "/api/v1/diagnostics",
+    "status": "PASS"
+  },
+  {
+    "test": "/openapi.json",
+    "status": "PASS"
+  },
+  {
+    "test": "/docs",
+    "status": "PASS"
+  },
+  {
+    "test": "Invalid/missing input, unknown identifiers, origin and host guards",
+    "status": "PASS"
+  },
+  {
+    "test": "Duplicate start, pause freeze, skip guard, resume, WS completion, report export, reset",
+    "status": "PASS"
+  },
+  {
+    "test": "Energy APPROVE: stale approval blocked, correct resulting plan, continuity",
+    "status": "PASS"
+  },
+  {
+    "test": "Energy REJECT: stale approval blocked, correct resulting plan, continuity",
+    "status": "PASS"
+  }
+]

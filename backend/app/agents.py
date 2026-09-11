@@ -22,7 +22,7 @@ class SentinelAgent:
 class ImpactAgent:
     def analyze(self, incident: Incident):
         pack = get_domain(incident.domain_id)
-        return calculate_impact(incident.topology, incident.source, pack.scenarios[incident.scenario_id].severity)
+        return calculate_impact(incident.topology, incident.source, incident.severity_override or pack.scenarios[incident.scenario_id].severity)
 
 
 class ResponseAgent:

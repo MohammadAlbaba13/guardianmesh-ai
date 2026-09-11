@@ -8,9 +8,11 @@ from .domains.registry import get_domain
 def validate_plan(plan: Plan, incident: Incident, simulated: bool = True) -> PolicyDecision:
     rules = ["SIMULATION_ONLY", "VALID_TARGET_AND_CAPABILITY", "NO_CRITICAL_ISOLATION",
              "PRESERVE_SERVICE_ROUTES", "APPROVE_SHARED_SEGMENT", "DOMAIN_POLICY"]
+    if incident.execution_mode != "SIMULATION":
+        rules[0] = "BOUND_QOD_ONLY_EXTERNAL"
     pack = get_domain(incident.domain_id)
     reasons: list[str] = []
-    if not simulated:
+    if not simulated and incident.execution_mode == "SIMULATION":
         reasons.append("Only the local simulated provider is authorized for execution.")
     if not plan.actions or len({a.id for a in plan.actions}) != len(plan.actions):
         reasons.append("Plans need uniquely identified actions.")
@@ -50,9 +52,9 @@ def validate_plan(plan: Plan, incident: Incident, simulated: bool = True) -> Pol
             reasons.append("Action would remove a required critical service route.")
     if reasons:
         return PolicyDecision(decision="REJECTED", reasons=list(dict.fromkeys(reasons)), rules=rules)
-    if shared:
+    if shared or incident.manual_approval or incident.execution_mode != "SIMULATION":
         return PolicyDecision(decision="APPROVAL_REQUIRED", reasons=[
-            "Shared-infrastructure containment requires explicit approval. All required service routes pass the safety dry-run."
+            "Explicit approval is required for this plan. All required service routes pass the safety dry-run."
         ], rules=rules)
     total = sum(n.critical for n in twin.nodes)
     return PolicyDecision(decision="APPROVED", reasons=[

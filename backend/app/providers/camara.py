@@ -1,4 +1,4 @@
-"""CAMARA integration boundary. No operator transport is installed or invoked."""
+"""CAMARA QoD v1 adapter, with legacy unbound configuration kept fail-closed."""
 from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator
 from urllib.parse import urlparse
@@ -41,12 +41,20 @@ class CamaraNetworkProvider:
     simulated = False
     notice = "Operator transport and device binding require validation; no sandbox connection is active."
 
-    def __init__(self, binding: SandboxBinding | None = None) -> None:
+    def __init__(self, binding: SandboxBinding | None = None, *, config=None, transport=None) -> None:
         self.binding = binding
+        self.service = None
+        if config is not None:
+            from .service import NetworkActionService
+            self.service = NetworkActionService("LIVE", config=config, transport=transport)
 
     async def execute(self, action: Action, incident: Incident) -> dict:
         if get_capability(action.kind).conceptual:
             raise ProviderUnavailable("Conceptual GuardianMesh controls cannot be sent to CAMARA")
+        if self.service is not None:
+            if action.kind != "qod":
+                raise ProviderUnavailable("Only QoD v1 has an installed transport")
+            return await self.service.execute(action, incident)
         if self.binding is None or not self.binding.authorized:
             raise ProviderUnavailable("No explicitly authorized sandbox binding")
         if action.kind not in self.binding.capabilities or action.target not in self.binding.device_bindings:

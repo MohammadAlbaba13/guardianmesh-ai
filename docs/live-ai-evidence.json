@@ -1,0 +1,29 @@
+{
+  "incident_id": "GM-C43CEBC074D7",
+  "status": "CONTAINED",
+  "reasoning": {
+    "model": "qwen2.5:0.5b",
+    "mode": "local_llm",
+    "requested_mode": "local_llm",
+    "interpretation": "The evidence indicates that the cyber threat is related to unauthorized remote-service attempts and the potential for lateral movement. The impact score is 80, indicating a critical risk level. The evidence includes unauthorized remote-service attempts, a simulated exploit signature, and the potential for lateral movement. The allowed capabilities include verify_location, sim_swap, reroute, qod, quarantine, and isolate_segment.",
+    "risk_rationale": "The evidence suggests that the cyber threat is related to unauthorized remote-service attempts and the potential for lateral movement. The impact score indicates a critical risk level. The evidence includes unauthorized remote-service attempts, a simulated exploit signature, and the potential for lateral movement. The allowed capabilities include verify_location, sim_swap, reroute, qod, quarantine, and isolate_segment.",
+    "priorities": [
+      "hospital",
+      "emergency",
+      "energy"
+    ],
+    "action_rationale": [
+      "The evidence suggests that the cyber threat is related to unauthorized remote-service attempts and the potential for lateral movement. The impact score indicates a critical risk level. The evidence includes unauthorized remote-service attempts, a simulated exploit signature, and the potential for lateral movement. The allowed capabilities include verify_location, sim_swap, reroute, qod, quarantine",
+      "The allowed capabilities include verify_location, sim_swap, reroute, qod, quarantine, and isolate_segment."
+    ],
+    "evidence_refs": [
+      "evidence:0",
+      "evidence:1",
+      "evidence:2"
+    ],
+    "fallback_reason": null
+  },
+  "policy": "APPROVED",
+  "agents_complete": 6,
+  "residual_risk": 0
+}

@@ -8,13 +8,20 @@ vi.mock('./useGuardian',()=>({useGuardian:()=>({domains:testDomains,domain:testD
 vi.mock('@xyflow/react',()=>({ReactFlow:({children}:{children:React.ReactNode})=><div data-testid="flow">{children}</div>,Background:()=>null,Controls:()=>null,Handle:()=>null,Position:{Left:'left',Right:'right'},MarkerType:{ArrowClosed:'arrow'}}));
 vi.mock('recharts',()=>({ResponsiveContainer:({children}:{children:React.ReactNode})=><div>{children}</div>,AreaChart:()=>null,Area:()=>null,YAxis:()=>null,Tooltip:()=>null}));
 afterEach(()=>{cleanup();vi.clearAllMocks();});
+it('requires operator approval when selecting live execution',()=>{
+  render(<App/>);
+  fireEvent.change(screen.getByLabelText('Network execution'),{target:{value:'LIVE'}});
+  expect(screen.getByRole('checkbox',{name:'Demo auto-approval'})).toBeDisabled();
+  fireEvent.click(screen.getByRole('button',{name:'Run Autonomous Defense Demo'}));
+  expect(mocks.start).toHaveBeenCalledWith('camera','fast',false,expect.objectContaining({execution_mode:'LIVE',manual_approval:true}));
+});
 it('renders the primary command center and launches the configured demo',()=>{
   render(<App/>);
   expect(screen.getByRole('heading',{name:'Keep the city moving.'})).toBeInTheDocument();
   expect(screen.getByLabelText('Six coordinated agents')).toBeInTheDocument();
-  expect(screen.getByText('SIMULATED NETWORK-AS-CODE ACTIONS')).toBeInTheDocument();
+  expect(screen.getByText(/SIMULATION REQUESTED.*PER-ACTION PROVENANCE/)).toBeInTheDocument();
   fireEvent.click(screen.getByRole('button',{name:'Run Autonomous Defense Demo'}));
-  expect(mocks.start).toHaveBeenCalledWith('camera','fast',true);
+  expect(mocks.start).toHaveBeenCalledWith('camera','fast',true,expect.objectContaining({execution_mode:'SIMULATION',manual_approval:false}));
   expect(screen.getByRole('button',{name:'Pause'})).toBeDisabled();
 });
 
@@ -43,7 +50,7 @@ it('passes guided/manual configuration from visible controls',()=>{
   fireEvent.click(screen.getByRole('button',{name:/Guided/}));
   fireEvent.click(screen.getByRole('checkbox',{name:'Demo auto-approval'}));
   fireEvent.click(screen.getByRole('button',{name:'Run Autonomous Defense Demo'}));
-  expect(mocks.start).toHaveBeenCalledWith('camera','guided',false);
+  expect(mocks.start).toHaveBeenCalledWith('camera','guided',false,expect.objectContaining({manual_approval:true,execution_mode:'SIMULATION'}));
 });
 it('renders real approval decisions with a safe rejection option',()=>{
   const incident=testIncident();incident.status='AWAITING_APPROVAL';incident.auto_approve=false;

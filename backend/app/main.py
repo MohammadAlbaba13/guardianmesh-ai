@@ -2,6 +2,9 @@ import asyncio
 import contextlib
 import json
 import logging
+from pathlib import Path
+from dotenv import load_dotenv
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -14,6 +17,11 @@ from .topology import build_topology
 from .domains.registry import get_domain, list_domains
 from .capabilities.registry import list_capabilities, get_capability
 from .agents import initial_agents
+from .diagnostics import diagnostics
+from .providers.service import NetworkActionService
+from .providers.qod import NetworkError
+
+load_dotenv(Path(__file__).resolve().parents[2] / ".env", override=False)
 
 
 class JsonFormatter(logging.Formatter):
@@ -37,12 +45,15 @@ def create_app(database_url: str | None = None) -> FastAPI:
         repository = Repository(database_url)
         repository.recover()
         app.state.engine = SimulationEngine(repository)
+        if isinstance(app.state.engine.provider, NetworkActionService) and not app.state.engine.provider.config.configured:
+            logging.getLogger("guardianmesh").warning("LIVE provider unavailable: configure authorized QoD bindings and provider credentials. No live success will be fabricated.")
         yield
         await app.state.engine.close()
         repository.engine.dispose()
 
     app = FastAPI(title="GuardianMesh AI", version="2.0.0", description="Autonomous Multi-Domain Resilience & Trust Platform. Local simulation; optional advisory AI.", lifespan=lifespan)
     app.add_middleware(CORSMiddleware, allow_origins=sorted(ORIGINS), allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
+    app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1", "testserver", "backend"])
 
     @app.middleware("http")
     async def restrict_origin(request: Request, call_next):
@@ -71,6 +82,46 @@ def create_app(database_url: str | None = None) -> FastAPI:
     async def health():
         return {"status":"ok", "simulation":True, "provider":"local", "agents":6,
                 "critical_services":sum(n.critical for n in build_topology().nodes), "domains":len(list_domains()), "version":"2.0.0"}
+
+    @app.get("/api/v1/diagnostics")
+    async def readiness():
+        return await diagnostics(app.state.engine)
+
+    @app.websocket("/ws/health")
+    async def websocket_health(socket: WebSocket):
+        if socket.headers.get("origin") and socket.headers["origin"] not in ORIGINS:
+            await socket.close(code=1008)
+            return
+        await socket.accept()
+        await socket.send_json({"status": "READY"})
+        await socket.close()
+
+    @app.post("/api/incidents/{incident_id}/actions/{action_id}/{operation}")
+    async def session_operation(incident_id: str, action_id: str, operation: str):
+        if operation not in ("lookup", "delete", "extend"):
+            raise HTTPException(404, "Unsupported session operation")
+        engine = app.state.engine
+        async with engine.lock:
+            incident = engine.get(incident_id)
+            if incident.status in ("RUNNING", "PAUSED", "AWAITING_APPROVAL"):
+                raise Conflict("Wait for the active run before managing a session")
+            action = next((a for a in incident.actions if a.id == action_id), None)
+            if action is None: raise HTTPException(404, "Unknown action")
+            if operation == "extend" and action.result.get("cleanup") == "DELETED":
+                raise Conflict("Deleted sessions cannot be extended")
+            manager = engine.provider if isinstance(engine.provider, NetworkActionService) else NetworkActionService("LIVE")
+            manager.checkpoint = engine.emit
+            try:
+                result = await manager.manage(action, incident, operation)
+            except NetworkError as exc:
+                engine.emit(incident, "SESSION_MANAGEMENT_FAILED", exc.code, "Network")
+                raise HTTPException(502, exc.code) from None
+            if incident.report:
+                from .reporting import generate_report
+                incident.report = generate_report(incident)
+                engine.repository.save(incident)
+                engine.publish(incident)
+            return result
 
     def runtime_metadata():
         engine = app.state.engine
@@ -192,14 +243,15 @@ def create_app(database_url: str | None = None) -> FastAPI:
                     pending.cancel()
                     with contextlib.suppress(asyncio.CancelledError):
                         await pending
-        except (WebSocketDisconnect, RuntimeError):
+        except (WebSocketDisconnect, RuntimeError, asyncio.CancelledError):
             pass
         finally:
             app.state.engine.unsubscribe(incident_id, queue)
             reader.cancel()
             if pending:
                 pending.cancel()
-            await asyncio.gather(*(task for task in (reader, pending) if task), return_exceptions=True)
+            with contextlib.suppress(asyncio.CancelledError):
+                await asyncio.gather(*(task for task in (reader, pending) if task), return_exceptions=True)
 
     return app
 

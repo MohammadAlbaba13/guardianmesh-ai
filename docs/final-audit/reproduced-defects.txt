@@ -1,0 +1,99 @@
+FFFF                                                                     [100%]
+================================== FAILURES ===================================
+_______ test_demo_automation_cannot_override_operator_gate[LIVE-False] ________
+
+tmp_path = WindowsPath('C:/Users/LOQ/AppData/Local/Temp/pytest-of-LOQ/pytest-32/test_demo_automation_cannot_ov0')
+mode = 'LIVE', manual = False
+
+    @pytest.mark.parametrize('mode,manual', [('LIVE', False), ('AUTO', False), ('SIMULATION', True)])
+    async def test_demo_automation_cannot_override_operator_gate(tmp_path, mode, manual):
+        calls = []
+        repo = Repository(f'sqlite:///{tmp_path / "gate.db"}')
+        engine = SimulationEngine(repo, provider=NetworkActionService(mode, config=config(), transport=transport(calls)))
+        try:
+            incident = await engine.start('camera', StartRequest(step_duration=.01,
+                execution_mode=mode, manual_approval=manual, auto_approve=True))
+            await wait_phase(engine, 'APPROVAL')
+            await asyncio.sleep(.15)
+>           assert incident.status == 'AWAITING_APPROVAL'
+E           AssertionError: assert 'RUNNING' == 'AWAITING_APPROVAL'
+E             
+E             - AWAITING_APPROVAL
+E             + RUNNING
+
+backend\tests\test_live_network.py:161: AssertionError
+_______ test_demo_automation_cannot_override_operator_gate[AUTO-False] ________
+
+tmp_path = WindowsPath('C:/Users/LOQ/AppData/Local/Temp/pytest-of-LOQ/pytest-32/test_demo_automation_cannot_ov1')
+mode = 'AUTO', manual = False
+
+    @pytest.mark.parametrize('mode,manual', [('LIVE', False), ('AUTO', False), ('SIMULATION', True)])
+    async def test_demo_automation_cannot_override_operator_gate(tmp_path, mode, manual):
+        calls = []
+        repo = Repository(f'sqlite:///{tmp_path / "gate.db"}')
+        engine = SimulationEngine(repo, provider=NetworkActionService(mode, config=config(), transport=transport(calls)))
+        try:
+            incident = await engine.start('camera', StartRequest(step_duration=.01,
+                execution_mode=mode, manual_approval=manual, auto_approve=True))
+            await wait_phase(engine, 'APPROVAL')
+            await asyncio.sleep(.15)
+>           assert incident.status == 'AWAITING_APPROVAL'
+E           AssertionError: assert 'RUNNING' == 'AWAITING_APPROVAL'
+E             
+E             - AWAITING_APPROVAL
+E             + RUNNING
+
+backend\tests\test_live_network.py:161: AssertionError
+_____ test_demo_automation_cannot_override_operator_gate[SIMULATION-True] _____
+
+tmp_path = WindowsPath('C:/Users/LOQ/AppData/Local/Temp/pytest-of-LOQ/pytest-32/test_demo_automation_cannot_ov2')
+mode = 'SIMULATION', manual = True
+
+    @pytest.mark.parametrize('mode,manual', [('LIVE', False), ('AUTO', False), ('SIMULATION', True)])
+    async def test_demo_automation_cannot_override_operator_gate(tmp_path, mode, manual):
+        calls = []
+        repo = Repository(f'sqlite:///{tmp_path / "gate.db"}')
+        engine = SimulationEngine(repo, provider=NetworkActionService(mode, config=config(), transport=transport(calls)))
+        try:
+            incident = await engine.start('camera', StartRequest(step_duration=.01,
+                execution_mode=mode, manual_approval=manual, auto_approve=True))
+>           await wait_phase(engine, 'APPROVAL')
+
+backend\tests\test_live_network.py:159: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+engine = <app.engine.SimulationEngine object at 0x000002059D4D4590>
+phase = 'APPROVAL'
+
+    async def wait_phase(engine, phase):
+        async with asyncio.timeout(10):
+            while engine.current.phase!=phase:
+>               if engine.task.done(): raise AssertionError(engine.current.outcome)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               AssertionError: Execution stopped safely; deterministic validation failed.
+
+backend\tests\test_live_network.py:85: AssertionError
+------------------------------ Captured log call ------------------------------
+ERROR    guardianmesh.engine:engine.py:352 incident_execution_failed
+______________ test_deleted_session_clears_current_verification _______________
+
+    async def test_deleted_session_clears_current_verification():
+        provider = NetworkActionService('LIVE', config=config(), transport=transport([]))
+        incident = sample_incident()
+        planned = action('qod', 'hospital')
+        planned.result = await provider.execute(planned, incident)
+        await provider.manage(planned, incident, 'delete')
+>       assert planned.result['verification'] == 'NOT_VERIFIED'
+E       AssertionError: assert 'VERIFIED' == 'NOT_VERIFIED'
+E         
+E         - NOT_VERIFIED
+E         ? ----
+E         + VERIFIED
+
+backend\tests\test_live_network.py:174: AssertionError
+=========================== short test summary info ===========================
+FAILED backend\tests\test_live_network.py::test_demo_automation_cannot_override_operator_gate[LIVE-False]
+FAILED backend\tests\test_live_network.py::test_demo_automation_cannot_override_operator_gate[AUTO-False]
+FAILED backend\tests\test_live_network.py::test_demo_automation_cannot_override_operator_gate[SIMULATION-True]
+FAILED backend\tests\test_live_network.py::test_deleted_session_clears_current_verification
+4 failed, 22 deselected in 1.60s

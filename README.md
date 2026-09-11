@@ -4,7 +4,7 @@
 
 GuardianMesh is one policy-governed intelligence engine for seven MENA Ignite challenge environments: Trusted Digital Identity, Smart Cities & Urban Safety, Secure Fintech & Anti-Fraud, Tourism & Cultural Experience, Industrial & Enterprise AI, Climate Resilience, and Open Innovation. Each Domain Pack supplies its own typed signals, directed digital twin, scenario catalog, risk context, response policy, capabilities and outcome metrics while the core preserves the same six-agent execution lifecycle.
 
-The default provider is a deterministic offline simulator. Every capability result is marked `SIMULATED`; no carrier, bank, identity provider, factory, emergency service or cloud API is contacted.
+The default provider is a deterministic offline simulator. Optional Nokia/CAMARA QoD v1 executes real external API requests for explicitly bound critical flows. Every action reports its own provenance; topology, containment and metrics remain simulated. See [live integration](docs/HACKATHON_LIVE_INTEGRATION.md), [judge runbook](docs/DEMO_RUNBOOK.md), and [current verification](docs/LIVE_VALIDATION.md).
 
 ## Run on this Windows machine
 
@@ -73,7 +73,7 @@ For a longer walkthrough use **Guided** (approximately one minute). **Pause**, *
 | Telecom Identity / SIM-Swap Risk | Unconfirmed SIM transfer, recent SIM change and location/authentication anomaly; suspected Mobile T1451 | Verify location, check swap history, mark endpoint trust restricted, protect dependencies and quarantine sensor identity |
 | Energy & City Control Threat | Unauthorized service-stop attempts against edge compute; Enterprise T1489 | Protect energy/city-control routes, prioritize energy telemetry, request shared-segment approval, isolate edge segment and source |
 
-**Manual approval:** choose Energy, disable **Demo auto-approval**, then run. The engine waits before any network execution. **Approve** permits the safety-checked segment action. **Reject · safe fallback** removes segment isolation, creates plan version 2, revalidates it, and contains only the source. A rejection still completes successfully. With automatic approval enabled, a visible decision is recorded as **DEMO_AUTOMATION**, never as a human operator. Hard safety rejection cannot be overridden by approval.
+**Manual approval:** disable **Demo auto-approval**, then run any scenario. The UI now gates the whole plan; Reject prevents all proposed actions. The following bounded replan behavior applies only to legacy API requests without `manual_approval`: choose Energy and disable auto approval. The engine waits before any network execution. **Approve** permits the safety-checked segment action. **Reject · safe fallback** removes segment isolation, creates plan version 2, revalidates it, and contains only the source. A rejection still completes successfully. With automatic approval enabled, a visible decision is recorded as **DEMO_AUTOMATION**, never as a human operator. Hard safety rejection cannot be overridden by approval.
 
 ## Problem and solution
 
@@ -151,7 +151,7 @@ Every result explicitly contains `simulated: true`. The provider does not open s
 
 These paths are **internal provider operation labels** displayed in the action feed. They are not exposed as unguarded REST endpoints and are not claimed to match a provider's production OpenAPI contract.
 
-Future real integration: implement `NetworkProvider`, pin the operator's exact OpenAPI versions, obtain authorized sandbox credentials/consent, map real device and network identifiers, handle asynchronous QoD/session status and provider failures, enforce idempotency and compensating actions, then extend policy and integration tests. The current policy deliberately rejects non-simulated providers; enabling a real adapter requires a reviewed policy change. No operator adapter is currently enabled.
+The QoD v1 transport now implements authenticated create, GET verification, delete and extension through server-side authorized bindings. It records external IDs and sanitized lifecycle evidence, fails closed in LIVE mode, and allows explicitly labeled safe AUTO fallback. Other controls remain simulated. See [the exact configuration and limitations](docs/HACKATHON_LIVE_INTEGRATION.md).
 
 Official references: [MITRE T1210](https://attack.mitre.org/techniques/T1210/), [Mobile T1451](https://attack.mitre.org/techniques/T1451/), [T1489](https://attack.mitre.org/techniques/T1489/), [CAMARA Location Verification](https://camaraproject.org/location-verification/), [SIM Swap](https://camaraproject.org/sim-swap/), [Quality on Demand](https://camaraproject.org/quality-on-demand/), [Traffic Influence](https://camaraproject.org/traffic-influence/), [Nokia Network as Code](https://networkascode.nokia.io/_docs/).
 
@@ -259,3 +259,7 @@ compose.yaml           Local Docker deployment
 - Pause is supported while RUNNING. While waiting for manual approval, the approval gate already freezes execution; skip/pause cannot bypass it. Restart/reset may cancel any pending run.
 - The application is intended for localhost; do not publicly expose its control APIs without authentication, authorization, rate limits and deployment review.
 - **Before judging:** keep dependency lockfiles, installed `.venv`/`node_modules`, ports, scenario timing and safety rules unchanged. Avoid package upgrades, multiple backend workers or database removal just before presenting. Run one camera demo, reset, and leave Fast pitch selected with Demo auto-approval on.
+
+## Interactive production prototype
+
+Mission Control provides explicit SIMULATION / LIVE / AUTO, deterministic or local LLM advisory mode, severity injection, and deliberate AUTO fallback. Judge Mode performs real readiness checks; manual approval works for the hospital hero. The provider-proof cards show sanitized session evidence and lifecycle controls. Replay Incident reads persisted events without repeating actions. All seven Domain Packs remain available. Use the [demo runbook](docs/DEMO_RUNBOOK.md) for the current presentation flow.

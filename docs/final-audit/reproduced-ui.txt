@@ -1,0 +1,48 @@
+
+> guardianmesh-command-center@1.0.0 test
+> vitest run --run src/App.test.tsx
+
+
+ RUN  v3.2.7 C:/Users/LOQ/Documents/ChatGPT/Win/frontend
+
+ ❯ src/App.test.tsx (6 tests | 1 failed) 1706ms
+   × requires operator approval when selecting live execution 365ms
+     → expect(element).toBeDisabled()
+
+Received element is not disabled:
+  <input
+  checked=""
+  type="checkbox"
+/>
+   ✓ renders the primary command center and launches the configured demo  342ms
+   ✓ offers all seven backend domains and delegates selection to the shared engine  523ms
+   ✓ uses operational classification without fabricating MITRE or an isolated climate sensor 26ms
+   ✓ passes guided/manual configuration from visible controls  420ms
+   ✓ renders real approval decisions with a safe rejection option 28ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/App.test.tsx > requires operator approval when selecting live execution
+Error: expect(element).toBeDisabled()
+
+Received element is not disabled:
+  <input
+  checked=""
+  type="checkbox"
+/>
+ ❯ src/App.test.tsx:14:68
+     12|   render(<App/>);
+     13|   fireEvent.change(screen.getByLabelText('Network execution'),{target:…
+     14|   expect(screen.getByRole('checkbox',{name:'Demo auto-approval'})).toB…
+       |                                                                    ^
+     15|   fireEvent.click(screen.getByRole('button',{name:'Run Autonomous Defe…
+     16|   expect(mocks.start).toHaveBeenCalledWith('camera','fast',false,expec…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  19:38:28
+   Duration  4.32s (transform 632ms, setup 268ms, collect 988ms, tests 1.71s, environment 825ms, prepare 138ms)
+

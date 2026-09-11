@@ -1,6 +1,8 @@
 # GuardianMesh AI — validation record
 
-The original Smart City evidence below was verified locally on Windows on **2026-09-07** and is retained as regression evidence. The multi-domain extension was verified locally on **2026-09-10**. All runs are safe deterministic simulations with no production telecom connectivity.
+Current interactive/QoD work: see [LIVE_VALIDATION.md](LIVE_VALIDATION.md). The dated records below describe prior milestones.
+
+The original Smart City evidence below was verified locally on Windows on **2026-09-07** and is retained as regression evidence. The multi-domain and QoD boundary work was revalidated locally on **2026-09-11**. All runs are safe deterministic simulations unless an explicitly configured external QoD action proves its own lifecycle.
 
 ## Current multi-domain extension
 
@@ -11,9 +13,9 @@ The backend registry exposes seven unique Domain Packs and seven backend-driven 
 | Domain REST catalog | **7 domains**, unique ids; OpenAPI version 2.0.0 |
 | Domain detail contract | **7 passed**; topology roots, scenarios, capability allowlists, metrics and truthful SIMULATED runtime labels |
 | Domain end-to-end API/WS | **7 passed**; all seven contained, residual score 0, declared services online, six agents complete, reports persisted |
-| Full backend suite | **115 passed**, two dependency deprecation warnings |
-| Frontend Vitest | **17 passed** across four files |
-| Frontend production build | **Passed**: TypeScript plus Vite, 2,294 modules, no warnings |
+| Full backend suite | **137 passed**, two dependency deprecation warnings |
+| Frontend Vitest | **21 passed** across five files |
+| Frontend production build | **Passed**: TypeScript plus Vite, 2,296 modules, no warnings |
 | Browser domain switching | Trusted Digital Identity loaded from backend; unique topology, 4/4 services and identity capabilities visible |
 | Browser identity rehearsal | Completed: T1451 mapping, risk 63, session restriction, pending step-up verification, 4/4 services online, residual 0 |
 | Browser console | No warning/error entries during visual rehearsal |
