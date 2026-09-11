@@ -58,7 +58,8 @@ def create_app(database_url: str | None = None) -> FastAPI:
         await app.state.engine.close()
         repository.engine.dispose()
 
-    app = FastAPI(title="GuardianMesh AI", version="2.0.0", description="Autonomous Multi-Domain Resilience & Trust Platform. Local simulation; optional advisory AI.", lifespan=lifespan)
+    app = FastAPI(title="GuardianMesh AI", version="2.0.0", description="Autonomous Multi-Domain Resilience & Trust Platform. Local simulation; optional advisory AI.", lifespan=lifespan,
+                  docs_url="/api/docs", openapi_url="/api/openapi.json")
     app.add_middleware(CORSMiddleware, allow_origins=sorted(ORIGINS), allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1", "testserver", "backend", *_EXTRA_TRUSTED_HOSTS])
 
