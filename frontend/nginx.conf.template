@@ -7,7 +7,7 @@ server {
     add_header X-Frame-Options SAMEORIGIN;
     location /api/ {
         proxy_pass ${BACKEND_URL};
-        proxy_set_header Host backend;
+        proxy_set_header Host $proxy_host;
         proxy_set_header Origin "";
     }
     location /ws/ {
@@ -15,7 +15,7 @@ server {
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
-        proxy_set_header Host backend;
+        proxy_set_header Host $proxy_host;
         proxy_set_header Origin "";
         proxy_read_timeout 3600s;
     }

@@ -2,6 +2,7 @@ import asyncio
 import contextlib
 import json
 import logging
+import os
 from pathlib import Path
 from dotenv import load_dotenv
 from starlette.middleware.trustedhost import TrustedHostMiddleware
@@ -38,6 +39,12 @@ logging.getLogger("guardianmesh").setLevel(logging.INFO)
 
 ORIGINS = {f"http://{host}:{port}" for host in ("localhost", "127.0.0.1") for port in (5173, 8000, 8080)}
 
+# Extra trusted hostnames (comma-separated) for the reverse-proxied frontend host in a
+# hosted deployment (e.g. Render). The nginx reverse proxy already strips/clears the
+# browser's Origin header before forwarding, so this only widens the Host allow-list
+# used by TrustedHostMiddleware; local development is unaffected when unset.
+_EXTRA_TRUSTED_HOSTS = [h.strip() for h in os.environ.get("GUARDIANMESH_TRUSTED_HOSTS", "").split(",") if h.strip()]
+
 
 def create_app(database_url: str | None = None) -> FastAPI:
     @asynccontextmanager
@@ -53,7 +60,7 @@ def create_app(database_url: str | None = None) -> FastAPI:
 
     app = FastAPI(title="GuardianMesh AI", version="2.0.0", description="Autonomous Multi-Domain Resilience & Trust Platform. Local simulation; optional advisory AI.", lifespan=lifespan)
     app.add_middleware(CORSMiddleware, allow_origins=sorted(ORIGINS), allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
-    app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1", "testserver", "backend"])
+    app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1", "testserver", "backend", *_EXTRA_TRUSTED_HOSTS])
 
     @app.middleware("http")
     async def restrict_origin(request: Request, call_next):
